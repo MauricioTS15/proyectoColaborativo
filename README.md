@@ -1,26 +1,23 @@
-# proyectoColaborativo
-
 <h1>¿Cómo documentar el proyecto web?</h1>
 <p>La documentación de los proyectos deberá contar, como mínimo, con los siguientes
 apartados:</h1>
 
-    <ul>1. Explicación general del proyecto en Django.</ul>
-        <li>Descripción de los escenarios y funcionalidades planteadas.</li>
-        <li>Descripción del modelo de datos diseñado.</li>
-        <li>Descripción de las plantillas utilizadas para las interfaces web (descripción de
-            la estructura HTML y estilos CSS)</li>
-        <li>Descripción de la estructura del proyecto web (ficheros correspondientes a
-            cada componente de la arquitectura con Django)</li>
-        <li>Descripción de las funcionalidades añadidas implementadas.</li>
-    <ul>2. Explicación general del proyecto en JavaScript.</ul>
-        <li>Descripción de la estructura del proyecto web.</li>
-        <li>Descripción de las funcionalidades implementadas.</li>
-    <ul>3. Conclusiones.</ul>
-    <ul>4. Bibliografía.</ul>
+<ul>1. Explicación general del proyecto en Django.
+    <li>Descripción de los escenarios y funcionalidades planteadas.</li>
+    <li>Descripción del modelo de datos diseñado.</li>
+    <li>Descripción de las plantillas utilizadas para las interfaces web (descripción de la estructura HTML y estilos CSS)</li>
+    <li>Descripción de la estructura del proyecto web (ficheros correspondientes acada componente de la arquitectura con Django)</li>
+    <li>Descripción de las funcionalidades añadidas implementadas.</li>
+</ul>
+        
+<ul>2. Explicación general del proyecto en JavaScript.
+    <li>Descripción de la estructura del proyecto web.</li>
+    <li>Descripción de las funcionalidades implementadas.</li>
+</ul>
+<ul>3. Conclusiones.</ul>
+<ul>4. Bibliografía.</ul>
 
 <p>No se admitirán documentos de más de 30 páginas (sin contar los anexos)</p>
-
-================================================================================================================================
 
 <h1>Reto 3: Gestión de proyectos</h1>
 <p>El área de IT de la empresa Deustotil Tech S.L. ha decidido subcontratar el desarrollo de un
