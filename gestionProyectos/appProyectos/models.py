@@ -7,6 +7,10 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     telefono = models.IntegerField()
+    
+    def __str__(self) -> str:
+        return f"{self.nombre} {self.apellido}"
+    
 class Empleado(models.Model):
     dni = models.CharField(max_length=9)
     nombre = models.CharField(max_length=50)
@@ -14,6 +18,10 @@ class Empleado(models.Model):
     email = models.EmailField(max_length=50)
     telefono = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
+    
+    
 class Tarea(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=255)
@@ -23,6 +31,10 @@ class Tarea(models.Model):
     nivel_prioridad = models.CharField(max_length=50)
     estado_tarea = models.CharField(max_length=50)
     notas_adicionales = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return {self.nombre}
+    
 class Proyectos(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=255)
@@ -33,5 +45,6 @@ class Proyectos(models.Model):
     tarea_realizar = models.ForeignKey(Tarea, on_delete=models.CASCADE)
     responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     
-
+    def __str__(self):
+        return self.nombre
     
