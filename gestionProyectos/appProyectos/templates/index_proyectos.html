@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block titulo %}Listado de proyectos{% endblock %}
+
+{% block contenido %}
+    <h1>Deustotil Tech S.L.</h1>
+    <h2>Listado de Proyectos</h2>
+    {% if proyectos %}
+        <ul>
+            {% for p in proyectos %}
+            <li>
+                <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay proyectos creados.</p>
+    {% endif %}
+
+    <h2>Crear un nuevo proyecto</h2>
+    <input type="button" value="Crear">
+{% endblock %}

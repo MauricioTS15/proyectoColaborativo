@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <title>Deustotil Tech S.L.</title>
-</head>
+{% block titulo %}Página principal{% endblock %}
 
-<body>
+{% block contenido %}
     <h1>Deustotil Tech S.L.</h1>
-    <h2>About</h2>
+    <h2>Sobre la empresa</h2>
     <p>Deustotil Tech S.L. es una empresa de tecnología fundada por un grupo de amigos que comparten una pasión por la innovación. Su objetivo es crear soluciones tecnológicas que mejoren la vida de las personas y hagan del mundo un lugar mejor. La empresa se destaca por su enfoque en la colaboración y la creatividad, y ha desarrollado varios proyectos exitosos, incluyendo un sistema de gestión de archivos en la nube, una aplicación de realidad aumentada para la educación y un sistema de control de tráfico inteligente. Deustotil Tech S.L. se ha convertido en un referente en la industria tecnológica gracias a su compromiso con la calidad y la innovación.</p>
-    <h2>Listado de Proyectos</h2>
-    {% if proyectos %}
-             <ul>
-             {% for d in proyectos %}
-                 <li>
-                    {{ d.nombre}}
-                 </li>
-             {% endfor %}
-             </ul>
-         {% else %}
-         <p>No hay departamentos creados.</p>
-         {% endif %}
-</body>
-
-</html>
+    <hr>
+    <a href="/appProyectos/proyectos">Ver proyectos</a>
+{% endblock %}

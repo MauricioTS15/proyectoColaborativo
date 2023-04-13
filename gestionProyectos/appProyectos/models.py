@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Cliente(models.Model):
     dni = models.CharField(max_length=9)
     nombre = models.CharField(max_length=50)
@@ -8,7 +7,7 @@ class Cliente(models.Model):
     email = models.EmailField(max_length=50)
     telefono = models.IntegerField()
     
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.nombre} {self.apellido}"
     
 class Empleado(models.Model):
@@ -21,7 +20,7 @@ class Empleado(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
     
-    
+#habilidad
 class Tarea(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=255)
@@ -34,7 +33,8 @@ class Tarea(models.Model):
     
     def __str__(self):
         return self.nombre
-    
+
+#departamento
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=255)
