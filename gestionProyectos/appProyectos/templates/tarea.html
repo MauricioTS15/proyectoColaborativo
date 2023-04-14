@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %}Detalles de la tarea{% endblock %}
+{% block titulo %} Detalles de la tarea {% endblock titulo %}
 
 {% block contenido %}
 <h1>Gestor de proyectos</h1>
@@ -11,13 +11,13 @@
 <table>
     <thead>
         <tr>
-            <th colspan="2">{{ tarea.nombre}}</th>
+            <th colspan="2">{{ tarea.nombre }}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>Descripción</td>
-            <td>{{ tarea.descripcion}}</td>
+            <td>{{ tarea.descripcion }}</td>
         </tr>
         <tr>
             <td>Fecha de inicio</td>
@@ -53,7 +53,7 @@
 <ol>
     {% for p in proyectos %}
     <li>
-        <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre}}</a>
+        <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre }}</a>
     </li>
     {% endfor %}
 </ol>
@@ -67,4 +67,4 @@
 <h2>Configuración de la tarea</h2>
 <a href="/appProyectos/mod_tarea"><input type="button" value="Modificar"></a>
 <input type="button" value="Eliminar">
-{% endblock %}
+{% endblock contenido %}
