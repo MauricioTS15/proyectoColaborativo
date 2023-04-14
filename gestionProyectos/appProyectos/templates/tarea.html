@@ -3,57 +3,68 @@
 {% block titulo %}Detalles de la tarea{% endblock %}
 
 {% block contenido %}
-        <h1>Gestor de proyectos</h1>
+<h1>Gestor de proyectos</h1>
 
-        <h2>Datos de la tarea</h2>
+<h2>Datos de la tarea</h2>
 
-        {% if tarea %}
-        <ul>
-            <li>
-                Nombre: {{ tarea.nombre}}
-            </li>
-            <li>
-                Descripción: {{ tarea.descripcion}}
-            </li>
-            <li>
-                Fecha de inicio: {{ tarea.fecha_inicio }}
-            </li>
-            <li>
-                Fecha de fin: {{ tarea.fecha_fin }}
-            </li>
-            <li>
-                <!-- <a href="/appProyectos/empleados/{{ tarea.empleado.id }}">{{ tarea.empleado }}</a> -->
-                Responsable: {{ tarea.responsable }}
-            </li>
-            <li>
-                Nivel de prioridad: {{ tarea.nivel_prioridad }}
-            </li>
-            <li>
-                Estado: {{ tarea.estado_tarea }}
-            </li>
-            <li>
-                Notas adicionales: {{ tarea.notas_adicionales }}
-            </li>
-        </ul>
+{% if tarea %}
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">{{ tarea.nombre}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Descripción</td>
+            <td>{{ tarea.descripcion}}</td>
+        </tr>
+        <tr>
+            <td>Fecha de inicio</td>
+            <td>{{ tarea.fecha_inicio }}</td>
+        </tr>
+        <tr>
+            <td>Fecha de fin<br></td>
+            <td>{{ tarea.fecha_fin }}</td>
+        </tr>
+        <tr>
+            <td>Responsable</td>
+            <!-- <a href="/appProyectos/empleados/{{ tarea.empleado.id }}">{{ tarea.empleado }}</a> -->
+            <td>{{ tarea.responsable }}</td>
+        </tr>
+        <tr>
+            <td>Nivel de prioridad</td>
+            <td>{{ tarea.nivel_prioridad }}</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>{{ tarea.estado_tarea }}</td>
+        </tr>
+        <tr>
+            <td>Notas adicionales</td>
+            <td>{{ tarea.notas_adicionales }}</td>
+        </tr>
+    </tbody>
+</table>
 
-            <h3>Lista de proyectos</h3>
-            
-            {% if proyectos %}
-            <ol>
-                {% for p in proyectos %}
-                    <li>
-                        <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre}}</a>
-                    </li>
-                {% endfor %}
-            </ol>
-            {% else %}
-                <p>No tiene proyectos asociados.</p>
-            {% endif %}
-        {% else %}
-            <p>No existe esta tarea.</p>
-        {% endif %}
+<h3>Lista de proyectos</h3>
 
-        <h2>Configuración de la tarea</h2>
-        <input type="button" value="Modificar">
-        <input type="button" value="Eliminar">
+{% if proyectos %}
+<ol>
+    {% for p in proyectos %}
+    <li>
+        <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre}}</a>
+    </li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>No tiene proyectos asociados.</p>
+{% endif %}
+{% else %}
+<p>No existe esta tarea.</p>
+{% endif %}
+
+<h2>Configuración de la tarea</h2>
+<input type="button" value="Modificar">
+<input type="button" value="Eliminar">
 {% endblock %}
