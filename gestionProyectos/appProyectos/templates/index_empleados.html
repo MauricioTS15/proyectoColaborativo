@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Listado de empleados
+{% endblock titulo %}
+{% block contenido %}
+    <h1>Deustotil Tech S.L.</h1>
+    <h2>Listado de Empleados</h2>
+    {% if empleados %}
+        <ul>
+            {% for e in empleados %}
+                <li>
+                    <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay empleados creados.</p>
+    {% endif %}
+    <h2>Crear un nuevo empleado</h2>
+    <input type="button" value="Crear">
+{% endblock contenido %}
