@@ -5,7 +5,6 @@
 {% block contenido %}
 <h1>Gestor de proyectos</h1>
 <h2>Datos del proyecto</h2>
-
 {% if proyecto %}
 <table>
     <thead>
@@ -32,13 +31,11 @@
         </tr>
         <tr>
             <td>Cliente</td>
-            <!-- <a href="/appProyectos/clientes/{{ proyecto.cliente.id }}">{{ proyecto.cliente }}</a> -->
-            <td>{{ proyecto.cliente }}</td>
+            <td><a href="/appProyectos/clientes/{{ proyecto.cliente.id }}">{{ proyecto.cliente }}</a></td>
         </tr>
         <tr>
             <td>Responsable</td>
-            <!-- <a href="/appProyectos/empleados/{{ proyecto.empleado.id }}">{{ proyecto.empleado }}</a> -->
-            <td>{{ proyecto.responsable }}</td>
+            <td><a href="/appProyectos/empleados/{{ proyecto.responsable.id }}">{{ proyecto.responsable }}</a></td>
         </tr>
         <tr>
             <td>Tareas</td>
@@ -58,10 +55,10 @@
         </tr>
     </tbody>
 </table>
+<h2>Configuración del proyecto</h2>
+<a href="/appProyectos/proyectos/{{ proyecto.id }}/mod_proyecto"><input type="button" value="Modificar"></a>
+<input type="button" value="Eliminar">
 {% else %}
 <p>No existe este proyecto.</p>
 {% endif %}
-<h2>Configuración del proyecto</h2>
-<a href="/appProyectos/mod_proyecto"><input type="button" value="Modificar"></a>
-<input type="button" value="Eliminar">
 {% endblock %}

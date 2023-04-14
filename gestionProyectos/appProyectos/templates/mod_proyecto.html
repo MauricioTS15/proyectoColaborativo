@@ -8,30 +8,46 @@
 <form>
     <fieldset>
         <label for="nomProyecto">Nombre:</label>
-        <input type="text" id="nomProyecto">
+        <input type="text" id="nomProyecto" value="{{ proyecto.nombre}}">
         <label for="descProyecto">Descripción:</label>
-        <textarea id="descProyecto"></textarea>
+        <textarea id="descProyecto">{{ proyecto.descripcion}}</textarea>
         <label for="fecinProyecto">Fecha de inicio:</label>
-        <input type="date" id="fecinProyecto">
+        <input type="date" id="fecinProyecto" value="{{ proyecto.fecha_inicio }}">
         <label for="fecfinProyecto">Fecha de fin:</label>
-        <input type="date" id="fecfinProyecto">
+        <input type="date" id="fecfinProyecto" value="{{ proyecto.fecha_fin }}">
         <label for="preProyecto">Presupuesto:</label>
-        <input type="text" id="preProyecto">
+        <input type="text" id="preProyecto" value="{{ proyecto.presupuesto }}">
         <label for="cliProyecto">Cliente:</label>
         <select id="cliProyecto">
-            <option value="cli1">Cliente 1</option>
-            <option value="cli2">Cliente 2</option>
+            {% if clientes %}
+            {% for c in clientes %}
+            <option value="{{ c.id }}">{{ c.nombre }} {{ c.apellido }}</option>
+            {% endfor %}
+            {% else %}
+            <option value="0">No hay clientes.</p>
+                {% endif %}
         </select>
         <label for="resProyecto">Responsable:</label>
         <select id="resProyecto">
-            <option value="emp1">Empleado 1</option>
-            <option value="emp2">Empleado 2</option>
+            {% if responsables %}
+            {% for r in responsables %}
+            <option value="{{ r.id }}">{{ r.nombre }} {{ r.apellido }}</option>
+            {% endfor %}
+            {% else %}
+            <option value="0">No hay responsables.</p>
+                {% endif %}
         </select>
         <label for="tarProyecto">Tareas:</label>
         <select id="tarProyecto" multiple>
-            <option value="tar1">Tarea 1</option>
-            <option value="tar2">Tarea 2</option>
+            {% if tareas %}
+            {% for t in tareas %}
+            <option value="{{ t.id }}">{{ t.nombre }} {{ t.apellido }}</option>
+            {% endfor %}
+            {% else %}
+            <option value="0">No hay tareas.</p>
+                {% endif %}
         </select>
     </fieldset>
+    <input type="button" value="Guardar cambios">
 </form>
 {% endblock %}
