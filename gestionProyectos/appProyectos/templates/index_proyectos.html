@@ -6,13 +6,13 @@
     <h1>Deustotil Tech S.L.</h1>
     <h2>Listado de Proyectos</h2>
     {% if proyectos %}
-        <ul>
+        <ol>
             {% for p in proyectos %}
             <li>
                 <a href="/appProyectos/proyectos/{{ p.id }}">{{ p.nombre}}</a>
             </li>
             {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>No hay proyectos creados.</p>
     {% endif %}
