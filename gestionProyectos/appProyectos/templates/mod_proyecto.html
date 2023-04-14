@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block titulo %}Modificación del proyecto{% endblock %}
+
+{% block contenido %}
+<h1>Gestor de proyectos</h1>
+<h2>Modificar el proyecto</h2>
+<form>
+    <fieldset>
+        <label for="nomProyecto">Nombre:</label>
+        <input type="text" id="nomProyecto">
+        <label for="descProyecto">Descripción:</label>
+        <textarea id="descProyecto"></textarea>
+        <label for="fecinProyecto">Fecha de inicio:</label>
+        <input type="date" id="fecinProyecto">
+        <label for="fecfinProyecto">Fecha de fin:</label>
+        <input type="date" id="fecfinProyecto">
+        <label for="preProyecto">Presupuesto:</label>
+        <input type="text" id="preProyecto">
+        <label for="cliProyecto">Cliente:</label>
+        <select id="cliProyecto">
+            <option value="cli1">Cliente 1</option>
+            <option value="cli2">Cliente 2</option>
+        </select>
+        <label for="resProyecto">Responsable:</label>
+        <select id="resProyecto">
+            <option value="emp1">Empleado 1</option>
+            <option value="emp2">Empleado 2</option>
+        </select>
+        <label for="tarProyecto">Tareas:</label>
+        <select id="tarProyecto" multiple>
+            <option value="tar1">Tarea 1</option>
+            <option value="tar2">Tarea 2</option>
+        </select>
+    </fieldset>
+</form>
+{% endblock %}
