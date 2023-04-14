@@ -1,67 +1,64 @@
 {% extends "base.html" %}
-
-{% block titulo %}Detalles del proyecto{% endblock %}
-
+{% block titulo %}Detalles del proyecto{% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de proyectos</h1>
-<h2>Datos del proyecto</h2>
-
-{% if proyecto %}
-<table>
-    <thead>
-        <tr>
-            <th colspan="2">{{ proyecto.nombre}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Descripción</td>
-            <td>{{ proyecto.descripcion}}</td>
-        </tr>
-        <tr>
-            <td>Fecha de inicio</td>
-            <td>{{ proyecto.fecha_inicio }}</td>
-        </tr>
-        <tr>
-            <td>Fecha de fin</td>
-            <td>{{ proyecto.fecha_fin }}</td>
-        </tr>
-        <tr>
-            <td>Presupuesto</td>
-            <td>{{ proyecto.presupuesto }}€</td>
-        </tr>
-        <tr>
-            <td>Cliente</td>
-            <!-- <a href="/appProyectos/clientes/{{ proyecto.cliente.id }}">{{ proyecto.cliente }}</a> -->
-            <td>{{ proyecto.cliente }}</td>
-        </tr>
-        <tr>
-            <td>Responsable</td>
-            <!-- <a href="/appProyectos/empleados/{{ proyecto.empleado.id }}">{{ proyecto.empleado }}</a> -->
-            <td>{{ proyecto.responsable }}</td>
-        </tr>
-        <tr>
-            <td>Tareas</td>
-            <td>
-                {% if tareas %}
-                <ul>
-                    {% for t in tareas %}
-                    <li>
-                        <a href="/appProyectos/tareas/{{ t.id }}">{{ t.nombre}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No hay tareas asignadas.</p>
-                {% endif %}
-            </td>
-        </tr>
-    </tbody>
-</table>
-{% else %}
-<p>No existe este proyecto.</p>
-{% endif %}
-<h2>Configuración del proyecto</h2>
-<input type="button" value="Modificar">
-<input type="button" value="Eliminar">
-{% endblock %}
+    <h1>Gestor de proyectos</h1>
+    <h2>Datos del proyecto</h2>
+    {% if proyecto %}
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">{{ proyecto.nombre }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Descripción</td>
+                    <td>{{ proyecto.descripcion }}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de inicio</td>
+                    <td>{{ proyecto.fecha_inicio }}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de fin</td>
+                    <td>{{ proyecto.fecha_fin }}</td>
+                </tr>
+                <tr>
+                    <td>Presupuesto</td>
+                    <td>{{ proyecto.presupuesto }}€</td>
+                </tr>
+                <tr>
+                    <td>Cliente</td>
+                    <!-- <a href="/appProyectos/clientes/{{ proyecto.cliente.id }}">{{ proyecto.cliente }}</a> -->
+                    <td>{{ proyecto.cliente }}</td>
+                </tr>
+                <tr>
+                    <td>Responsable</td>
+                    <!-- <a href="/appProyectos/empleados/{{ proyecto.empleado.id }}">{{ proyecto.empleado }}</a> -->
+                    <td>{{ proyecto.responsable }}</td>
+                </tr>
+                <tr>
+                    <td>Tareas</td>
+                    <td>
+                        {% if tareas %}
+                            <ul>
+                                {% for t in tareas %}
+                                    <li>
+                                        <a href="/appProyectos/tareas/{{ t.id }}">{{ t.nombre }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No hay tareas asignadas.</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p>No existe este proyecto.</p>
+    {% endif %}
+    <h2>Configuración del proyecto</h2>
+    <input type="button" value="Modificar">
+    <input type="button" value="Eliminar">
+{% endblock contenido %}

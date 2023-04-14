@@ -4,13 +4,27 @@
     <h1>Gestor de clientes</h1>
     <h2>Datos del clientes</h2>
     {% if cliente %}
-        <ul>
-            <li>DNI: {{ cliente.dni }}</li>
-            <li>Nombre: {{ cliente.nombre }}</li>
-            <li>Apellido: {{ cliente.apellido }}</li>
-            <li>Email: {{ cliente.email }}</li>
-            <li>Telefono: {{ cliente.telefono }}</li>
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">{{ cliente.nombre }} - {{ cliente.dni }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apellido</td>
+                    <td>{{ cliente.apellido }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ cliente.email }}</td>
+                </tr>
+                <tr>
+                    <td>Teléfono</td>
+                    <td>{{ cliente.telefono }}</td>
+                </tr>
+            </tbody>
+        </table>
     {% else %}
         <p>No existe este cliente.</p>
     {% endif %}
