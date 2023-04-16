@@ -1,58 +1,58 @@
 {% extends "base.html" %}
-
-{% block titulo %}Modificación del proyecto{% endblock %}
-
+{% block titulo %}
+    Modificación del proyecto
+{% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de proyectos</h1>
-<h2>Modificar el proyecto</h2>
-<form method="POST">
-    <fieldset>
-        {% csrf_token %}
-        {{form.as_p}}
-    </fieldset>
-    <fieldset>
-        <legend>Campos precargados (no funcional)</legend>
-        <label for="nomProyecto">Nombre:</label>
-        <input type="text" id="nomProyecto" value="{{ proyecto.nombre}}">
-        <label for="descProyecto">Descripción:</label>
-        <textarea id="descProyecto">{{ proyecto.descripcion}}</textarea>
-        <label for="fecinProyecto">Fecha de inicio:</label>
-        <input type="date" id="fecinProyecto" value="{{ proyecto.fecha_inicio }}">
-        <label for="fecfinProyecto">Fecha de fin:</label>
-        <input type="date" id="fecfinProyecto" value="{{ proyecto.fecha_fin }}">
-        <label for="preProyecto">Presupuesto:</label>
-        <input type="text" id="preProyecto" value="{{ proyecto.presupuesto }}">
-        <label for="cliProyecto">Cliente:</label>
-        <select id="cliProyecto">
-            {% if clientes %}
-            {% for c in clientes %}
-            <option value="{{ c.id }}">{{ c.nombre }} {{ c.apellido }}</option>
-            {% endfor %}
-            {% else %}
-            <option value="0">No hay clientes.</p>
+    <h1>Gestor de proyectos</h1>
+    <h2>Modificar el proyecto</h2>
+    <form method="POST">
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset>
+        <fieldset>
+            <legend>Campos precargados (no funcional)</legend>
+            <label for="nomProyecto">Nombre:</label>
+            <input type="text" id="nomProyecto" value="{{ proyecto.nombre }}">
+            <label for="descProyecto">Descripción:</label>
+            <textarea id="descProyecto">{{ proyecto.descripcion}}</textarea>
+            <label for="fecinProyecto">Fecha de inicio:</label>
+            <input type="date" id="fecinProyecto" value="{{ proyecto.fecha_inicio }}">
+            <label for="fecfinProyecto">Fecha de fin:</label>
+            <input type="date" id="fecfinProyecto" value="{{ proyecto.fecha_fin }}">
+            <label for="preProyecto">Presupuesto:</label>
+            <input type="text" id="preProyecto" value="{{ proyecto.presupuesto }}">
+            <label for="cliProyecto">Cliente:</label>
+            <select id="cliProyecto">
+                {% if clientes %}
+                    {% for c in clientes %}<option value="{{ c.id }}">{{ c.nombre }} {{ c.apellido }}</option>{% endfor %}
+                {% else %}
+                    <option value="0">
+                        No hay clientes.
+                    </p>
                 {% endif %}
-        </select>
-        <label for="resProyecto">Responsable:</label>
-        <select id="resProyecto">
-            {% if responsables %}
-            {% for r in responsables %}
-            <option value="{{ r.id }}">{{ r.nombre }} {{ r.apellido }}</option>
-            {% endfor %}
-            {% else %}
-            <option value="0">No hay responsables.</p>
+            </select>
+            <label for="resProyecto">Responsable:</label>
+            <select id="resProyecto">
+                {% if responsables %}
+                    {% for r in responsables %}<option value="{{ r.id }}">{{ r.nombre }} {{ r.apellido }}</option>{% endfor %}
+                {% else %}
+                    <option value="0">
+                        No hay responsables.
+                    </p>
                 {% endif %}
-        </select>
-        <label for="tarProyecto">Tareas:</label>
-        <select id="tarProyecto" multiple>
-            {% if tareas %}
-            {% for t in tareas %}
-            <option value="{{ t.id }}">{{ t.nombre }} {{ t.apellido }}</option>
-            {% endfor %}
-            {% else %}
-            <option value="0">No hay tareas.</p>
+            </select>
+            <label for="tarProyecto">Tareas:</label>
+            <select id="tarProyecto" multiple>
+                {% if tareas %}
+                    {% for t in tareas %}<option value="{{ t.id }}">{{ t.nombre }} {{ t.apellido }}</option>{% endfor %}
+                {% else %}
+                    <option value="0">
+                        No hay tareas.
+                    </p>
                 {% endif %}
-        </select>
-    </fieldset>
-    <input type="submit" value="Guardar cambios">
-</form>
-{% endblock %}
+            </select>
+        </fieldset>
+        <input type="submit" value="Guardar cambios">
+    </form>
+{% endblock contenido %}

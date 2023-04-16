@@ -1,21 +1,23 @@
 {% extends "base.html" %}
-
-{% block titulo %}Listado de proyectos{% endblock titulo %}
-
+{% block titulo %}
+    Listado de proyectos
+{% endblock titulo %}
 {% block contenido %}
-<h1>Deustotil Tech S.L.</h1>
-<h2>Listado de proyectos</h2>
-{% if proyectos %}
-<ol>
-    {% for p in proyectos %}
-    <li>
-        <a href="{% url 'proyecto' p.id %}">{{ p.nombre }}</a>
-    </li>
-    {% endfor %}
-</ol>
-{% else %}
-<p>No hay proyectos creados.</p>
-{% endif %}
-<h2>Crear un nuevo proyecto</h2>
-<a href="{% url 'registrar proyecto' %}"><input type="button" value="Crear"></a>
+    <h1>Deustotil Tech S.L.</h1>
+    <h2>Listado de proyectos</h2>
+    {% if proyectos %}
+        <ol>
+            {% for p in proyectos %}
+                <li>
+                    <a href="{% url 'proyecto' p.id %}">{{ p.nombre }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No hay proyectos creados.</p>
+    {% endif %}
+    <h2>Crear un nuevo proyecto</h2>
+    <a href="{% url 'registrar proyecto' %}">
+        <input type="button" value="Crear">
+    </a>
 {% endblock contenido %}

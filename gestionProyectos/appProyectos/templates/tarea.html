@@ -1,52 +1,59 @@
 {% extends "base.html" %}
-
-{% block titulo %}Detalles de la tarea{% endblock titulo %}
-
+{% block titulo %}
+    Detalles de la tarea
+{% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de tareas</h1>
-<h2>Datos de la tarea</h2>
-{% if tarea %}
-<table>
-    <thead>
-        <tr>
-            <th colspan="2">{{ tarea.nombre }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Descripción</td>
-            <td>{{ tarea.descripcion }}</td>
-        </tr>
-        <tr>
-            <td>Fecha de inicio</td>
-            <td>{{ tarea.fecha_inicio }}</td>
-        </tr>
-        <tr>
-            <td>Fecha de fin<br></td>
-            <td>{{ tarea.fecha_fin }}</td>
-        </tr>
-        <tr>
-            <td>Responsable</td>
-            <td><a href="{% url 'empleado' tarea.responsable.id %}">{{ tarea.responsable }}</a></td>
-        </tr>
-        <tr>
-            <td>Nivel de prioridad</td>
-            <td>{{ tarea.nivel_prioridad }}</td>
-        </tr>
-        <tr>
-            <td>Estado</td>
-            <td>{{ tarea.estado_tarea }}</td>
-        </tr>
-        <tr>
-            <td>Notas adicionales</td>
-            <td>{{ tarea.notas_adicionales }}</td>
-        </tr>
-    </tbody>
-</table>
-<h2>Configuración de la tarea</h2>
-<a href="{% url 'modificar tarea' tarea.id %}"><input type="button" value="Modificar"></a>
-<input type="button" value="Eliminar">
-{% else %}
-<p>No existe esta tarea.</p>
-{% endif %}
+    <h1>Gestor de tareas</h1>
+    <h2>Datos de la tarea</h2>
+    {% if tarea %}
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">{{ tarea.nombre }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Descripción</td>
+                    <td>{{ tarea.descripcion }}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de inicio</td>
+                    <td>{{ tarea.fecha_inicio }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        Fecha de fin
+                        <br>
+                    </td>
+                    <td>{{ tarea.fecha_fin }}</td>
+                </tr>
+                <tr>
+                    <td>Responsable</td>
+                    <td>
+                        <a href="{% url 'empleado' tarea.responsable.id %}">{{ tarea.responsable }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nivel de prioridad</td>
+                    <td>{{ tarea.nivel_prioridad }}</td>
+                </tr>
+                <tr>
+                    <td>Estado</td>
+                    <td>{{ tarea.estado_tarea }}</td>
+                </tr>
+                <tr>
+                    <td>Notas adicionales</td>
+                    <td>{{ tarea.notas_adicionales }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Configuración de la tarea</h2>
+        <a href="{% url 'modificar tarea' tarea.id %}">
+            <input type="button" value="Modificar">
+        </a>
+        <input type="button" value="Eliminar">
+    {% else %}
+        <p>No existe esta tarea.</p>
+    {% endif %}
 {% endblock contenido %}
