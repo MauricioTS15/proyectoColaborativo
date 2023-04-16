@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block titulo %}Modificación de la tarea{% endblock %}
+{% block titulo %}Registrar proyecto{% endblock %}
 
 {% block contenido %}
-<h1>Gestor de tareas</h1>
-<h2>Modificar la tarea</h2>
+<h1>Gestor de proyectos</h1>
+<h2>Registrar proyecto</h2>
 <form method="POST">
     <fieldset>
         {% csrf_token %}
         {{form.as_p}}
     </fieldset>
-    <input type="submit" value="Guardar cambios">
+    <input type="submit" value="Registrar">
 </form>
 {% endblock %}

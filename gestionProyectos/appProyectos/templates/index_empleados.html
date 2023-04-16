@@ -4,15 +4,15 @@
 {% endblock titulo %}
 {% block contenido %}
     <h1>Deustotil Tech S.L.</h1>
-    <h2>Listado de Empleados</h2>
+    <h2>Listado de empleados</h2>
     {% if empleados %}
-        <ul>
+        <ol>
             {% for e in empleados %}
                 <li>
                     <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }}</a>
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>No hay empleados creados.</p>
     {% endif %}

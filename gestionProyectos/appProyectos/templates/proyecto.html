@@ -31,11 +31,11 @@
         </tr>
         <tr>
             <td>Cliente</td>
-            <td><a href="/appProyectos/clientes/{{ proyecto.cliente.id }}">{{ proyecto.cliente }}</a></td>
+            <td><a href="{% url 'cliente' proyecto.cliente.id %}">{{ proyecto.cliente }}</a></td>
         </tr>
         <tr>
             <td>Responsable</td>
-            <td><a href="/appProyectos/empleados/{{ proyecto.responsable.id }}">{{ proyecto.responsable }}</a></td>
+            <td><a href="{% url 'empleado' proyecto.responsable.id %}">{{ proyecto.responsable }}</a></td>
         </tr>
         <tr>
             <td>Tareas</td>
@@ -44,7 +44,7 @@
                 <ul>
                     {% for t in tareas %}
                     <li>
-                        <a href="/appProyectos/tareas/{{ t.id }}">{{ t.nombre}}</a>
+                        <a href="{% url 'tarea' t.id %}">{{ t.nombre}}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -56,7 +56,7 @@
     </tbody>
 </table>
 <h2>Configuración del proyecto</h2>
-<a href="/appProyectos/proyectos/{{ proyecto.id }}/mod_proyecto"><input type="button" value="Modificar"></a>
+<a href="{% url 'modificar proyecto' proyecto.id %}"><input type="button" value="Modificar"></a>
 <input type="button" value="Eliminar">
 {% else %}
 <p>No existe este proyecto.</p>

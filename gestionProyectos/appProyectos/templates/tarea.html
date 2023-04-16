@@ -3,10 +3,8 @@
 {% block titulo %}Detalles de la tarea{% endblock titulo %}
 
 {% block contenido %}
-<h1>Gestor de proyectos</h1>
-
+<h1>Gestor de tareas</h1>
 <h2>Datos de la tarea</h2>
-
 {% if tarea %}
 <table>
     <thead>
@@ -29,7 +27,7 @@
         </tr>
         <tr>
             <td>Responsable</td>
-            <td><a href="/appProyectos/empleados/{{ tarea.responsable.id }}">{{ tarea.responsable }}</a></td>
+            <td><a href="{% url 'empleado' tarea.responsable.id %}">{{ tarea.responsable }}</a></td>
         </tr>
         <tr>
             <td>Nivel de prioridad</td>
@@ -46,7 +44,7 @@
     </tbody>
 </table>
 <h2>Configuración de la tarea</h2>
-<a href="/appProyectos/tareas/{{ tarea.id }}/mod_tarea"><input type="button" value="Modificar"></a>
+<a href="{% url 'modificar tarea' tarea.id %}"><input type="button" value="Modificar"></a>
 <input type="button" value="Eliminar">
 {% else %}
 <p>No existe esta tarea.</p>

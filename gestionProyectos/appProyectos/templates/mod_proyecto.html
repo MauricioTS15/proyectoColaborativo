@@ -5,8 +5,13 @@
 {% block contenido %}
 <h1>Gestor de proyectos</h1>
 <h2>Modificar el proyecto</h2>
-<form>
+<form method="POST">
     <fieldset>
+        {% csrf_token %}
+        {{form.as_p}}
+    </fieldset>
+    <fieldset>
+        <legend>Campos precargados (no funcional)</legend>
         <label for="nomProyecto">Nombre:</label>
         <input type="text" id="nomProyecto" value="{{ proyecto.nombre}}">
         <label for="descProyecto">Descripción:</label>
@@ -48,6 +53,6 @@
                 {% endif %}
         </select>
     </fieldset>
-    <input type="button" value="Guardar cambios">
+    <input type="submit" value="Guardar cambios">
 </form>
 {% endblock %}
