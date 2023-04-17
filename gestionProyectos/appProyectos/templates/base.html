@@ -1,46 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>
-        {% block titulo %}{% endblock titulo %}
-    </title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/263/263100.png">
-</head>
-
-<body>
-    <header>
-        <img src="https://cdn.freelogodesign.org/files/d64a8969eaab4eb78370dc7c21b29478/thumb/logo_200x200.png?v=638169994510000000" alt="Deustotil logo blue">
-        <nav>
-            <ul>
-                <li>
-                    <a href="{% url 'index' %}">Inicio</a>
-                </li>
-                <li>
-                    <a href="{% url 'index proyectos' %}">Proyectos</a>
-                </li>
-                <li>
-                    <a href="{% url 'index tareas' %}">Tareas</a>
-                </li>
-                <li>
-                    <a href="{% url 'index clientes' %}">Clientes</a>
-                </li>
-                <li>
-                    <a href="{% url 'index empleados' %}">Empleados</a>
-                </li>
-            </ul>
-        </nav>
-        <hr>
-    </header>
-    <div id="content">
-        {% block contenido %}{% endblock contenido %}
-    </div>
-    <footer>
-        <hr>
-        <img src="https://i.imgur.com/0AJLiR8.png" alt="Deustotil logo white">
-    </footer>
-</body>
-
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <title>
+            {% block titulo %}
+            {% endblock titulo %}
+        </title>
+        <link rel="shortcut icon"
+              href="https://cdn-icons-png.flaticon.com/512/263/263100.png">
+    </head>
+    <body>
+        <header>
+            <img src="https://cdn.freelogodesign.org/files/d64a8969eaab4eb78370dc7c21b29478/thumb/logo_200x200.png?v=638169994510000000"
+                 alt="Deustotil logo blue">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'index' %}">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index proyectos' %}">Proyectos</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index tareas' %}">Tareas</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index clientes' %}">Clientes</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index empleados' %}">Empleados</a>
+                    </li>
+                </ul>
+            </nav>
+            <hr>
+        </header>
+        <div id="content">
+            {% block contenido %}
+            {% endblock contenido %}
+        </div>
+        <footer>
+            <hr>
+            <img src="https://i.imgur.com/0AJLiR8.png" alt="Deustotil logo white">
+        </footer>
+    </body>
 </html>

@@ -1,21 +1,23 @@
 {% extends "base.html" %}
-
-{% block titulo %}Listado de tareas{% endblock titulo %}
-
+{% block titulo %}
+    Listado de tareas
+{% endblock titulo %}
 {% block contenido %}
-<h1>Deustotil Tech S.L.</h1>
-<h2>Listado de tareas</h2>
-{% if tareas %}
-<ol>
-    {% for t in tareas %}
-    <li>
-        <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
-    </li>
-    {% endfor %}
-</ol>
-{% else %}
-<p>No hay tareas creados.</p>
-{% endif %}
-<h2>Crear una nueva tarea</h2>
-<a href="{% url 'registrar tarea' %}"><input type="button" value="Crear"></a>
+    <h1>Deustotil Tech S.L.</h1>
+    <h2>Listado de tareas</h2>
+    {% if tareas %}
+        <ol>
+            {% for t in tareas %}
+                <li>
+                    <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No hay tareas creados.</p>
+    {% endif %}
+    <h2>Crear una nueva tarea</h2>
+    <a href="{% url 'registrar tarea' %}">
+        <input type="button" value="Crear">
+    </a>
 {% endblock contenido %}
