@@ -3,21 +3,25 @@ from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.shortcuts import render
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import ProyectoForm, TareaForm
-
+from django.views.generic import DetailView, ListView
 # devuelve la página principal
 def index(request):
     return render(request, 'index.html')
 
+class ProyectoListView(ListView):
+    model = Proyecto
+    queryset = Proyecto.objects.all()
+
 # devuelve el listado de proyectos
-def index_proyectos(request):
-    proyectos = get_list_or_404(Proyecto.objects.order_by('nombre'))
-    context = {'proyectos': proyectos}
-    return render(request, 'index_proyectos.html', context)
+# def index_proyectos(request):
+#     proyectos = get_list_or_404(Proyecto.objects.order_by('nombre'))
+#     context = {'proyectos': proyectos}
+#     return render(request, 'index_proyectos.html', context)
 
 # devuelve los datos de un proyecto
 def show_proyecto(request, proyecto_id):
     proyecto = get_object_or_404(Proyecto, pk=proyecto_id)
-    tareas = proyecto.tarea_realizar.all()
+    tareas = proyecto.tareas.all()
     context = {'proyecto': proyecto, 'tareas': tareas}
     return render(request, 'proyecto.html', context)
 
@@ -147,3 +151,13 @@ def show_empleado(request, empleado_id):
     empleado = get_object_or_404(Empleado, pk=empleado_id)
     context = {'empleado': empleado}
     return render(request, 'empleado.html', context)
+
+# class EmpleadoDetail(DetailView):
+#     model = Empleado
+    
+#     def get_context_data(self, **kwargs):
+#     # Cargar el contexto base
+#         context = super().get_context_data(**kwargs)
+#         # Añadir un listado de departamentos
+#         context['departamento_list'] = Departamento.objects.all()
+#         return context

@@ -3,67 +3,7 @@
     Detalles del proyecto
 {% endblock titulo %}
 {% block contenido %}
-<<<<<<< HEAD
-<h1>Gestor de proyectos</h1>
-<h2>Datos del proyecto</h2>
-{% if proyecto %}
-<table>
-    <thead>
-        <tr>
-            <th colspan="2">{{ proyecto.nombre }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Descripción</td>
-            <td>{{ proyecto.descripcion }}</td>
-        </tr>
-        <tr>
-            <td>Fecha de inicio</td>
-            <td>{{ proyecto.fecha_inicio }}</td>
-        </tr>
-        <tr>
-            <td>Fecha de fin</td>
-            <td>{{ proyecto.fecha_fin }}</td>
-        </tr>
-        <tr>
-            <td>Presupuesto</td>
-            <td>{{ proyecto.presupuesto }}€</td>
-        </tr>
-        <tr>
-            <td>Cliente</td>
-            <td><a href="{% url 'cliente' proyecto.cliente.id %}">{{ proyecto.cliente }}</a></td>
-        </tr>
-        <tr>
-            <td>Responsable</td>
-            <td><a href="{% url 'empleado' proyecto.responsable.id %}">{{ proyecto.responsable }}</a></td>
-        </tr>
-        <tr>
-            <td>Tareas</td>
-            <td>
-                {% if tareas %}
-                <ul>
-                    {% for t in tareas %}
-                    <li>
-                        <a href="{% url 'tarea' t.id %}">{{ t.nombre}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No hay tareas asignadas.</p>
-                {% endif %}
-            </td>
-        </tr>
-    </tbody>
-</table>
-<h2>Configuración del proyecto</h2>
-<a href="{% url 'modificar proyecto' proyecto.id %}"><input type="button" value="Modificar"></a>
-<input type="button" value="Eliminar">
-{% else %}
-<p>No existe este proyecto.</p>
-{% endif %}
-{% endblock %}
-=======
+
     <h1>Gestor de proyectos</h1>
     <h2>Datos del proyecto</h2>
     {% if proyecto %}
@@ -129,4 +69,4 @@
         <p>No existe este proyecto.</p>
     {% endif %}
 {% endblock contenido %}
->>>>>>> 1eebf5aeb3f7d50c3b375a52fd0fa1250d63848c
+
