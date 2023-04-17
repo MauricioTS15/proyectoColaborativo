@@ -31,21 +31,21 @@
         </tr>
         <tr>
             <td>Nivel de prioridad</td>
-            <td>{{ tarea.nivel_prioridad }}</td>
+            <td>{{ tarea.prioridad }}</td>
         </tr>
         <tr>
             <td>Estado</td>
-            <td>{{ tarea.estado_tarea }}</td>
+            <td>{{ tarea.estado }}</td>
         </tr>
         <tr>
             <td>Notas adicionales</td>
-            <td>{{ tarea.notas_adicionales }}</td>
+            <td>{{ tarea.notas }}</td>
         </tr>
     </tbody>
 </table>
 <h2>Configuración de la tarea</h2>
-<a href="{% url 'modificar tarea' tarea.id %}"><input type="button" value="Modificar"></a>
-<input type="button" value="Eliminar">
+<a href="{% url 'modificar tarea' tarea.id %}"><input type="button" value="Actualizar"></a>
+<input type="button" value="Incluir notas">
 {% else %}
 <p>No existe esta tarea.</p>
 {% endif %}

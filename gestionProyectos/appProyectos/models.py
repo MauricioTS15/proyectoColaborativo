@@ -27,9 +27,9 @@ class Tarea(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    nivel_prioridad = models.CharField(max_length=50)
-    estado_tarea = models.CharField(max_length=50)
-    notas_adicionales = models.CharField(max_length=50)
+    prioridad = models.CharField(max_length=50)
+    estado = models.CharField(max_length=50)
+    notas = models.CharField(max_length=255, default="")
     
     def __str__(self):
         return self.nombre
@@ -42,7 +42,7 @@ class Proyecto(models.Model):
     fecha_fin = models.DateField()
     presupuesto = models.IntegerField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    tarea_realizar = models.ManyToManyField(Tarea)
+    tareas = models.ManyToManyField(Tarea)
     responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     
     def __str__(self):

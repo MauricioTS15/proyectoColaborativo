@@ -36,8 +36,8 @@ def reg_proyecto(request):
             responsable = form.cleaned_data['responsable']
             presupuesto = form.cleaned_data['presupuesto']
             cliente = form.cleaned_data['cliente']
-            tarea_realizar = form.cleaned_data['tarea']
-            Proyecto.objects.create(nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tarea_realizar=tarea_realizar, responsable=responsable)
+            tareas = form.cleaned_data['tareas']
+            Proyecto.objects.create(nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tareas=tareas, responsable=responsable)
             return redirect('proyectos')
     else:
         form = ProyectoForm()
@@ -60,8 +60,8 @@ def mod_proyecto(request, proyecto_id):
             responsable = form.cleaned_data['responsable']
             presupuesto = form.cleaned_data['presupuesto']
             cliente = form.cleaned_data['cliente']
-            tarea_realizar = form.cleaned_data['tarea']
-            Proyecto.objects.update(id=proyecto_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tarea_realizar=tarea_realizar, responsable=responsable)
+            tareas = form.cleaned_data['tareas']
+            Proyecto.objects.update(id=proyecto_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tareas=tareas, responsable=responsable)
             return redirect('proyectos')
     else:
         form = ProyectoForm()
@@ -92,10 +92,10 @@ def reg_tarea(request):
             fecha_inicio = form.cleaned_data['fecha_inicio']
             fecha_fin = form.cleaned_data['fecha_fin']
             responsable = form.cleaned_data['responsable']
-            nivel_prioridad = form.cleaned_data['nivel_prioridad']
+            prioridad = form.cleaned_data['prioridad']
             estado = form.cleaned_data['estado']
-            notas_adicionales = form.cleaned_data['notas_adicionales']
-            Tarea.objects.update(nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, responsable=responsable, nivel_prioridad=nivel_prioridad, estado_tarea=estado, notas_adicionales=notas_adicionales)
+            notas = form.cleaned_data['notas']
+            Tarea.objects.update(nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
             return redirect('proyectos')
     else:
         form = TareaForm()
@@ -114,10 +114,10 @@ def mod_tarea(request, tarea_id):
             fecha_inicio = form.cleaned_data['fecha_inicio']
             fecha_fin = form.cleaned_data['fecha_fin']
             responsable = form.cleaned_data['responsable']
-            nivel_prioridad = form.cleaned_data['nivel_prioridad']
+            prioridad = form.cleaned_data['prioridad']
             estado = form.cleaned_data['estado']
-            notas_adicionales = form.cleaned_data['notas_adicionales']
-            Tarea.objects.update(id=tarea_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, responsable=responsable, nivel_prioridad=nivel_prioridad, estado_tarea=estado, notas_adicionales=notas_adicionales)
+            notas = form.cleaned_data['notas']
+            Tarea.objects.update(id=tarea_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
             return redirect('proyectos')
     else:
         form = TareaForm()
