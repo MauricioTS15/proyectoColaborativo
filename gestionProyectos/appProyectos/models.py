@@ -32,6 +32,18 @@ class Estado(models.Model):
     def __str__(self):
         return self.nombre
 
+class Proyecto(models.Model):
+    nombre = models.CharField(max_length=155)
+    descripcion = models.CharField(max_length=255)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    presupuesto = models.FloatField()
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.nombre
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=155)
     descripcion = models.CharField(max_length=255)
@@ -40,21 +52,8 @@ class Tarea(models.Model):
     responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     prioridad = models.ForeignKey(Prioridad, on_delete=models.CASCADE)
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
-    notas = models.CharField(max_length=255)
+    notas = models.CharField(blank=True, max_length=255)
+    proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.nombre
-
-class Proyecto(models.Model):
-    nombre = models.CharField(max_length=155)
-    descripcion = models.CharField(max_length=255)
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
-    presupuesto = models.IntegerField()
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    tareas = models.ManyToManyField(Tarea)
-    responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.nombre
-    
