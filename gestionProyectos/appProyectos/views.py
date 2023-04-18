@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.shortcuts import render
 from django.views import View
 from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import ProyectoForm, TareaForm
+from .forms import RegProyectoForm, RegTareaForm
 from django.views.generic import DetailView, ListView
 
 # devuelve la página principal
@@ -19,10 +19,8 @@ class ProyectoListView(ListView):
 class ProyectoDetailView(DetailView):
     model = Proyecto
     
-    def get_context_data(self, **kwargs):
-        # Cargar el contexto base   
+    def get_context_data(self, **kwargs):   
         context = super().get_context_data(**kwargs)
-        # Añadir un listado de tareas
         context['tarea_list'] = context['proyecto'].tarea_set.all()
         return context
 
@@ -30,12 +28,12 @@ class ProyectoDetailView(DetailView):
 class ProyectoCreateView(View):
     # Llamada para mostrar la página con el formulario
     def get(self, request, *args, **kwargs):
-        form = ProyectoForm()
+        form = RegProyectoForm()
         return render(request, 'reg_proyecto.html', {'form': form})
     
     # Llamada para mostrar la creación del proyecto
     def post(self, request, *args, **kwargs):
-        form = ProyectoForm(request.POST)
+        form = RegProyectoForm(request.POST)
         if form.is_valid():
             proyecto = Proyecto()
             proyecto.nombre = form.cleaned_data['nombre']
@@ -56,7 +54,7 @@ def mod_proyecto(request, proyecto_id):
     responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
     tareas = get_list_or_404(Tarea.objects.order_by('nombre'))
     if request.method == 'POST':
-        form = ProyectoForm(request.POST)
+        form = RegProyectoForm(request.POST)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             descripcion = form.cleaned_data['descripcion']
@@ -68,9 +66,9 @@ def mod_proyecto(request, proyecto_id):
             tareas = form.cleaned_data['tareas']
             Proyecto.objects.update(id=proyecto_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio,
                                     fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tareas=tareas, responsable=responsable)
-            return redirect('proyectos')
+            return redirect('index proyectos')
     else:
-        form = ProyectoForm()
+        form = RegProyectoForm()
     context = {'form': form, 'proyecto': proyecto, 'clientes': clientes,
                'responsables': responsables, 'tareas': tareas}
     return render(request, 'mod_proyecto.html', context)
@@ -88,7 +86,7 @@ class TareaDetailView(DetailView):
 def reg_tarea(request):
     responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
     if request.method == 'POST':
-        form = TareaForm(request.POST)
+        form = RegTareaForm(request.POST)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             descripcion = form.cleaned_data['descripcion']
@@ -102,7 +100,7 @@ def reg_tarea(request):
                                  fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
             return redirect('proyectos')
     else:
-        form = TareaForm()
+        form = RegTareaForm()
     context = {'form': form, 'responsables': responsables}
     return render(request, 'reg_tarea.html', context)
 
@@ -111,7 +109,7 @@ def mod_tarea(request, tarea_id):
     tarea = get_object_or_404(Proyecto, pk=tarea_id)
     responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
     if request.method == 'POST':
-        form = TareaForm(request.POST)
+        form = RegTareaForm(request.POST)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             descripcion = form.cleaned_data['descripcion']
@@ -146,14 +144,3 @@ class EmpleadoListView(ListView):
 # devuelve los datos de un empleado
 class EmpleadoDetailView(DetailView):
     model = Empleado
-
-# DETAILVIEW
-# class EmpleadoDetail(DetailView):
-#     model = Empleado
-
-#     def get_context_data(self, **kwargs):
-#     # Cargar el contexto base
-#         context = super().get_context_data(**kwargs)
-#         # Añadir un listado de departamentos
-#         context['departamento_list'] = Departamento.objects.all()
-#         return context

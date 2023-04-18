@@ -29,12 +29,12 @@ header {
 nav {
     font-size: 25px;
     cursor: pointer;
+    margin-right: 50px;
 }
 
 #nav-menu {
     display: flex;
     list-style: none;
-    margin-right: 50px;
 }
 
 .nav-menu-item {
@@ -57,7 +57,7 @@ nav {
 }
 
 #logo {
-    display : flex;
+    display: flex;
     align-items: center;
     margin-left: 50px;
     height: 80px;
@@ -66,5 +66,26 @@ nav {
 /* FOOTER STYLE */
 
 footer {
+    margin: 0;
     background-color: #ffffff;
 }
+
+#logo-box-footer {
+    display: flex;
+    margin-left: 50px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+#logo-img-footer {
+    height: 80px;
+}
+
+#tittle-box-footer {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+
+/* MAIN STYLE */
