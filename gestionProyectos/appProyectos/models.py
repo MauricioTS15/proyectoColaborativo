@@ -2,9 +2,9 @@ from django.db import models
 
 class Cliente(models.Model):
     dni = models.CharField(max_length=9)
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    nombre = models.CharField(max_length=155)
+    apellido = models.CharField(max_length=155)
+    email = models.EmailField(max_length=155)
     telefono = models.IntegerField()
     
     def __str__(self):
@@ -12,31 +12,41 @@ class Cliente(models.Model):
     
 class Empleado(models.Model):
     dni = models.CharField(max_length=9)
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    nombre = models.CharField(max_length=155)
+    apellido = models.CharField(max_length=155)
+    email = models.EmailField(max_length=155)
     telefono = models.IntegerField()
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
     
-#habilidad
-class Tarea(models.Model):
-    nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=255)
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
-    responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    prioridad = models.CharField(max_length=50)
-    estado = models.CharField(max_length=50)
-    notas = models.CharField(max_length=255, default="")
+class Prioridad(models.Model):
+    nombre = models.CharField(max_length=155)
+    
+    def __str__(self):
+        return self.nombre
+    
+class Estado(models.Model):
+    nombre = models.CharField(max_length=155)
     
     def __str__(self):
         return self.nombre
 
-#departamento
+class Tarea(models.Model):
+    nombre = models.CharField(max_length=155)
+    descripcion = models.CharField(max_length=255)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    prioridad = models.ForeignKey(Prioridad, on_delete=models.CASCADE)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    notas = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.nombre
+
 class Proyecto(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=155)
     descripcion = models.CharField(max_length=255)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
