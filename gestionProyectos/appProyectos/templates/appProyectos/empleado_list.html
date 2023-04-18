@@ -5,9 +5,9 @@
 {% block contenido %}
     <h1>Deustotil Tech S.L.</h1>
     <h2>Listado de empleados</h2>
-    {% if empleados %}
+    {% if empleado_list %}
         <ol>
-            {% for e in empleados %}
+            {% for e in empleado_list %}
                 <li>
                     <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }}</a>
                 </li>

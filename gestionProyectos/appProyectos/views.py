@@ -4,19 +4,15 @@ from django.shortcuts import render
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import ProyectoForm, TareaForm
 from django.views.generic import DetailView, ListView
+
 # devuelve la página principal
 def index(request):
     return render(request, 'index.html')
 
+# devuelve el listado de proyectos
 class ProyectoListView(ListView):
     model = Proyecto
-    queryset = Proyecto.objects.all()
-
-# devuelve el listado de proyectos
-# def index_proyectos(request):
-#     proyectos = get_list_or_404(Proyecto.objects.order_by('nombre'))
-#     context = {'proyectos': proyectos}
-#     return render(request, 'index_proyectos.html', context)
+    queryset = Proyecto.objects.order_by('nombre')
 
 # devuelve los datos de un proyecto
 def show_proyecto(request, proyecto_id):
@@ -73,10 +69,9 @@ def mod_proyecto(request, proyecto_id):
     return render(request, 'mod_proyecto.html', context)
 
 # devuelve el listado de tareas
-def index_tareas(request):
-    tareas = get_list_or_404(Tarea.objects.order_by('nombre'))
-    context = {'tareas': tareas}
-    return render(request, 'index_tareas.html', context)
+class TareaListView(ListView):
+    model = Tarea
+    queryset = Tarea.objects.order_by('nombre')
 
 # devuelve los datos de una tarea
 def show_tarea(request, tarea_id):
@@ -129,10 +124,9 @@ def mod_tarea(request, tarea_id):
     return render(request, 'mod_tarea.html', context)
 
 # devuelve el listado de clientes
-def index_clientes(request):
-    clientes = get_list_or_404(Cliente.objects.order_by('nombre'))
-    context = {'clientes': clientes}
-    return render(request, 'index_clientes.html', context)
+class ClienteListView(ListView):
+    model = Cliente
+    queryset = Cliente.objects.order_by('nombre')
 
 # devuelve los datos de un cliente
 def show_cliente(request, cliente_id):
@@ -141,10 +135,9 @@ def show_cliente(request, cliente_id):
     return render(request, 'cliente.html', context)
 
 # devuelve el listado de empleados
-def index_empleados(request):
-    empleados = get_list_or_404(Empleado.objects.order_by('nombre'))
-    context = {'empleados': empleados}
-    return render(request, 'index_empleados.html', context)
+class EmpleadoListView(ListView):
+    model = Empleado
+    queryset = Empleado.objects.order_by('nombre')
 
 # devuelve los datos de un empleado
 def show_empleado(request, empleado_id):
@@ -152,6 +145,7 @@ def show_empleado(request, empleado_id):
     context = {'empleado': empleado}
     return render(request, 'empleado.html', context)
 
+# DETAILVIEW
 # class EmpleadoDetail(DetailView):
 #     model = Empleado
     
