@@ -3,11 +3,13 @@ from django.forms import ModelForm
 from .models import Proyecto
 
 # formulario con campos de la clase proyecto
+
+
 class RegProyecto(ModelForm):
-  
-  class Meta:
-    model = Proyecto
-    fields = '__all__'
+
+    class Meta:
+        model = Proyecto
+        fields = '__all__'
 
 # formulario con campos de la clase tarea
 
