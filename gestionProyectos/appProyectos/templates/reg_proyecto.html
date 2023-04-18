@@ -5,11 +5,9 @@
 {% block contenido %}
     <h1>Gestor de proyectos</h1>
     <h2>Registrar proyecto</h2>
-    <form method="POST">
-        <fieldset>
-            {% csrf_token %}
-            {{ form.as_p }}
-        </fieldset>
-        <input type="submit" value="Registrar">
+    <form>
+        {% csrf_token %}
+        {{form}}
+    <input type="submit" value="Registrar">
     </form>
 {% endblock contenido %}

@@ -3,8 +3,9 @@
 {% block titulo %}Página principal{% endblock titulo %}
 
 {% block contenido %}
-<h1>Deustotil Tech S.L.</h1>
-<h2>Sobre la empresa</h2>
+<div id='text-main'>
+    <h1 id='title-main'>Deustotil Tech S.L.</h1>
+<h2 id='subtitle-main'>Sobre la empresa</h2>
 <p>
     Deustotil Tech S.L. es una empresa de tecnología fundada por un grupo de amigos que comparten una pasión por la
     innovación. Su objetivo es crear soluciones tecnológicas que mejoren la vida de las personas y hagan del mundo un
@@ -15,3 +16,4 @@
 </p>
 <a href="{% url 'index proyectos' %}"><input type="button" value="Ver proyectos"></a>
 {% endblock contenido %}
+</div>
