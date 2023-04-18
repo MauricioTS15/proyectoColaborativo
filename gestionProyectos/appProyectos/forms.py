@@ -1,22 +1,28 @@
 from django import forms
 
+from appProyectos.models import Proyecto
+
 #formulario con campos de la clase proyecto
-class ProyectoForm(forms.Form):
-  clientes = [('1', 'pito cruzeta'),
-              ]
-  responsables = [('1', 'yuan cruzeta')
-                  ]
-  lista_tareas = [('1', 'ordenar estanterías'),
-            ]
+class ProyectoForm(forms.ModelForm):
+  class Meta:
+    model = Proyecto
+    fields = '__all__'
+
+  # clientes = [('1', 'pito cruzeta'),
+  #             ]
+  # responsables = [('1', 'yuan cruzeta')
+  #                 ]
+  # lista_tareas = [('1', 'ordenar estanterías'),
+  #           ]
   
-  nombre = forms.CharField(label='Nombre:', max_length=50, required=False)
-  descripcion = forms.CharField(label='Descripción:', widget=forms.Textarea, max_length=255, required=False)
-  fecha_inicio = forms.DateField(label='Fecha de incio', widget=forms.DateInput(attrs={'type': 'date'}), required=False)
-  fecha_fin = forms.DateField(label='Fecha de fin', widget=forms.DateInput(attrs={'type': 'date'}), required=False)
-  presupuesto = forms.CharField(label='Presupuesto:', max_length=50, required=False)
-  cliente = forms.ChoiceField(label='Cliente:', choices=clientes)
-  responsable = forms.ChoiceField(label='Responsable:', choices=responsables)
-  tareas = forms.MultipleChoiceField(label='Tareas:', choices=lista_tareas, required=False)
+  # nombre = forms.CharField(label='Nombre:', max_length=50, required=False)
+  # descripcion = forms.CharField(label='Descripción:', widget=forms.Textarea, max_length=255, required=False)
+  # fecha_inicio = forms.DateField(label='Fecha de incio', widget=forms.DateInput(attrs={'type': 'date'}), required=False)
+  # fecha_fin = forms.DateField(label='Fecha de fin', widget=forms.DateInput(attrs={'type': 'date'}), required=False)
+  # presupuesto = forms.CharField(label='Presupuesto:', max_length=50, required=False)
+  # cliente = forms.ChoiceField(label='Cliente:', choices=clientes)
+  # responsable = forms.ChoiceField(label='Responsable:', choices=responsables)
+  # tareas = forms.MultipleChoiceField(label='Tareas:', choices=lista_tareas, required=False)
 
 #formulario con campos de la clase tarea
 class TareaForm(forms.Form):

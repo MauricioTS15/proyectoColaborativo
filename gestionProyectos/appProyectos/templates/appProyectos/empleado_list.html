@@ -9,7 +9,7 @@
         <ol>
             {% for e in empleado_list %}
                 <li>
-                    <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }}</a>
+                    <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</a>
                 </li>
             {% endfor %}
         </ol>

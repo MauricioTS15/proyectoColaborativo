@@ -45,9 +45,9 @@
                 <tr>
                     <td>Tareas</td>
                     <td>
-                        {% if tareas %}
+                        {% if tarea_list %}
                             <ul>
-                                {% for t in tareas %}
+                                {% for t in tarea_list %}
                                     <li>
                                         <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
                                     </li>
