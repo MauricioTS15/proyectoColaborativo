@@ -1,15 +1,17 @@
 from django.db import models
 
+
 class Cliente(models.Model):
     dni = models.CharField(max_length=9)
     nombre = models.CharField(max_length=155)
     apellido = models.CharField(max_length=155)
     email = models.EmailField(max_length=155)
     telefono = models.IntegerField()
-    
+
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
-    
+
+
 class Empleado(models.Model):
     dni = models.CharField(max_length=9)
     nombre = models.CharField(max_length=155)
@@ -19,18 +21,21 @@ class Empleado(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
-    
+
+
 class Prioridad(models.Model):
     nombre = models.CharField(max_length=155)
-    
+
     def __str__(self):
         return self.nombre
-    
+
+
 class Estado(models.Model):
     nombre = models.CharField(max_length=155)
-    
+
     def __str__(self):
         return self.nombre
+
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=155)
@@ -40,9 +45,10 @@ class Proyecto(models.Model):
     presupuesto = models.FloatField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     responsable = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.nombre
+
 
 class Tarea(models.Model):
     nombre = models.CharField(max_length=155)
@@ -54,6 +60,6 @@ class Tarea(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     notas = models.CharField(blank=True, max_length=255)
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.nombre
