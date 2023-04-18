@@ -2,42 +2,46 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <title>
             {% block titulo %}
             {% endblock titulo %}
         </title>
-        <link rel="shortcut icon"
-            href="{% static 'images/logo-white.png' %}">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap"
+              rel="stylesheet">
     </head>
     <body>
         <header>
-            <div class='logo-box'>
-                <a id='logo-link' href="./">
-                    <img id='logo' src="{% static 'images/logo-white.png' %}"
-                    alt="Deustotil logo blue"/>
+            <div class="logo-box">
+                <a id="logo-link" href="./">
+                    <img id="logo"
+                         src="{% static 'images/logo-white.png' %}"
+                         alt="Deustotil logo blue" />
                 </a>
-                <span class='title'>Deustotil Tech S.L.</span>
+                <span class="title">Deustotil Tech S.L.</span>
             </div>
-            <nav id='navbar-principal'>
-                <ul id='nav-menu'>
-                    <li class='nav-menu-item' >
-                        <a class='nav-link' href="{% url 'index' %}">Inicio</a>
+            <nav id="navbar-principal">
+                <ul id="nav-menu">
+                    <li class="nav-menu-item">
+                        <a class="nav-link" href="{% url 'index' %}">Inicio</a>
                     </li>
-                    <li class='nav-menu-item'>
-                        <a class='nav-link' href="{% url 'index proyectos' %}">Proyectos</a>
+                    <li class="nav-menu-item">
+                        <a class="nav-link" href="{% url 'index proyectos' %}">Proyectos</a>
                     </li>
-                    <li class='nav-menu-item'>
-                        <a class='nav-link' href="{% url 'index tareas' %}">Tareas</a>
+                    <li class="nav-menu-item">
+                        <a class="nav-link" href="{% url 'index tareas' %}">Tareas</a>
                     </li>
-                    <li class='nav-menu-item'>
-                        <a class='nav-link' href="{% url 'index clientes' %}">Clientes</a>
+                    <li class="nav-menu-item">
+                        <a class="nav-link" href="{% url 'index clientes' %}">Clientes</a>
                     </li>
-                    <li class='nav-menu-item'>
-                        <a class='nav-link' href="{% url 'index empleados' %}">Empleados</a>
+                    <li class="nav-menu-item">
+                        <a class="nav-link" href="{% url 'index empleados' %}">Empleados</a>
                     </li>
                 </ul>
             </nav>
@@ -48,11 +52,13 @@
         </div>
         <hr>
         <footer>
-            <div id='logo-box-footer'>
+            <div id="logo-box-footer">
                 <a href="#">
-                    <img id='logo-img-footer' src="{% static 'images/logo.png' %}" alt="Deustotil logo white">
+                    <img id="logo-img-footer"
+                         src="{% static 'images/logo.png' %}"
+                         alt="Deustotil logo white">
                 </a>
-                <span id='tittle-box-footer'>Deustotil Tech S.L.</span>
+                <span id="tittle-box-footer">Deustotil Tech S.L.</span>
             </div>
         </footer>
     </body>
