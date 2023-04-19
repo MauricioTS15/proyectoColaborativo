@@ -48,8 +48,10 @@
                     <td>{{ tarea.notas }}</td>
                 </tr>
                 <tr>
-                    <td>Proyecto: </td>
-                    <td>{{ tarea.proyecto }}</td>
+                    <td>Proyecto</td>
+                    <td>
+                        <a href="{% url 'proyecto' tarea.proyecto.id %}">{{ tarea.proyecto }}</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

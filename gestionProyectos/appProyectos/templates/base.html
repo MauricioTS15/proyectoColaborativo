@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.6">
         <title>
             {% block titulo %}
             {% endblock titulo %}
@@ -13,18 +13,15 @@
         <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>
+        <header id="header-principal">
             <div class="logo-box">
-                <a id="logo-link" href="./">
-                    <img id="logo"
-                         src="{% static 'images/logo-white.png' %}"
-                         alt="Deustotil logo blue" />
+                <a id="logo-link" href="{% url 'index' %}">
+                    <img id="logo" src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
+                    <span class="title">Deustotil Tech S.L.</span>
                 </a>
-                <span class="title">Deustotil Tech S.L.</span>
             </div>
             <nav id="navbar-principal">
                 <ul id="nav-menu">
@@ -46,18 +43,14 @@
                 </ul>
             </nav>
         </header>
-        <div id="content">
+        <main>
             {% block contenido %}
             {% endblock contenido %}
-        </div>
+        </main>
         <hr>
-        <footer>
+        <footer id="footer-principal">
             <div id="logo-box-footer">
-                <a href="#">
-                    <img id="logo-img-footer"
-                         src="{% static 'images/logo.png' %}"
-                         alt="Deustotil logo white">
-                </a>
+                <img id="logo-img-footer" src="{% static 'images/logo.png' %}" alt="Deustotil logo white">
                 <span id="tittle-box-footer">Deustotil Tech S.L.</span>
             </div>
         </footer>

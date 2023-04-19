@@ -1,13 +1,17 @@
 body {
     font-family: 'Poppins', sans-serif;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* HEADER STYLE */
 
-header {
+#header-principal {
     background-color: rgb(12, 43, 67);
     display: flex;
-    margin: 0;
+    width: 100vw;
     justify-content: space-between;
     height: 120px;
     align-items: center;
@@ -24,6 +28,7 @@ header {
     color: #ffffff;
     font-weight: bold;
     margin-left: 20px;
+    text-decoration: none;
 }
 
 nav {
@@ -60,14 +65,15 @@ nav {
     display: flex;
     align-items: center;
     margin-left: 50px;
-    height: 80px;
+    height: 50px;
 }
 
 /* FOOTER STYLE */
 
-footer {
+#footer-principal {
     margin: 0;
-    background-color: #ffffff;
+    width: 100vw;
+    box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset;
 }
 
 #logo-box-footer {
@@ -78,14 +84,59 @@ footer {
 }
 
 #logo-img-footer {
-    height: 80px;
+    height: 30px;
 }
 
 #tittle-box-footer {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 
 /* MAIN STYLE */
+
+main {
+    width: 80vw;
+}
+
+table {
+    color: white;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+table a {
+    color: white;
+}
+table ul {
+    padding: 0;
+}
+table li {
+    list-style-type: none;
+}
+table td, th {
+    padding: 5px;
+}
+table thead {
+    background-color: rgb(12, 43, 67);
+}
+table tbody tr:nth-child(odd) {
+    background-color: rgb(17, 108, 194);
+}
+table tbody tr:nth-child(even) {
+    background-color: rgb(54, 158, 255);
+}
+
+.button-main {
+    border-radius: 7px;
+    padding: 5px;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(17, 108, 194);
+}
+.button-main:hover {
+    color: white;
+    background-image: linear-gradient(to left, rgb(17, 108, 194), rgb(54, 158, 255));
+}

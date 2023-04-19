@@ -1,13 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, get_list_or_404, redirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import RegProyectoForm, RegTareaForm
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView
-
+from .models import Cliente, Empleado, Tarea, Proyecto
+from .forms import RegProyectoForm, RegTareaForm
 
 # devuelve la página principal
 def index(request):
