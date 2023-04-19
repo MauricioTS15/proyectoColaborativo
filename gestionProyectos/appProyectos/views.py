@@ -5,6 +5,8 @@ from django.views import View
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import RegProyectoForm, RegTareaForm
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import DeleteView, UpdateView
+
 
 # devuelve la página principal
 
@@ -171,3 +173,12 @@ class EmpleadoListView(ListView):
 
 class EmpleadoDetailView(DetailView):
     model = Empleado
+    
+class ProyectoDeleteView(DeleteView):
+    model = Proyecto
+    # success_url = ("proyecto-list")
+    
+class ProyectoUpdateView(UpdateView):
+    model = Proyecto
+    fields = ["nombre"]
+    template_nombre_suffix = "_update_form"
