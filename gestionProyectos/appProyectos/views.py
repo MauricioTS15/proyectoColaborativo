@@ -99,26 +99,27 @@ class TareaDetailView(DetailView):
 # devuelve un formulario para crear una tarea
 
 
-def reg_tarea(request):
-    responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
-    if request.method == 'POST':
+class TareaCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = RegTareaForm()
+        return render(request, 'reg_tarea.html', {'form': form})
+    
+    def post(self, request, *args, **kwargs):
         form = RegTareaForm(request.POST)
         if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            descripcion = form.cleaned_data['descripcion']
-            fecha_inicio = form.cleaned_data['fecha_inicio']
-            fecha_fin = form.cleaned_data['fecha_fin']
-            responsable = form.cleaned_data['responsable']
-            prioridad = form.cleaned_data['prioridad']
-            estado = form.cleaned_data['estado']
-            notas = form.cleaned_data['notas']
-            Tarea.objects.update(nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio,
-                                 fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
-            return redirect('proyectos')
-    else:
-        form = RegTareaForm()
-    context = {'form': form, 'responsables': responsables}
-    return render(request, 'reg_tarea.html', context)
+            tarea = Tarea()
+            tarea.nombre = form.cleaned_data['nombre']
+            tarea.descripcion = form.cleaned_data['descripcion']
+            tarea.fecha_inicio = form.cleaned_data['fecha_inicio']
+            tarea.fecha_fin = form.cleaned_data['fecha_fin']
+            tarea.responsable = form.cleaned_data['responsable']
+            tarea.estado = form.cleaned_data['estado']
+            tarea.prioridad = form.cleaned_data['prioridad']
+            tarea.notas = form.cleaned_data['notas']
+            tarea.proyecto = form.cleaned_data['proyecto']
+            tarea.save()
+            return redirect('index tareas')
+        return render(request, 'reg_tarea.html', {'form': form})
 
 # devuelve un formulario para modificar la tarea
 
