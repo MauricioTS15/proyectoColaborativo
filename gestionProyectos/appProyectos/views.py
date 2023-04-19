@@ -9,21 +9,15 @@ from django.views.generic.edit import DeleteView, UpdateView
 
 
 # devuelve la página principal
-
-
 def index(request):
     return render(request, 'index.html')
 
 # devuelve el listado de proyectos
-
-
 class ProyectoListView(ListView):
     model = Proyecto
     queryset = Proyecto.objects.order_by('nombre')
 
 # devuelve los datos de un proyecto
-
-
 class ProyectoDetailView(DetailView):
     model = Proyecto
 
@@ -32,16 +26,14 @@ class ProyectoDetailView(DetailView):
         context['tarea_list'] = context['proyecto'].tarea_set.all()
         return context
 
-# deuelve un formulario para crear un proyecto
-
-
+# devuelve un formulario para crear un proyecto
 class ProyectoCreateView(View):
-    # Llamada para mostrar la página con el formulario
+    # mostrar el formulario vacío
     def get(self, request, *args, **kwargs):
         form = RegProyectoForm()
         return render(request, 'reg_proyecto.html', {'form': form})
 
-    # Llamada para mostrar la creación del proyecto
+    # registrar el proyecto
     def post(self, request, *args, **kwargs):
         form = RegProyectoForm(request.POST)
         if form.is_valid():
@@ -58,8 +50,17 @@ class ProyectoCreateView(View):
         return render(request, 'reg_proyecto.html', {'form': form})
 
 # devuelve un formulario para modificar el proyecto
+class ProyectoUpdateView(UpdateView):
+    model = Proyecto
+    fields = ["nombre"]
+    template_nombre_suffix = "_update_form"
 
+# borra el proyecto
+class ProyectoDeleteView(DeleteView):
+    model = Proyecto
+    # success_url = ("proyecto-list")
 
+# devuelve un formulario para modificar el proyecto
 def mod_proyecto(request, proyecto_id):
     proyecto = get_object_or_404(Proyecto, pk=proyecto_id)
     clientes = get_list_or_404(Cliente.objects.order_by('nombre'))
@@ -86,26 +87,22 @@ def mod_proyecto(request, proyecto_id):
     return render(request, 'mod_proyecto.html', context)
 
 # devuelve el listado de tareas
-
-
 class TareaListView(ListView):
     model = Tarea
     queryset = Tarea.objects.order_by('nombre')
 
 # devuelve los datos de una tarea
-
-
 class TareaDetailView(DetailView):
     model = Tarea
 
 # devuelve un formulario para crear una tarea
-
-
 class TareaCreateView(View):
+    # mostrar el formulario vacío
     def get(self, request, *args, **kwargs):
         form = RegTareaForm()
         return render(request, 'reg_tarea.html', {'form': form})
     
+    # registrar la tarea
     def post(self, request, *args, **kwargs):
         form = RegTareaForm(request.POST)
         if form.is_valid():
@@ -124,8 +121,6 @@ class TareaCreateView(View):
         return render(request, 'reg_tarea.html', {'form': form})
 
 # devuelve un formulario para modificar la tarea
-
-
 def mod_tarea(request, tarea_id):
     tarea = get_object_or_404(Proyecto, pk=tarea_id)
     responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
@@ -144,41 +139,24 @@ def mod_tarea(request, tarea_id):
                                  fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
             return redirect('proyectos')
     else:
-        form = TareaForm()
+        form = RegTareaForm()
     context = {'form': form, 'tarea': tarea, 'responsables': responsables}
     return render(request, 'mod_tarea.html', context)
 
 # devuelve el listado de clientes
-
-
 class ClienteListView(ListView):
     model = Cliente
     queryset = Cliente.objects.order_by('nombre')
 
 # devuelve los datos de un cliente
-
-
 class ClienteDetailView(DetailView):
     model = Cliente
 
 # devuelve el listado de empleados
-
-
 class EmpleadoListView(ListView):
     model = Empleado
     queryset = Empleado.objects.order_by('nombre')
 
 # devuelve los datos de un empleado
-
-
 class EmpleadoDetailView(DetailView):
     model = Empleado
-    
-class ProyectoDeleteView(DeleteView):
-    model = Proyecto
-    # success_url = ("proyecto-list")
-    
-class ProyectoUpdateView(UpdateView):
-    model = Proyecto
-    fields = ["nombre"]
-    template_nombre_suffix = "_update_form"
