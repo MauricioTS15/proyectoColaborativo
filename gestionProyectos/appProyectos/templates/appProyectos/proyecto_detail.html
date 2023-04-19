@@ -64,7 +64,9 @@
         <a href="{% url 'modificar proyecto' proyecto.id %}">
             <input type="button" value="Modificar">
         </a>
-        <input type="button" value="Eliminar">
+        <a href="{% url 'borrar proyecto' proyecto.id %}">
+            <input type="button" value="Eliminar">
+        </a>
     {% else %}
         <p>No existe este proyecto.</p>
     {% endif %}

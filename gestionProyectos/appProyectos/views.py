@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import RegProyectoForm, RegTareaForm
@@ -58,7 +59,7 @@ class ProyectoUpdateView(UpdateView):
 # borra el proyecto
 class ProyectoDeleteView(DeleteView):
     model = Proyecto
-    # success_url = ("proyecto-list")
+    success_url = reverse_lazy("proyecto_list")
 
 # devuelve un formulario para modificar el proyecto
 def mod_proyecto(request, proyecto_id):
