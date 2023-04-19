@@ -57,7 +57,9 @@
         <a href="{% url 'modificar tarea' tarea.id %}">
             <input type="button" value="Modificar">
         </a>
-        <input type="button" value="Eliminar">
+        <a href="{% url 'borrar tarea' tarea.id %}">
+            <input type="button" value="Eliminar">
+        </a>
     {% else %}
         <p>No existe esta tarea.</p>
     {% endif %}

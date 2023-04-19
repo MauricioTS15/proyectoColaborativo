@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Modificación de la tarea
+{% endblock titulo %}
+{% block contenido %}
+    <h1>Gestor de tareas</h1>
+    <h2>Modificar la tarea</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input type="submit" value="Guardar cambios">
+    </form>
+{% endblock contenido %}

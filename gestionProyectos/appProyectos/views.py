@@ -64,32 +64,6 @@ class ProyectoDeleteView(DeleteView):
     context_object_name = "proyecto"
     success_url = reverse_lazy('index proyectos')
 
-# devuelve un formulario para modificar el proyecto
-def mod_proyecto(request, proyecto_id):
-    proyecto = get_object_or_404(Proyecto, pk=proyecto_id)
-    clientes = get_list_or_404(Cliente.objects.order_by('nombre'))
-    responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
-    tareas = get_list_or_404(Tarea.objects.order_by('nombre'))
-    if request.method == 'POST':
-        form = RegProyectoForm(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            descripcion = form.cleaned_data['descripcion']
-            fecha_inicio = form.cleaned_data['fecha_inicio']
-            fecha_fin = form.cleaned_data['fecha_fin']
-            responsable = form.cleaned_data['responsable']
-            presupuesto = form.cleaned_data['presupuesto']
-            cliente = form.cleaned_data['cliente']
-            tareas = form.cleaned_data['tareas']
-            Proyecto.objects.update(id=proyecto_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio,
-                                    fecha_fin=fecha_fin, presupuesto=presupuesto, cliente=cliente, tareas=tareas, responsable=responsable)
-            return redirect('index proyectos')
-    else:
-        form = RegProyectoForm()
-    context = {'form': form, 'proyecto': proyecto, 'clientes': clientes,
-               'responsables': responsables, 'tareas': tareas}
-    return render(request, 'mod_proyecto.html', context)
-
 # devuelve el listado de tareas
 class TareaListView(ListView):
     model = Tarea
@@ -125,27 +99,17 @@ class TareaCreateView(View):
         return render(request, 'reg_tarea.html', {'form': form})
 
 # devuelve un formulario para modificar la tarea
-def mod_tarea(request, tarea_id):
-    tarea = get_object_or_404(Proyecto, pk=tarea_id)
-    responsables = get_list_or_404(Empleado.objects.order_by('nombre'))
-    if request.method == 'POST':
-        form = RegTareaForm(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            descripcion = form.cleaned_data['descripcion']
-            fecha_inicio = form.cleaned_data['fecha_inicio']
-            fecha_fin = form.cleaned_data['fecha_fin']
-            responsable = form.cleaned_data['responsable']
-            prioridad = form.cleaned_data['prioridad']
-            estado = form.cleaned_data['estado']
-            notas = form.cleaned_data['notas']
-            Tarea.objects.update(id=tarea_id, nombre=nombre, descripcion=descripcion, fecha_inicio=fecha_inicio,
-                                 fecha_fin=fecha_fin, responsable=responsable, prioridad=prioridad, estado=estado, notas=notas)
-            return redirect('proyectos')
-    else:
-        form = RegTareaForm()
-    context = {'form': form, 'tarea': tarea, 'responsables': responsables}
-    return render(request, 'mod_tarea.html', context)
+class TareaUpdateView(UpdateView):
+    model = Tarea
+    template_name_suffix = "_update_form"
+    form_class = RegTareaForm
+    success_url = reverse_lazy('index tareas')
+
+# borra la tarea
+class TareaDeleteView(DeleteView):
+    model = Tarea
+    context_object_name = "tarea"
+    success_url = reverse_lazy('index tareas')
 
 # devuelve el listado de clientes
 class ClienteListView(ListView):
