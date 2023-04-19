@@ -53,13 +53,16 @@ class ProyectoCreateView(View):
 # devuelve un formulario para modificar el proyecto
 class ProyectoUpdateView(UpdateView):
     model = Proyecto
-    fields = ["nombre"]
-    template_nombre_suffix = "_update_form"
+    template_name_suffix = "_update_form"
+    form_class = RegProyectoForm
+    success_url = reverse_lazy('index proyectos')
+    
 
 # borra el proyecto
 class ProyectoDeleteView(DeleteView):
     model = Proyecto
-    success_url = reverse_lazy("proyecto_list")
+    context_object_name = "proyecto"
+    success_url = reverse_lazy('index proyectos')
 
 # devuelve un formulario para modificar el proyecto
 def mod_proyecto(request, proyecto_id):
