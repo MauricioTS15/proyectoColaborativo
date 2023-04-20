@@ -3,7 +3,7 @@
     Listado de tareas
 {% endblock titulo %}
 {% block contenido %}
-    <h1>Deustotil Tech S.L.</h1>
+    <h1>Gestor de tareas</h1>
     <h2>Listado de tareas</h2>
     {% if tarea_list %}
         <ol>
@@ -16,6 +16,8 @@
     {% else %}
         <p>No hay tareas creados.</p>
     {% endif %}
+    {% block detail %}
+    {% endblock detail %}
     <h2>Crear una nueva tarea</h2>
     <a href="{% url 'registrar tarea' %}">
         <input type="button" value="Crear">

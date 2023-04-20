@@ -22,6 +22,7 @@ class ProyectoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['proyecto_list'] = Proyecto.objects.all()
         context['tarea_list'] = context['proyecto'].tarea_set.all()
         return context
 
@@ -54,7 +55,6 @@ class ProyectoUpdateView(UpdateView):
     template_name_suffix = "_update_form"
     form_class = RegProyectoForm
     success_url = reverse_lazy('index proyectos')
-    
 
 # borra el proyecto
 class ProyectoDeleteView(DeleteView):
@@ -70,6 +70,11 @@ class TareaListView(ListView):
 # devuelve los datos de una tarea
 class TareaDetailView(DetailView):
     model = Tarea
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tarea_list'] = Tarea.objects.all()
+        return context
 
 # devuelve un formulario para crear una tarea
 class TareaCreateView(View):

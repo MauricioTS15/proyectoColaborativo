@@ -49,48 +49,54 @@
         </main>
         <hr>
         <footer id="footer-principal">
-            <div id="logo-box-footer">
-                <div id='item-box-footer'>
+            <div id='contenerdor1-footer'>
+                <div id='item1-footer'>
                     <img id="logo-img-footer" src="{% static 'images/logo.png' %}" alt="Deustotil logo white">
                     <span id="tittle-box-footer">Deustotil Tech S.L.</span>
+                </div>
+            </div>
+            <div id='contenerdor2-footer'>
+                <div class='item2-footer'>
                     <h3>- SEDE CENTRAL</h3>
                     <p>Parque Científico y Tecnológico de Gasteiz.</p>
                     <p>Z-999 | Spain</p>
                 </div>
-                <div>
+                <div class='item2-footer'>
                     <h3>- CONTACTO</h3>
-                    <a href="tel:000 000 000"><span>Tel.: 000 000 000</span></a>
-                    <a href="tel:111 111 111"><span>Móvil: 111 111 111</span></a>
+                    <a class='links-block' href="tel:000 000 000"><p>Tel.: 000 000 000</p></a>
+                    <a class='links-block' href="tel:111 111 111"><p>Móvil: 111 111 111</p></a>
                 </div>
-                <div>
+                <div class='item2-footer'>
                     <h3>- SÍGUENOS</h3>
-                    <ul>
-                        <li>
-                            <a href="">
-                                <img src="" alt="logo linkedin">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="" alt="logo twitter">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="" alt="logo instagram">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="" alt="logo github">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <img src="" alt="logo youtube">
-                            </a>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul id='lista-logos-footer'>
+                            <li id='item-lista-logos-footer'>
+                                <a href="">
+                                    <img class='logo-block' src="{% static 'images/linkedin-logo.png' %}" alt="logo linkedin">
+                                </a>
+                            </li>
+                            <li id='item-lista-logos-footer'>
+                                <a href="">
+                                    <img class='logo-block' src="{% static 'images/twitter-logo.png' %}" alt="logo twitter">
+                                </a>
+                            </li>
+                            <li id='item-lista-logos-footer'>
+                                <a href="">
+                                    <img class='logo-block' src="{% static 'images/instagram-logo.png' %}" alt="logo instagram">
+                                </a>
+                            </li>
+                            <li id='item-lista-logos-footer'>
+                                <a href="">
+                                    <img class='logo-block' src="{% static 'images/github-logo.png' %}" alt="logo github">
+                                </a>
+                            </li>
+                            <li id='item-lista-logos-footer'>
+                                <a href="">
+                                    <img class='logo-block' src="{% static 'images/youtube-logo.png' %}" alt="logo youtube">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>

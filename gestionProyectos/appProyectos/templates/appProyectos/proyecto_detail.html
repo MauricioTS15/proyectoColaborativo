@@ -1,10 +1,8 @@
-{% extends "base.html" %}
+{% extends "appProyectos/proyecto_list.html" %}
 {% block titulo %}
     Detalles del proyecto
 {% endblock titulo %}
-{% block contenido %}
-
-    <h1>Gestor de proyectos</h1>
+{% block detail %}
     <h2>Datos del proyecto</h2>
     {% if proyecto %}
         <table>
@@ -70,5 +68,4 @@
     {% else %}
         <p>No existe este proyecto.</p>
     {% endif %}
-{% endblock contenido %}
-
+{% endblock detail %}

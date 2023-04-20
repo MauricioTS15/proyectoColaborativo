@@ -1,10 +1,8 @@
-{% extends "base.html" %}
+{% extends "appProyectos/tarea_list.html" %}
 {% block titulo %}
     Detalles de la tarea
 {% endblock titulo %}
-{% block contenido %}
-
-    <h1>Gestor de tareas</h1>
+{% block detail %}
     <h2>Datos de la tarea</h2>
     {% if tarea %}
         <table>
@@ -65,4 +63,4 @@
     {% else %}
         <p>No existe esta tarea.</p>
     {% endif %}
-{% endblock contenido %}
+{% endblock detail %}
