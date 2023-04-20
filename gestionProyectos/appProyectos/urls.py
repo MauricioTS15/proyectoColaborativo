@@ -14,6 +14,7 @@ urlpatterns = [
     path('tareas/<int:pk>/tarea_update_form', views.TareaUpdateView.as_view(), name='modificar tarea'),
     path('tareas/<int:pk>/tarea_confirm_delete', views.TareaDeleteView.as_view(), name='borrar tarea'),
     path('clientes/', views.ClienteListView.as_view(), name='index clientes'),
+    path('clientes/reg_cliente', views.ClienteCreateView.as_view(), name='registrar cliente'),
     path('clientes/<int:pk>', views.ClienteDetailView.as_view(), name='cliente'),
     path('empleados/', views.EmpleadoListView.as_view(), name='index empleados'),
     path('empleados/<int:pk>', views.EmpleadoDetailView.as_view(), name='empleado'),

@@ -118,6 +118,24 @@ class ClienteListView(ListView):
 class ClienteDetailView(DetailView):
     model = Cliente
 
+class ClienteCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = RegClienteForm()
+        return render(request, 'reg_cliente.html', {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        form = RegClienteForm(request.POST)
+        if form.is_valid():
+            cliente = Cliente()
+            cliente.dni = form.cleaned_data['dni']
+            cliente.nombre = form.cleaned_data['nombre']
+            cliente.apellido = form.cleaned_data['apellido']
+            cliente.email = form.cleaned_data['email']
+            cliente.telefono = form.cleaned_data['telefono']
+            cliente.save()
+            return redirect('index clientes')
+        return render(request, 'reg_cliente.html', {'form': form})
+
 # devuelve un formulario para modificar un cliente
 class ClienteUpdateView(UpdateView):
     model = Cliente
