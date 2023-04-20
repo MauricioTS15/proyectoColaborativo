@@ -9,7 +9,7 @@ body {
 /* HEADER STYLE */
 
 #header-principal {
-    background-color: rgb(12, 43, 67);
+    background-color: #0C2B43;
     display: flex;
     width: 100vw;
     justify-content: space-between;
@@ -28,7 +28,6 @@ body {
     color: #ffffff;
     font-weight: bold;
     margin-left: 20px;
-    text-decoration: none;
 }
 
 nav {
@@ -59,6 +58,7 @@ nav {
 #logo-link {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 #logo {
@@ -71,13 +71,16 @@ nav {
 /* FOOTER STYLE */
 
 #footer-principal {
+    background-color: white;
     margin: 0;
     width: 100vw;
+    height: 200px;
     box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset;
 }
 
 #logo-box-footer {
     display: flex;
+    justify-content: space-around;
     margin-left: 50px;
     margin-top: 20px;
     align-items: center;
@@ -91,6 +94,10 @@ nav {
     font-size: 20px;
     font-weight: bold;
     margin-left: 10px;
+}
+
+#item-box-footer {
+    
 }
 
 
