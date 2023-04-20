@@ -20,6 +20,7 @@ urlpatterns = [
     path('clientes/<int:pk>/cliente_confirm_delete', views.ClienteDeleteView.as_view(), name='borrar cliente'),
     path('empleados/', views.EmpleadoListView.as_view(), name='index empleados'),
     path('empleados/<int:pk>', views.EmpleadoDetailView.as_view(), name='empleado'),
+    path('empleados/reg_empleado', views.EmpleadoCreateView.as_view(), name='registrar empleado'),
     path('empleados/<int:pk>/empleado_update_form', views.ClienteUpdateView.as_view(), name='modificar empleado'),
     path('empleados/<int:pk>/empleado_confirm_delete', views.ClienteDeleteView.as_view(), name='borrar empleado'),
 ]

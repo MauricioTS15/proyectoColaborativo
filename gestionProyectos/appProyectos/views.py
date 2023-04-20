@@ -157,7 +157,25 @@ class EmpleadoListView(ListView):
 # devuelve los datos de un empleado
 class EmpleadoDetailView(DetailView):
     model = Empleado
+
+class EmpleadoCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = RegEmpleadoForm()
+        return render(request, 'reg_empleado.html', {'form': form})
     
+    def post(self, request, *args, **kwargs):
+        form = RegClienteForm(request.POST)
+        if form.is_valid():
+            empleado = Empleado()
+            empleado.dni = form.cleaned_data['dni']
+            empleado.nombre = form.cleaned_data['nombre']
+            empleado.apellido = form.cleaned_data['apellido']
+            empleado.email = form.cleaned_data['email']
+            empleado.telefono = form.cleaned_data['telefono']
+            empleado.save()
+            return redirect('index empleados')
+        return render(request, 'reg_empleado.html', {'form': form})
+
 # devuelve un formulario para modificar un empleado
 class EmpleadoUpdateView(UpdateView):
     model = Empleado

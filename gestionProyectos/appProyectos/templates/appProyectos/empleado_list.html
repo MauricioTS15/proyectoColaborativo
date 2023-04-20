@@ -17,5 +17,7 @@
         <p>No hay empleados creados.</p>
     {% endif %}
     <h2>Crear un nuevo empleado</h2>
-    <input type="button" value="Crear">
+    <a href="{% url 'registrar empleado' %}">
+        <input type="button" value="Crear">
+    </a>
 {% endblock contenido %}
