@@ -31,6 +31,6 @@
         <p>No existe este empleado.</p>
     {% endif %}
     <h2>Configuración del empleado</h2>
-    <input type="button" value="Modificar">
-    <input type="button" value="Eliminar">
+    <a href="{% url 'modificar empleado' empleado.id %}"><input type="button" value="Modificar"></a>
+    <a href="{% url 'borrar empleado' empleado.id %}"><input type="button" value="Eliminar"></a>
 {% endblock contenido %}

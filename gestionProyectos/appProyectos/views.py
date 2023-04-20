@@ -123,14 +123,13 @@ class ClienteUpdateView(UpdateView):
     model = Cliente
     template_name_suffix = "_update_form"
     form_class = RegClienteForm
-    success_url = reverse_lazy('index cliente')
-    
+    success_url = reverse_lazy('index clientes')
 
 # borra el cliente
 class ClienteDeleteView(DeleteView):
     model = Cliente
     context_object_name = "cliente"
-    success_url = reverse_lazy('index cliente')
+    success_url = reverse_lazy('index clientes')
 
 # devuelve el listado de empleados
 class EmpleadoListView(ListView):
@@ -146,11 +145,10 @@ class EmpleadoUpdateView(UpdateView):
     model = Empleado
     template_name_suffix = "_update_form"
     form_class = RegEmpleadoForm
-    success_url = reverse_lazy('index empleado')
-    
+    success_url = reverse_lazy('index empleados')
 
 # borra el empleado
-class ClienteDeleteView(DeleteView):
+class EmpleadoDeleteView(DeleteView):
     model = Empleado
     context_object_name = "empleado"
-    success_url = reverse_lazy('index empleado')
+    success_url = reverse_lazy('index empleados')
