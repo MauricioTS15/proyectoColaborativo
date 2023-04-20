@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Registrar cliente
+{% endblock titulo %}
+{% block contenido %}
+    <h1>Gestor de clientes</h1>
+    <h2>Registrar cliente</h2>
+    <form method="POST">
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset>
+        <input type="submit" value="Registrar">
+    </form>
+{% endblock contenido %}

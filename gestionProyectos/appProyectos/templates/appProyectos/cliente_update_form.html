@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Modificación del cliente
+{% endblock titulo %}
+{% block contenido %}
+    <h1>Gestor de clientes</h1>
+    <h2>Modificar el cliente</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar cambios">
+    </form>
+{% endblock contenido %}

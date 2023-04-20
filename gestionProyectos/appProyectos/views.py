@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView
 from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import RegProyectoForm, RegTareaForm
+from .forms import RegProyectoForm, RegTareaForm, RegClienteForm,RegEmpleadoForm
 
 # devuelve la página principal
 def index(request):
@@ -118,6 +118,20 @@ class ClienteListView(ListView):
 class ClienteDetailView(DetailView):
     model = Cliente
 
+# devuelve un formulario para modificar un cliente
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    template_name_suffix = "_update_form"
+    form_class = RegClienteForm
+    success_url = reverse_lazy('index cliente')
+    
+
+# borra el cliente
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    context_object_name = "cliente"
+    success_url = reverse_lazy('index cliente')
+
 # devuelve el listado de empleados
 class EmpleadoListView(ListView):
     model = Empleado
@@ -126,3 +140,17 @@ class EmpleadoListView(ListView):
 # devuelve los datos de un empleado
 class EmpleadoDetailView(DetailView):
     model = Empleado
+    
+# devuelve un formulario para modificar un empleado
+class EmpleadoUpdateView(UpdateView):
+    model = Empleado
+    template_name_suffix = "_update_form"
+    form_class = RegEmpleadoForm
+    success_url = reverse_lazy('index empleado')
+    
+
+# borra el empleado
+class ClienteDeleteView(DeleteView):
+    model = Empleado
+    context_object_name = "empleado"
+    success_url = reverse_lazy('index empleado')
