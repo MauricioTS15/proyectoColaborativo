@@ -16,6 +16,10 @@ urlpatterns = [
     path('clientes/', views.ClienteListView.as_view(), name='index clientes'),
     path('clientes/reg_cliente', views.ClienteCreateView.as_view(), name='registrar cliente'),
     path('clientes/<int:pk>', views.ClienteDetailView.as_view(), name='cliente'),
+    path('clientes/<int:pk>/cliente_update_form', views.ClienteUpdateView.as_view(), name='modificar cliente'),
+    path('clientes/<int:pk>/cliente_confirm_delete', views.ClienteDeleteView.as_view(), name='borrar cliente'),
     path('empleados/', views.EmpleadoListView.as_view(), name='index empleados'),
     path('empleados/<int:pk>', views.EmpleadoDetailView.as_view(), name='empleado'),
+    path('empleados/<int:pk>/empleado_update_form', views.ClienteUpdateView.as_view(), name='modificar empleado'),
+    path('empleados/<int:pk>/empleado_confirm_delete', views.ClienteDeleteView.as_view(), name='borrar empleado'),
 ]

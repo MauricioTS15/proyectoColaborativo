@@ -31,6 +31,6 @@
         <p>No existe este cliente.</p>
     {% endif %}
     <h2>Configuración del cliente</h2>
-    <input type="button" value="Modificar">
-    <input type="button" value="Eliminar">
+    <a href="{% url 'modificar cliente' cliente.id %}"><input type="button" value="Modificar"></a>
+    <a href="{% url 'borrar cliente' cliente.id %}"><input type="button" value="Eliminar"></a>
 {% endblock contenido %}
