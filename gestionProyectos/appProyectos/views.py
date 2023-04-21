@@ -14,7 +14,7 @@ def index(request):
 # devuelve el listado de proyectos
 class ProyectoListView(ListView):
     model = Proyecto
-    queryset = Proyecto.objects.order_by('nombre')
+    queryset = Proyecto.objects.order_by('id')
 
 # devuelve los datos de un proyecto
 class ProyectoDetailView(DetailView):
@@ -22,8 +22,8 @@ class ProyectoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['proyecto_list'] = Proyecto.objects.all()
-        context['tarea_list'] = context['proyecto'].tarea_set.all()
+        context['proyecto_list'] = Proyecto.objects.order_by('id')
+        context['tarea_list'] = context['proyecto'].tarea_set.order_by('nombre')
         return context
 
 # devuelve un formulario para crear un proyecto
@@ -56,16 +56,26 @@ class ProyectoUpdateView(UpdateView):
     form_class = RegProyectoForm
     success_url = reverse_lazy('index proyectos')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['proyecto_list'] = Proyecto.objects.order_by('id')
+        return context
+
 # borra el proyecto
 class ProyectoDeleteView(DeleteView):
     model = Proyecto
     context_object_name = "proyecto"
     success_url = reverse_lazy('index proyectos')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['proyecto_list'] = Proyecto.objects.order_by('id')
+        return context
+
 # devuelve el listado de tareas
 class TareaListView(ListView):
     model = Tarea
-    queryset = Tarea.objects.order_by('nombre')
+    queryset = Tarea.objects.order_by('id')
 
 # devuelve los datos de una tarea
 class TareaDetailView(DetailView):
@@ -73,7 +83,7 @@ class TareaDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tarea_list'] = Tarea.objects.all()
+        context['tarea_list'] = Tarea.objects.order_by('id')
         return context
 
 # devuelve un formulario para crear una tarea
@@ -117,7 +127,7 @@ class TareaDeleteView(DeleteView):
 # devuelve el listado de clientes
 class ClienteListView(ListView):
     model = Cliente
-    queryset = Cliente.objects.order_by('nombre')
+    queryset = Cliente.objects.order_by('id')
 
 # devuelve los datos de un cliente
 class ClienteDetailView(DetailView):
@@ -125,9 +135,10 @@ class ClienteDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cliente_list'] = Cliente.objects.all()
+        context['cliente_list'] = Cliente.objects.order_by('id')
         return context
 
+# devuelve un formulario para crear un cliente
 class ClienteCreateView(View):
     def get(self, request, *args, **kwargs):
         form = RegClienteForm()
@@ -162,7 +173,7 @@ class ClienteDeleteView(DeleteView):
 # devuelve el listado de empleados
 class EmpleadoListView(ListView):
     model = Empleado
-    queryset = Empleado.objects.order_by('nombre')
+    queryset = Empleado.objects.order_by('id')
 
 # devuelve los datos de un empleado
 class EmpleadoDetailView(DetailView):
@@ -170,9 +181,10 @@ class EmpleadoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['empleado_list'] = Empleado.objects.all()
+        context['empleado_list'] = Empleado.objects.order_by('id')
         return context
 
+# devuelve un formulario para crear un empleado
 class EmpleadoCreateView(View):
     def get(self, request, *args, **kwargs):
         form = RegEmpleadoForm()

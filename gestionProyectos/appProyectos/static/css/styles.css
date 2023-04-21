@@ -1,104 +1,85 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+}
+
+main {
+    padding-top: 120px;
 }
 
 /* HEADER STYLE */
 
 #header-principal {
+    position: fixed;
     background-color: #0C2B43;
     display: flex;
-    width: 100vw;
+    width: 100%;
     justify-content: space-between;
     height: 120px;
     align-items: center;
     box-shadow: 4px 7px 45px 5px rgba(0, 0, 0, 0.4);
 }
 
-.logo-box {
+#header-principal div {
     display: flex;
     align-items: center;
 }
-
-.title {
+#header-principal div a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+#header-principal div a img {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    height: 50px;
+}
+#header-principal div a span {
     font-size: 30px;
     color: #ffffff;
     font-weight: bold;
     margin-left: 20px;
 }
 
-nav {
+#header-principal nav {
     font-size: 25px;
     cursor: pointer;
     margin-right: 50px;
 }
-
-#nav-menu {
+#header-principal nav ul {
     display: flex;
     list-style: none;
 }
 
-.nav-menu-item {
+#header-principal nav ul li {
     margin: 0 20px;
 
 }
-
-.nav-link {
+#header-principal nav ul li a {
     color: white;
     text-decoration: none;
 }
-
-.nav-link:hover {
-    color: #2596be;
-}
-
-#logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-#logo {
-    display: flex;
-    align-items: center;
-    margin-left: 50px;
-    height: 50px;
+#header-principal nav ul li a:hover {
+    color: rgb(111, 170, 224);
 }
 
 /* FOOTER STYLE */
 
 #footer-principal {
-    background-color: white;
+    background-color: #ebebeb;
     margin: 0;
-    width: 100vw;
-    height: 200px;
-    box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset;
+    width: 100%;
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.45) inset;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.logo-img-footer {
-    height: 30px;
-}
-
-#logo2-img-footer {
-    height: 60px;
-}
-
-.tittle-box-footer {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-#contenerdor1-footer {
+.container-footer {
     display: flex;
     justify-content: space-between;
     margin-left: 50px;
     margin-right: 50px;
-    margin-top: 50px;
-    align-items: center;
 }
 
 .item1-footer {
@@ -107,13 +88,17 @@ nav {
     justify-content: center;
     width: 350px;
 }
+.item1-footer img {
+    height: 30px;
+}
+.item1-footer span {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
 
-#contenedor2-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 20px;
+#logo-img-footer {
+    height: 60px;
 }
 
 .item2-footer {
@@ -122,13 +107,24 @@ nav {
     align-items: center;
     width: 350px;
 }
-
-#contenedor3-footer {
+.item2-footer ul {
     display: flex;
-    justify-content: space-between;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 20px;
+    padding-left: 0;
+}
+.item2-footer ul li {
+    display: flex;
+    margin-right: 20px;
+}
+.item2-footer ul li img {
+    width: 50px;
+    transition: transform .1s;
+}
+.item2-footer ul li img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.item2-footer ul li img:active {
+    transform: scale(1.05) translateY(.125rem);
 }
 
 .item3-footer {
@@ -139,38 +135,22 @@ nav {
     align-items: center;
 }
 
-.links-block:hover {
-    color:rgb(54, 158, 255)
-}
-
-#lista-logos-footer {
-    display: flex;
-    padding-left: 0;
-}
-
-#item-lista-logos-footer {
-    display: flex;
-    margin-right: 20px;
-}
-
-img,object,embed,video {
-    max-width: 100%;
-}
-
-.logo-block {
-    width: 50px;
-    cursor: pointer;
-}
-
-.links-block {
+.link-block {
     text-decoration: none;
     color: black;
+}
+.link-block:hover {
+    color: rgb(111, 170, 224);
 }
 
 /* MAIN STYLE */
 
-main {
-    width: 80vw;
+img {
+    max-width: 100%;
+}
+
+h1 {
+    margin: 0 auto;
 }
 
 table {
@@ -179,6 +159,7 @@ table {
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 table a {
     color: white;
@@ -189,34 +170,102 @@ table ul {
 table li {
     list-style-type: none;
 }
-table td, th {
-    padding: 5px;
+table td,
+th {
+    padding: 10px;
 }
 table thead {
     background-color: rgb(12, 43, 67);
 }
 table tbody tr:nth-child(odd) {
-    background-color: rgb(17, 108, 194);
+    background-color: rgb(0, 86, 167);
 }
 table tbody tr:nth-child(even) {
-    background-color: rgb(54, 158, 255);
+    background-color: rgb(0, 59, 114);
 }
 
-.button-main {
+.button {
+    text-decoration: none;
+}
+
+.button-big {
     border-radius: 7px;
     border-top: none;
     border-left: none;
-    padding: 5px;
-    font-size: large;
+    padding: 0.6em 1em;
+    font-size: larger;
     font-weight: bold;
     color: rgb(17, 108, 194);
+    transition: transform .1s;
 }
-.button-main:hover {
+.button-big:hover {
     color: white;
     background-image: linear-gradient(to left, rgb(17, 108, 194), rgb(54, 158, 255));
+    cursor: pointer;
+}
+.button-big:active {
+    transform: scale(0.95);
 }
 
-.detalle {
+.button-small {
+    border-radius: 4px;
+    padding: 0.3em 0.5em;
+    font-size: medium;
+    color: rgb(17, 108, 194);
+    transition: transform .1s;
+}
+.button-small:hover {
+    border-color: white;
+    color: white;
+    background-image: linear-gradient(to left, rgb(17, 108, 194), rgb(54, 158, 255));
+    cursor: pointer;
+}
+.button-small:active {
+    transform: scale(0.95);
+}
+
+#section-index {
+    margin: 20px 10vw 20px 10vw;
+}
+
+#section-index article {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#container-main {
     display: flex;
     gap: 100px;
 }
+#container-main aside {
+    padding: 20px;
+    width: 350px;
+    height: 100vh;
+    box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.45);
+}
+#container-main aside nav {
+    display: flex;
+}
+#container-main aside nav i {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    background-color: white;
+}
+#container-main aside h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+#container-main nav a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+#container-main nav a:hover {
+    color: rgb(136, 136, 136);
+}
+

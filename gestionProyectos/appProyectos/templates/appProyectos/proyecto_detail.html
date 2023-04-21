@@ -2,7 +2,7 @@
 {% block titulo %}
     Detalles del proyecto
 {% endblock titulo %}
-{% block detail %}
+{% block vista %}
     <h2>Datos del proyecto</h2>
     {% if proyecto %}
         <table>
@@ -58,14 +58,13 @@
                 </tr>
             </tbody>
         </table>
-        <h2>Configuración del proyecto</h2>
-        <a href="{% url 'modificar proyecto' proyecto.id %}">
-            <input type="button" value="Modificar">
+        <a href="{% url 'modificar proyecto' proyecto.id %}" class="button">
+            <input class="button-small" type="button" value="Modificar">
         </a>
-        <a href="{% url 'borrar proyecto' proyecto.id %}">
-            <input type="button" value="Eliminar">
+        <a href="{% url 'borrar proyecto' proyecto.id %}" class="button">
+            <input class="button-small" type="button" value="Eliminar">
         </a>
     {% else %}
         <p>No existe este proyecto.</p>
     {% endif %}
-{% endblock detail %}
+{% endblock vista %}

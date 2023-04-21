@@ -1,131 +1,138 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.6">
-        <title>
-            {% block titulo %}
-            {% endblock titulo %}
-        </title>
-        <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header id="header-principal">
-            <div class="logo-box">
-                <a id="logo-link" href="{% url 'index' %}">
-                    <img id="logo" src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
-                    <span class="title">Deustotil Tech S.L.</span>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block titulo %}
+        {% endblock titulo %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.9">
+    <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header id="header-principal">
+        <div>
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
+                <span>Deustotil Tech S.L.</span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'index' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'index proyectos' %}">Proyectos</a>
+                </li>
+                <li>
+                    <a href="{% url 'index tareas' %}">Tareas</a>
+                </li>
+                <li>
+                    <a href="{% url 'index clientes' %}">Clientes</a>
+                </li>
+                <li>
+                    <a href="{% url 'index empleados' %}">Empleados</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block contenido %}
+        {% endblock contenido %}
+    </main>
+    <footer id="footer-principal">
+        <div class="container-footer">
+            <div class="item1-footer">
+                <img src="{% static 'images/logo.png' %}" alt="Deustotil logo white">
+                <span>Deustotil Tech S.L.</span>
+            </div>
+            <div class="item1-footer">
+                <img src="{% static 'images/deusto-logo.png' %}" alt="Deusto logo">
+                <span>Deusto</span>
+            </div>
+            <div class="item1-footer">
+                <img id="logo-img-footer" src="{% static 'images/vitoria-logo.png' %}" alt="Vitoria-Gasteiz">
+                <span >Vitoria-Gasteiz</span>
+            </div>
+        </div>
+        <div class="container-footer">
+            <div class="item2-footer">
+                <h3>- SEDE CENTRAL</h3>
+                <p>Deusto - Arriaga</p>
+                <p>CLASE 2 | VITORIA</p>
+            </div>
+            <div class="item2-footer">
+                <h3>- CONTACTO</h3>
+                <a class="link-block" href="tel:000 000 000">
+                    <p>Tel.: 000 000 000</p>
+                </a>
+                <a class="link-block" href="tel:111 111 111">
+                    <p>Móvil: 111 11 11 11</p>
                 </a>
             </div>
-            <nav id="navbar-principal">
-                <ul id="nav-menu">
-                    <li class="nav-menu-item">
-                        <a class="nav-link" href="{% url 'index' %}">Inicio</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <a class="nav-link" href="{% url 'index proyectos' %}">Proyectos</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <a class="nav-link" href="{% url 'index tareas' %}">Tareas</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <a class="nav-link" href="{% url 'index clientes' %}">Clientes</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <a class="nav-link" href="{% url 'index empleados' %}">Empleados</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            {% block contenido %}
-            {% endblock contenido %}
-        </main>
-        <hr>
-        <footer id="footer-principal">
-            <div id="contenerdor1-footer">
-                <div class="item1-footer">
-                    <img class="logo-img-footer" src="{% static 'images/logo.png' %}" alt="Deustotil logo white">
-                    <span class="tittle-box-footer">Deustotil Tech S.L.</span>
-                </div>
-                <div class="item1-footer">
-                    <img class="logo-img-footer" src="{% static 'images/deusto-logo.png' %}" alt="Deusto logo">
-                    <span class="tittle-box-footer">Deusto</span>
-                </div>
-                <div class="item1-footer">
-                    <img id="logo2-img-footer" src="{% static 'images/vitoria-logo.jpg' %}" alt="Vitoria-Gasteiz">
-                    <span class="tittle-box-footer">Vitoria-Gasteiz</span>
+            <div class="item2-footer">
+                <h3>- REDES SOCIALES</h3>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="">
+                                <img src="{% static 'images/linkedin-logo.png' %}" alt="logo linkedin">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="{% static 'images/twitter-logo.png' %}" alt="logo twitter">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="{% static 'images/instagram-logo.png' %}" alt="logo instagram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="{% static 'images/github-logo.png' %}" alt="logo github">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="{% static 'images/youtube-logo.png' %}" alt="logo youtube">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div id="contenedor2-footer">
-                <div class="item2-footer">
-                    <h3>- SEDE CENTRAL</h3>
-                    <p>Deusto - Arriaga.</p>
-                    <p>CLASE 2 | VITORIA</p>
-                </div>
-                <div class="item2-footer">
-                    <h3>- CONTACTO</h3>
-                    <a class="links-block" href="tel:000 000 000"><p>Tel.: 000 000 000</p></a>
-                    <a class="links-block" href="tel:111 111 111"><p>Móvil: 111 11 11 11</p></a>
-                </div>
-                <div class="item2-footer">
-                    <h3>- SÍGUENOS</h3>
-                    <div>
-                        <ul id="lista-logos-footer">
-                            <li id="item-lista-logos-footer">
-                                <a href="">
-                                    <img class="logo-block" src="{% static 'images/linkedin-logo.png' %}" alt="logo linkedin">
-                                </a>
-                            </li>
-                            <li id="item-lista-logos-footer">
-                                <a href="">
-                                    <img class="logo-block" src="{% static 'images/twitter-logo.png' %}" alt="logo twitter">
-                                </a>
-                            </li>
-                            <li id="item-lista-logos-footer">
-                                <a href="">
-                                    <img class="logo-block" src="{% static 'images/instagram-logo.png' %}" alt="logo instagram">
-                                </a>
-                            </li>
-                            <li id="item-lista-logos-footer">
-                                <a href="">
-                                    <img class="logo-block" src="{% static 'images/github-logo.png' %}" alt="logo github">
-                                </a>
-                            </li>
-                            <li id="item-lista-logos-footer">
-                                <a href="">
-                                    <img class="logo-block" src="{% static 'images/youtube-logo.png' %}" alt="logo youtube">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        </div>
+        <div class="container-footer">
+            <div class="item3-footer">
+                <span>© 2023 Deustotil Tech S.L.</span>
+                <span>Todos los derechos reservados</span>
             </div>
-            <div id="contenedor3-footer">
-                <div class="item3-footer">
-                    <span>© 2023 DeustoTil Tech S.L.</span>
-                    <span>Todos los derechos reservados</span>
-                </div>
-                <div class="item3-footer">
-                    <a class="links-block" href="">
-                        <span>Política de privacidad</span>
-                    </a>
-                    <a class="links-block" href="">
-                        <span>Política de cookies</span>
-                    </a>
-                </div>
-                <div class="item3-footer">
-                    <a class="links-block" href="">
-                        <span>Información Legal</span>
-                    </a>
-                </div>
+            <div class="item3-footer">
+                <a class="link-block" href="">
+                    <span>Política de privacidad</span>
+                </a>
+                <a class="link-block" href="">
+                    <span>Política de cookies</span>
+                </a>
             </div>
-        </footer>
-    </body>
+            <div class="item3-footer">
+                <a class="link-block" href="">
+                    <span>Información Legal</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
 </html>

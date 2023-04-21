@@ -3,29 +3,38 @@
 Listado de proyectos
 {% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de proyectos</h1>
-<div class="detalle">
+<div id="container-main">
     <aside>
-        <h2>Crear un nuevo proyecto</h2>
-        <a href="{% url 'registrar proyecto' %}">
-            <input type="button" value="Crear">
-        </a>
-        <h2>Listado de proyectos</h2>
-        {% if proyecto_list %}
-        <ol>
+        <div>
+            <h1>Gestor de proyectos</h1>
+        </div>
+        <div>
+            <a href="{% url 'registrar proyecto' %}" class="button">
+                <input class="button-big" type="button" value="Crear un nuevo proyecto">
+            </a>
+        </div>
+        <div>
+            <h2>Listado de proyectos</h2>
+            {% if proyecto_list %}
             {% for p in proyecto_list %}
-            <li>
+            <nav>
                 <a href="{% url 'proyecto' p.id %}">{{ p.nombre }}</a>
-            </li>
+                <a href="{% url 'modificar proyecto' p.id %}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'borrar proyecto' p.id %}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </nav>
             {% endfor %}
-        </ol>
-        {% else %}
-        <p>No hay proyectos creados.</p>
-        {% endif %}
+            {% else %}
+            <p>No hay proyectos creados.</p>
+            {% endif %}
+        </div>
     </aside>
     <section>
-        {% block detail %}
-        {% endblock detail%}
+        {% block vista %}
+        {% endblock vista %}
     </section>
 </div>
 {% endblock contenido %}

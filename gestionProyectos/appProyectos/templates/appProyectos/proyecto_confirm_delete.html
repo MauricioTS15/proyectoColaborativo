@@ -1,15 +1,14 @@
-{% extends "base.html" %}
+{% extends "appProyectos/proyecto_list.html" %}
 {% block titulo %}
     Eliminación del proyecto
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de proyectos</h1>
+{% block vista %}
     <h2>Borrar el proyecto</h2>
     <form method="post">
         {% csrf_token %}
         <p>Se va a borrar el proyecto "{{ proyecto }}"</p>
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Confirmar">
+        <input class="button-small" type="submit" value="Confirmar">
     </form>
-{% endblock contenido %}
+{% endblock vista %}
