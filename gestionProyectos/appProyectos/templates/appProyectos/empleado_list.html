@@ -1,23 +1,31 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Listado de empleados
+Listado de empleados
 {% endblock titulo %}
 {% block contenido %}
-    <h1>Deustotil Tech S.L.</h1>
-    <h2>Listado de empleados</h2>
-    {% if empleado_list %}
+<h1>Gestor de empleados</h1>
+<div class="detalle">
+    <aside>
+        <h2>Crear un nuevo empleado</h2>
+        <a href="{% url 'registrar empleado' %}">
+            <input type="button" value="Crear">
+        </a>
+        <h2>Listado de empleados</h2>
+        {% if empleado_list %}
         <ol>
             {% for e in empleado_list %}
-                <li>
-                    <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</a>
-                </li>
+            <li>
+                <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</a>
+            </li>
             {% endfor %}
         </ol>
-    {% else %}
+        {% else %}
         <p>No hay empleados creados.</p>
-    {% endif %}
-    <h2>Crear un nuevo empleado</h2>
-    <a href="{% url 'registrar empleado' %}">
-        <input type="button" value="Crear">
-    </a>
+        {% endif %}
+    </aside>
+    <section>
+        {% block detail %}
+        {% endblock detail %}
+    </section>
+</div>
 {% endblock contenido %}

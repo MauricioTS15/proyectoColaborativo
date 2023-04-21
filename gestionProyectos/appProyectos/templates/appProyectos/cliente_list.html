@@ -1,23 +1,31 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Listado de clientes
+Listado de clientes
 {% endblock titulo %}
 {% block contenido %}
-    <h1>Deustotil Tech S.L.</h1>
-    <h2>Listado de clientes</h2>
-    {% if cliente_list %}
+<h1>Gestor de clientes</h1>
+<div class="detalle">
+    <aside>
+        <h2>Crear un nuevo cliente</h2>
+        <a href="{% url 'registrar cliente' %}">
+            <input type="button" value="Crear">
+        </a>
+        <h2>Listado de clientes</h2>
+        {% if cliente_list %}
         <ol>
             {% for c in cliente_list %}
-                <li>
-                    <a href="/appProyectos/clientes/{{ c.id }}">{{ c.nombre }} {{ c.apellido }}</a>
-                </li>
+            <li>
+                <a href="/appProyectos/clientes/{{ c.id }}">{{ c.nombre }} {{ c.apellido }}</a>
+            </li>
             {% endfor %}
         </ol>
-    {% else %}
+        {% else %}
         <p>No hay clientes creados.</p>
-    {% endif %}
-    <h2>Crear un nuevo cliente</h2>
-    <a href="{% url 'registrar cliente' %}">
-        <input type="button" value="Crear">
-    </a>
-{% endblock contenido %}
+        {% endif %}
+    </aside>
+    <section>
+        {% block detail %}
+        {% endblock detail %}
+    </section>
+
+    {% endblock contenido %}
