@@ -1,25 +1,31 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Listado de tareas
+Listado de tareas
 {% endblock titulo %}
 {% block contenido %}
-    <h1>Gestor de tareas</h1>
-    <h2>Listado de tareas</h2>
-    {% if tarea_list %}
+<h1>Gestor de tareas</h1>
+<div class="detalle">
+    <aside>
+        <h2>Crear una nueva tarea</h2>
+        <a href="{% url 'registrar tarea' %}">
+            <input type="button" value="Crear">
+        </a>
+        <h2>Listado de tareas</h2>
+        {% if tarea_list %}
         <ol>
             {% for t in tarea_list %}
-                <li>
-                    <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
-                </li>
+            <li>
+                <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
+            </li>
             {% endfor %}
         </ol>
-    {% else %}
+        {% else %}
         <p>No hay tareas creados.</p>
-    {% endif %}
-    {% block detail %}
-    {% endblock detail %}
-    <h2>Crear una nueva tarea</h2>
-    <a href="{% url 'registrar tarea' %}">
-        <input type="button" value="Crear">
-    </a>
+        {% endif %}
+    </aside>
+    <section>
+        {% block detail %}
+        {% endblock detail %}
+    </section>
+</div>
 {% endblock contenido %}

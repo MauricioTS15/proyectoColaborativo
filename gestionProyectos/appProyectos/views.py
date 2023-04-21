@@ -123,6 +123,11 @@ class ClienteListView(ListView):
 class ClienteDetailView(DetailView):
     model = Cliente
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cliente_list'] = Cliente.objects.all()
+        return context
+
 class ClienteCreateView(View):
     def get(self, request, *args, **kwargs):
         form = RegClienteForm()
@@ -162,6 +167,11 @@ class EmpleadoListView(ListView):
 # devuelve los datos de un empleado
 class EmpleadoDetailView(DetailView):
     model = Empleado
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['empleado_list'] = Empleado.objects.all()
+        return context
 
 class EmpleadoCreateView(View):
     def get(self, request, *args, **kwargs):
