@@ -7,18 +7,68 @@ Página principal
     <h1>Herramienta de gestión de proyectos</h1>
     <article>
         <h2>Inicio</h2>
-        <a href="{% url 'index proyectos' %}" class="button">
-            <input type="button-big" value="Ver proyectos">
-        </a>
-        <a href="{% url 'index tareas' %}" class="button">
-            <input type="button-big" value="Ver tareas">
-        </a>
-        <a href="{% url 'index clientes' %}" class="button">
-            <input type="button-big" value="Ver clientes">
-        </a>
-        <a href="{% url 'index empleados' %}" class="button">
-            <input type="button-big" value="Ver empleados">
-        </a>
+        <ul>
+            <li>
+                {% if proyecto %}
+                <a href="{% url 'proyecto' proyecto.id %}">
+                    <div style="background-image: url('../static/images/proyecto-img.jpg');" alt="Proyecto reciente">
+                        <span>Más reciente: </span>
+                        <span>{{ proyecto.nombre }}</span>
+                    </div>
+                </a>
+                {% else %}
+                <p>No se han encontrado proyectos recientes.</p>
+                {% endif %}
+                <a href="{% url 'index proyectos' %}" class="button">
+                    <input type="button" class="button-big" value="Ver proyectos">
+                </a>
+            </li>
+            <li>
+                {% if tarea %}
+                <a href="{% url 'tarea' tarea.id %}">
+                    <div style="background-image: url('../static/images/tarea-img.jpg');" alt="Tarea reciente">
+                        <span>Más reciente: </span>
+                        <span>{{ tarea.nombre }}</span>
+                    </div>
+                </a>
+                {% else %}
+                <p>No se han encontrado tareas recientes.</p>
+                {% endif %}
+                <a href="{% url 'index tareas' %}" class="button">
+                    <input type="button" class="button-big" value="Ver tareas">
+                </a>
+            </li>
+            <li>
+                {% if cliente %}
+                <a href="{% url 'cliente' cliente.id %}">
+                    <div style="background-image: url('../static/images/cliente-img.jpg');" alt="Cliente reciente">
+                        <span>Más reciente: </span>
+                        <span>{{ cliente.nombre }} {{ cliente.apellido }}</span>
+                    </div>
+                </a>
+                {% else %}
+                <p>No se han encontrado clientes recientes.</p>
+                {% endif %}
+                <a href="{% url 'index clientes' %}" class="button">
+                    <input type="button" class="button-big" value="Ver clientes">
+                </a>
+            </li>
+            <li>
+                {% if empleado %}
+                <a href="{% url 'empleado' empleado.id %}">
+                    <div style="background-image: url('../static/images/empleado-img.jpg');" alt="Empleado reciente">
+                        <span>Más reciente: </span>
+                        <span>{{ empleado.nombre }} {{ empleado.apellido }}</span>
+                    </div>
+                </a>
+                {% else %}
+                <p>No se han encontrado empleados recientes.</p>
+                {% endif %}
+                <a href="{% url 'index empleados' %}" class="button">
+                    <input type="button" class="button-big" value="Ver empleados">
+                </a>
+            </li>
+        </ul>
     </article>
 </section>
 {% endblock contenido %}

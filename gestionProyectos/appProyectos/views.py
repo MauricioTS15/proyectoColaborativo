@@ -9,7 +9,12 @@ from .forms import RegProyectoForm, RegTareaForm, RegClienteForm,RegEmpleadoForm
 
 # devuelve la página principal
 def index(request):
-    return render(request, 'index.html')
+    proyecto = Proyecto.objects.last()
+    tarea = Tarea.objects.last()
+    cliente = Cliente.objects.last()
+    empleado = Empleado.objects.last()
+    context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado}
+    return render(request, 'index.html', context)
 
 # devuelve el listado de proyectos
 class ProyectoListView(ListView):
