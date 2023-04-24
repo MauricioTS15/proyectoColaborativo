@@ -4,12 +4,21 @@ from .models import Proyecto, Tarea, Cliente, Empleado
 
 # formulario con campos de la clase proyecto
 class RegProyectoForm(ModelForm):
+    descripcion = forms.CharField(label='Descripción:', widget=forms.Textarea(attrs={"rows":"5"}), required=False)
+    fecha_inicio = forms.DateField(label='Fecha de inicio:', widget=forms.DateInput(attrs={'type': 'date'}))
+    fecha_fin = forms.DateField(label='Fecha de fin:', widget=forms.DateInput(attrs={'type': 'date'}))
+
     class Meta:
         model = Proyecto
         fields = '__all__'
 
 # formulario con campos de la clase tarea
 class RegTareaForm(ModelForm):
+    descripcion = forms.CharField(label='Descripción:', widget=forms.Textarea(attrs={"rows":"5"}), required=False)
+    fecha_inicio = forms.DateField(label='Fecha de inicio:', widget=forms.DateInput(attrs={'type': 'date'}))
+    fecha_fin = forms.DateField(label='Fecha de fin:', widget=forms.DateInput(attrs={'type': 'date'}))
+    notas = forms.CharField(label='Notas adicionales:', widget=forms.Textarea(attrs={"rows":"3"}), required=False)
+
     class Meta:
         model = Tarea
         fields = '__all__'
