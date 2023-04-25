@@ -1,13 +1,14 @@
-{% extends "base.html" %}
+{% extends "appProyectos/empleado_list.html" %}
 {% block titulo %}
     Modificación del empleado
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de empleados</h1>
+{% block vista %}
     <h2>Modificar el empleado</h2>
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Guardar cambios">
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset>
+        <input class="button-small" type="submit" value="Guardar cambios">
     </form>
-{% endblock contenido %}
+{% endblock vista %}

@@ -1,15 +1,15 @@
-{% extends "base.html" %}
+{% extends "appProyectos/tarea_list.html" %}
 {% block titulo %}
     Eliminación de la tarea
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de tareas</h1>
+{% block vista %}
     <h2>Borrar la tarea</h2>
     <form method="POST">
-        {% csrf_token %}
-        <p>Se va a borrar la tarea "{{ tarea }}"</p>
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Confirmar">
+        <fieldset>
+            {% csrf_token %}
+            <p>Se va a borrar la tarea "{{ tarea }}".</p>
+            {{ form }}
+        </fieldset>
+        <input class="button-small" type="submit" value="Confirmar">
     </form>
-{% endblock contenido %}
+{% endblock vista %}

@@ -35,8 +35,10 @@ class ProyectoDetailView(DetailView):
 class ProyectoCreateView(View):
     # mostrar el formulario vacío
     def get(self, request, *args, **kwargs):
+        proyecto_list = Proyecto.objects.order_by('id')
         form = RegProyectoForm()
-        return render(request, 'reg_proyecto.html', {'form': form})
+        context = {'proyecto_list': proyecto_list, 'form': form}
+        return render(request, 'reg_proyecto.html', context)
 
     # registrar el proyecto
     def post(self, request, *args, **kwargs):
@@ -95,8 +97,10 @@ class TareaDetailView(DetailView):
 class TareaCreateView(View):
     # mostrar el formulario vacío
     def get(self, request, *args, **kwargs):
+        tarea_list = Tarea.objects.order_by('id')
         form = RegTareaForm()
-        return render(request, 'reg_tarea.html', {'form': form})
+        context = {'tarea_list': tarea_list, 'form': form}
+        return render(request, 'reg_tarea.html', context)
     
     # registrar la tarea
     def post(self, request, *args, **kwargs):
@@ -123,11 +127,21 @@ class TareaUpdateView(UpdateView):
     form_class = RegTareaForm
     success_url = reverse_lazy('index tareas')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tarea_list'] = Tarea.objects.order_by('id')
+        return context
+
 # borra la tarea
 class TareaDeleteView(DeleteView):
     model = Tarea
     context_object_name = "tarea"
     success_url = reverse_lazy('index tareas')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tarea_list'] = Tarea.objects.order_by('id')
+        return context
 
 # devuelve el listado de clientes
 class ClienteListView(ListView):
@@ -146,8 +160,10 @@ class ClienteDetailView(DetailView):
 # devuelve un formulario para crear un cliente
 class ClienteCreateView(View):
     def get(self, request, *args, **kwargs):
+        cliente_list = Cliente.objects.order_by('id')
         form = RegClienteForm()
-        return render(request, 'reg_cliente.html', {'form': form})
+        context = {'cliente_list': cliente_list, 'form': form}
+        return render(request, 'reg_cliente.html', context)
     
     def post(self, request, *args, **kwargs):
         form = RegClienteForm(request.POST)
@@ -169,11 +185,21 @@ class ClienteUpdateView(UpdateView):
     form_class = RegClienteForm
     success_url = reverse_lazy('index clientes')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cliente_list'] = Cliente.objects.order_by('id')
+        return context
+
 # borra el cliente
 class ClienteDeleteView(DeleteView):
     model = Cliente
     context_object_name = "cliente"
     success_url = reverse_lazy('index clientes')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cliente_list'] = Cliente.objects.order_by('id')
+        return context
 
 # devuelve el listado de empleados
 class EmpleadoListView(ListView):
@@ -192,8 +218,10 @@ class EmpleadoDetailView(DetailView):
 # devuelve un formulario para crear un empleado
 class EmpleadoCreateView(View):
     def get(self, request, *args, **kwargs):
+        empleado_list = Empleado.objects.order_by('id')
         form = RegEmpleadoForm()
-        return render(request, 'reg_empleado.html', {'form': form})
+        context = {'empleado_list': empleado_list, 'form': form}
+        return render(request, 'reg_empleado.html', context)
     
     def post(self, request, *args, **kwargs):
         form = RegClienteForm(request.POST)
@@ -215,8 +243,18 @@ class EmpleadoUpdateView(UpdateView):
     form_class = RegEmpleadoForm
     success_url = reverse_lazy('index empleados')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['empleado_list'] = Empleado.objects.order_by('id')
+        return context
+
 # borra el empleado
 class EmpleadoDeleteView(DeleteView):
     model = Empleado
     context_object_name = "empleado"
     success_url = reverse_lazy('index empleados')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['empleado_list'] = Empleado.objects.order_by('id')
+        return context

@@ -4,11 +4,12 @@
 {% endblock titulo %}
 {% block vista %}
     <h2>Borrar el proyecto</h2>
-    <form method="post">
-        {% csrf_token %}
-        <p>Se va a borrar el proyecto "{{ proyecto }}"</p>
-        {% csrf_token %}
-        {{ form }}
+    <form method="POST">
+        <fieldset>
+            {% csrf_token %}
+            <p>Se va a borrar el proyecto "{{ proyecto }}".</p>
+            {{ form }}
+        </fieldset>
         <input class="button-small" type="submit" value="Confirmar">
     </form>
 {% endblock vista %}

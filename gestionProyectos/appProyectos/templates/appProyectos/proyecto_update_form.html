@@ -5,8 +5,10 @@
 {% block vista %}
     <h2>Modificar el proyecto</h2>
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset>
         <input class="button-small" type="submit" value="Guardar cambios">
     </form>
 {% endblock vista %}

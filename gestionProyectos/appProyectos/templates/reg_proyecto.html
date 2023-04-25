@@ -1,15 +1,14 @@
-{% extends "base.html" %}
+{% extends "appProyectos/proyecto_list.html" %}
 {% block titulo %}
     Registrar proyecto
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de proyectos</h1>
+{% block vista %}
     <h2>Registrar proyecto</h2>
     <form method="POST">
         <fieldset>
             {% csrf_token %}
             {{ form.as_p }}
         </fieldset>
-        <input type="submit" value="Registrar">
+        <input class="button-small" type="submit" value="Registrar">
     </form>
-{% endblock contenido %}
+{% endblock vista %}

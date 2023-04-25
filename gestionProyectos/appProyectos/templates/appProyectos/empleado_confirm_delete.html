@@ -1,15 +1,15 @@
-{% extends "base.html" %}
+{% extends "appProyectos/empleado_list.html" %}
 {% block titulo %}
     Eliminación del empleado
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de empleados</h1>
+{% block vista %}
     <h2>Borrar el empleado</h2>
     <form method="POST">
-        {% csrf_token %}
-        <p>Se va a borrar el empleado "{{ empleado }}"</p>
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Confirmar">
+        <fieldset>
+            {% csrf_token %}
+            <p>Se va a borrar el empleado "{{ empleado }}".</p>
+            {{ form }}
+        </fieldset>
+        <input class="button-small" type="submit" value="Confirmar">
     </form>
-{% endblock contenido %}
+{% endblock vista %}

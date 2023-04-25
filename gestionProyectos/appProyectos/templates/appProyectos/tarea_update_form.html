@@ -1,13 +1,14 @@
-{% extends "base.html" %}
+{% extends "appProyectos/tarea_list.html" %}
 {% block titulo %}
     Modificación de la tarea
 {% endblock titulo %}
-{% block contenido %}
-    <h1>Gestor de tareas</h1>
+{% block vista %}
     <h2>Modificar la tarea</h2>
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <input type="submit" value="Guardar cambios">
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset> 
+        <input class="button-small" type="submit" value="Guardar cambios">
     </form>
-{% endblock contenido %}
+{% endblock vista %}
