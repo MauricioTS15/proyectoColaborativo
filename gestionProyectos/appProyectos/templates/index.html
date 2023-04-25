@@ -12,7 +12,7 @@ Página principal
                 {% if proyecto %}
                 <a href="{% url 'proyecto' proyecto.id %}">
                     <div style="background-image: url('../static/images/proyecto-img.jpg');" alt="Proyecto reciente">
-                        <span>Más reciente: </span>
+                        <span>Proyecto más reciente: </span>
                         <span>{{ proyecto.nombre }}</span>
                     </div>
                 </a>
@@ -27,7 +27,7 @@ Página principal
                 {% if tarea %}
                 <a href="{% url 'tarea' tarea.id %}">
                     <div style="background-image: url('../static/images/tarea-img.jpg');" alt="Tarea reciente">
-                        <span>Más reciente: </span>
+                        <span>Tarea más reciente: </span>
                         <span>{{ tarea.nombre }}</span>
                     </div>
                 </a>
@@ -42,7 +42,7 @@ Página principal
                 {% if cliente %}
                 <a href="{% url 'cliente' cliente.id %}">
                     <div style="background-image: url('../static/images/cliente-img.jpg');" alt="Cliente reciente">
-                        <span>Más reciente: </span>
+                        <span>Cliente más reciente: </span>
                         <span>{{ cliente.nombre }} {{ cliente.apellido }}</span>
                     </div>
                 </a>
@@ -57,7 +57,7 @@ Página principal
                 {% if empleado %}
                 <a href="{% url 'empleado' empleado.id %}">
                     <div style="background-image: url('../static/images/empleado-img.jpg');" alt="Empleado reciente">
-                        <span>Más reciente: </span>
+                        <span>Empleado más reciente: </span>
                         <span>{{ empleado.nombre }} {{ empleado.apellido }}</span>
                     </div>
                 </a>
