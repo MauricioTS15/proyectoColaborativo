@@ -18,14 +18,14 @@
                 </tr>
                 <tr>
                     <td>Fecha de inicio</td>
-                    <td>{{ tarea.fecha_inicio }}</td>
+                    <td>{{ tarea.fecha_inicio|date:"d/m/Y" }}</td>
                 </tr>
                 <tr>
                     <td>
                         Fecha de fin
                         <br>
                     </td>
-                    <td>{{ tarea.fecha_fin }}</td>
+                    <td>{{ tarea.fecha_fin|date:"d/m/Y" }}</td>
                 </tr>
                 <tr>
                     <td>Responsable</td>
