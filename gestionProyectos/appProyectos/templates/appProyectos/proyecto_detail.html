@@ -43,18 +43,22 @@
                 <tr>
                     <td>Tareas</td>
                     <td>
+                        <ul>
                         {% if tarea_list %}
-                            <ul>
-                                {% for t in tarea_list %}
-                                    <li>
-                                        <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                            {% for t in tarea_list %}
+                                <li>
+                                    <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
+                                </li>
+                            {% endfor %}
                         {% else %}
-                            <p>No hay tareas asignadas.</p>
-                            
+                            <li>No hay tareas asignadas.</li>
                         {% endif %}
+                            <li>
+                                <a href="{% url 'registrar tarea' %}">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
             </tbody>

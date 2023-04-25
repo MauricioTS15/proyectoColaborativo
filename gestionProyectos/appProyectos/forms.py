@@ -32,5 +32,3 @@ class RegEmpleadoForm(ModelForm):
     class Meta:
         model = Empleado
         fields = '__all__'
-
-# fecha = forms.DateField(label='Fecha:', widget=forms.DateInput(attrs={'type': 'date'}), required=False) <- formato date

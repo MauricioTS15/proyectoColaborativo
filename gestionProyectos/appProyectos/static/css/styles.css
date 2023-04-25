@@ -37,7 +37,7 @@ main {
 }
 #header-principal div a span {
     font-size: 30px;
-    color: #ffffff;
+    color: white;
     font-weight: bold;
     margin-left: 20px;
 }
@@ -67,7 +67,7 @@ main {
 /* FOOTER STYLE */
 
 #footer-principal {
-    background-color: #ebebeb;
+    background-color: rgb(235, 235, 235);
     margin: 0;
     width: 100%;
     box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.45) inset;
@@ -160,6 +160,7 @@ table {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 10px;
+    width: 50vw;
 }
 table a {
     color: white;
@@ -176,12 +177,16 @@ th {
 }
 table thead {
     background-color: rgb(12, 43, 67);
+    font-size: larger;
 }
 table tbody tr:nth-child(odd) {
     background-color: rgb(0, 86, 167);
 }
 table tbody tr:nth-child(even) {
     background-color: rgb(0, 59, 114);
+}
+table a:hover {
+    color:rgb(111, 170, 224);
 }
 
 .button {
@@ -226,6 +231,7 @@ table tbody tr:nth-child(even) {
 
 #section-index {
     margin: 20px 10vw 20px 10vw;
+    height: 70vh;
 }
 #section-index h1 {
     font-size: 2em;
@@ -237,6 +243,7 @@ table tbody tr:nth-child(even) {
     display: flex;
     justify-content: space-between;
     padding: 0;
+    margin-top: 60px;
 }
 #section-index article ul li {
     list-style: none;
@@ -282,18 +289,32 @@ table tbody tr:nth-child(even) {
 
 #container-main {
     display: flex;
-    gap: 100px;
 }
 #container-main aside {
-    padding: 20px;
-    width: 350px;
+    padding: 40px;
+    width: 28%;
     height: 100vh;
     box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.45);
+}
+
+#container-main aside h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
 }
 
 #container-main aside nav div {
     display: flex;
     flex-direction: row;
+}
+#container-main aside nav div a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+#container-main aside nav div a:hover {
+    color: rgb(136, 136, 136);
 }
 #container-main aside nav div i {
     display: flex;
@@ -302,19 +323,7 @@ table tbody tr:nth-child(even) {
     background-color: white;
 }
 
-#container-main aside h1 {
-    font-size: 2em;
-    margin-bottom: 0.5em;
+#container-main section {
+    padding: 40px 100px;
+    width: 70%;
 }
-
-#container-main nav a {
-    display: flex;
-    text-decoration: none;
-    color: black;
-    margin-bottom: 15px;
-    margin-right: 10px;
-}
-#container-main nav a:hover {
-    color: rgb(136, 136, 136);
-}
-

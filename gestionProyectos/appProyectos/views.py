@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView
@@ -54,6 +54,7 @@ class ProyectoCreateView(View):
             proyecto.presupuesto = form.cleaned_data['presupuesto']
             proyecto.save()
             return redirect('index proyectos')
+            #return reverse_lazy('proyecto', kwargs={'pk': proyecto.id})
         return render(request, 'reg_proyecto.html', {'form': form})
 
 # devuelve un formulario para modificar el proyecto
