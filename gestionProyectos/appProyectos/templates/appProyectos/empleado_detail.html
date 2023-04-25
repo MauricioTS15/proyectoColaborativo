@@ -2,7 +2,7 @@
 {% block titulo %}
     Detalles del empleado
 {% endblock titulo %}
-{% block detail %}
+{% block vista %}
     <h2>Datos del empleado</h2>
     {% if empleado %}
         <table>
@@ -27,13 +27,13 @@
             </tbody>
         </table>
         <h2>Configuración del empleado</h2>
-        <a href="{% url 'modificar empleado' empleado.id %}">
-            <input type="button" value="Modificar">
+        <a href="{% url 'modificar empleado' empleado.id %}" class="button">
+            <input class="button-small" type="button" value="Modificar">
         </a>
-        <a href="{% url 'borrar empleado' empleado.id %}">
-            <input type="button" value="Eliminar">
+        <a href="{% url 'borrar empleado' empleado.id %}" class="button">
+            <input class="button-small" type="button" value="Eliminar">
         </a>
     {% else %}
         <p>No existe este empleado.</p>
     {% endif %}
-{% endblock detail %}
+{% endblock vista %}

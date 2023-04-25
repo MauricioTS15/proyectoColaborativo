@@ -2,7 +2,7 @@
 {% block titulo %}
     Detalles del cliente
 {% endblock titulo %}
-{% block detail %}
+{% block vista %}
     <h2>Datos del cliente</h2>
     {% if cliente %}
         <table>
@@ -27,13 +27,13 @@
             </tbody>
         </table>
         <h2>Configuración del cliente</h2>
-        <a href="{% url 'modificar cliente' cliente.id %}">
-            <input type="button" value="Modificar">
+        <a href="{% url 'modificar cliente' cliente.id %}" class="button">
+            <input class="button-small" type="button" value="Modificar">
         </a>
-        <a href="{% url 'borrar cliente' cliente.id %}">
-            <input type="button" value="Eliminar">
+        <a href="{% url 'borrar cliente' cliente.id %}" class="button">
+            <input class="button-small" type="button" value="Eliminar">
         </a>
     {% else %}
         <p>No existe este cliente.</p>
     {% endif %}
-{% endblock detail %}
+{% endblock vista %}

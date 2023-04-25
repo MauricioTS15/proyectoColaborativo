@@ -15,9 +15,10 @@ Listado de proyectos
         </div>
         <div>
             <h2>Listado de proyectos</h2>
+            <nav>
             {% if proyecto_list %}
             {% for p in proyecto_list %}
-            <nav>
+            <div>
                 <a href="{% url 'proyecto' p.id %}">{{ p.nombre }}</a>
                 <a href="{% url 'modificar proyecto' p.id %}">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -25,11 +26,12 @@ Listado de proyectos
                 <a href="{% url 'borrar proyecto' p.id %}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
-            </nav>
+            </div>
             {% endfor %}
             {% else %}
             <p>No hay proyectos creados.</p>
             {% endif %}
+            </nav>
         </div>
     </aside>
     <section>

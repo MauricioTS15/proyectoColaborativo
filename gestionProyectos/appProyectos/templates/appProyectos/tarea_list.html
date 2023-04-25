@@ -3,29 +3,41 @@
 Listado de tareas
 {% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de tareas</h1>
-<div class="detalle">
+<div id="container-main">
     <aside>
-        <h2>Crear una nueva tarea</h2>
-        <a href="{% url 'registrar tarea' %}">
-            <input type="button" value="Crear">
-        </a>
-        <h2>Listado de tareas</h2>
-        {% if tarea_list %}
-        <ol>
+        <div>
+            <h1>Gestor de tareas</h1>
+        </div>
+        <div>
+            <a href="{% url 'registrar tarea' %}" class="button">
+                <input class="button-big" type="button" value="Crear una nueva tarea">
+            </a>
+        </div>
+        <div>
+            <h2>Listado de tareas</h2>
+            <nav>
+            {% if tarea_list %}
             {% for t in tarea_list %}
-            <li>
+            <div>
                 <a href="{% url 'tarea' t.id %}">{{ t.nombre }}</a>
-            </li>
+                <a href="{% url 'modificar tarea' t.id %}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'borrar tarea' t.id %}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </div>
             {% endfor %}
-        </ol>
-        {% else %}
-        <p>No hay tareas creados.</p>
-        {% endif %}
+            {% else %}
+            <p>No hay tareas creadas.</p>
+            {% endif %}
+            </nav>
+        </div>
     </aside>
     <section>
-        {% block detail %}
-        {% endblock detail %}
+        {% block vista %}
+        <h2>Selecciona una tarea</h2>
+        {% endblock vista %}
     </section>
 </div>
 {% endblock contenido %}

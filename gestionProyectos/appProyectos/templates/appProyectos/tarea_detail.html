@@ -2,7 +2,7 @@
 {% block titulo %}
     Detalles de la tarea
 {% endblock titulo %}
-{% block detail %}
+{% block vista %}
     <h2>Datos de la tarea</h2>
     {% if tarea %}
         <table>
@@ -54,13 +54,13 @@
             </tbody>
         </table>
         <h2>Configuración de la tarea</h2>
-        <a href="{% url 'modificar tarea' tarea.id %}">
-            <input type="button" value="Modificar">
+        <a href="{% url 'modificar tarea' tarea.id %}" class="button">
+            <input class="button-small" type="button" value="Modificar">
         </a>
-        <a href="{% url 'borrar tarea' tarea.id %}">
-            <input type="button" value="Eliminar">
+        <a href="{% url 'borrar tarea' tarea.id %}" class="button">
+            <input class="button-small" type="button" value="Eliminar">
         </a>
     {% else %}
         <p>No existe esta tarea.</p>
     {% endif %}
-{% endblock detail %}
+{% endblock vista %}

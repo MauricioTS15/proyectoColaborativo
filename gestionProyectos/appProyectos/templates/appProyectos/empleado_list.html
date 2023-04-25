@@ -3,29 +3,41 @@
 Listado de empleados
 {% endblock titulo %}
 {% block contenido %}
-<h1>Gestor de empleados</h1>
-<div class="detalle">
+<div id="container-main">
     <aside>
-        <h2>Crear un nuevo empleado</h2>
-        <a href="{% url 'registrar empleado' %}">
-            <input type="button" value="Crear">
-        </a>
-        <h2>Listado de empleados</h2>
-        {% if empleado_list %}
-        <ol>
+        <div>
+            <h1>Gestor de empleados</h1>
+        </div>
+        <div>
+            <a href="{% url 'registrar empleado' %}" class="button">
+                <input class="button-big" type="button" value="Crear un nuevo empleado">
+            </a>
+        </div>
+        <div>
+            <h2>Listado de empleados</h2>
+            <nav>
+            {% if empleado_list %}   
             {% for e in empleado_list %}
-            <li>
-                <a href="/appProyectos/empleados/{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</a>
-            </li>
+            <div>
+                <a href="{% url 'empleado' e.id %}">{{ e.nombre }} {{e.apellido}}</a>
+                <a href="{% url 'modificar empleado' e.id %}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'borrar empleado' e.id %}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </div>
             {% endfor %}
-        </ol>
-        {% else %}
-        <p>No hay empleados creados.</p>
-        {% endif %}
+            {% else %}
+            <p>No hay empleados creados.</p>
+            {% endif %}
+            </nav>
+        </div>
     </aside>
     <section>
-        {% block detail %}
-        {% endblock detail %}
+        {% block vista %}
+        <h2>Selecciona un empleado</h2>
+        {% endblock vista %}
     </section>
 </div>
 {% endblock contenido %}
