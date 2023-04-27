@@ -1,7 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
-from django.views import View
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from .models import Cliente, Empleado, Tarea, Proyecto
@@ -85,31 +83,18 @@ class TareaDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear una tarea
-class TareaCreateView(View):
-    # mostrar el formulario vacío
-    def get(self, request, *args, **kwargs):
-        tarea_list = Tarea.objects.order_by('id')
-        form = TareaForm()
-        context = {'tarea_list': tarea_list, 'form': form}
-        return render(request, 'reg_tarea.html', context)
+class TareaCreateView(CreateView):
+    model = Tarea
+    form_class = TareaForm
+    template_name_suffix = '_create_form'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tarea_list'] = Tarea.objects.order_by('id')
+        return context
     
-    # registrar la tarea
-    def post(self, request, *args, **kwargs):
-        form = TareaForm(request.POST)
-        if form.is_valid():
-            tarea = Tarea()
-            tarea.nombre = form.cleaned_data['nombre']
-            tarea.descripcion = form.cleaned_data['descripcion']
-            tarea.fecha_inicio = form.cleaned_data['fecha_inicio']
-            tarea.fecha_fin = form.cleaned_data['fecha_fin']
-            tarea.responsable = form.cleaned_data['responsable']
-            tarea.estado = form.cleaned_data['estado']
-            tarea.prioridad = form.cleaned_data['prioridad']
-            tarea.notas = form.cleaned_data['notas']
-            tarea.proyecto = form.cleaned_data['proyecto']
-            tarea.save()
-            return redirect('index tareas')
-        return render(request, 'reg_tarea.html', {'form': form})
+    def get_success_url(self):
+        return reverse_lazy('tarea', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar la tarea
 class TareaUpdateView(UpdateView):
@@ -122,6 +107,9 @@ class TareaUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['tarea_list'] = Tarea.objects.order_by('id')
         return context
+    
+    def get_success_url(self):
+        return reverse_lazy('tarea', kwargs={'pk': self.object.id})
 
 # borra la tarea
 class TareaDeleteView(DeleteView):
@@ -149,25 +137,18 @@ class ClienteDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un cliente
-class ClienteCreateView(View):
-    def get(self, request, *args, **kwargs):
-        cliente_list = Cliente.objects.order_by('id')
-        form = ClienteForm()
-        context = {'cliente_list': cliente_list, 'form': form}
-        return render(request, 'reg_cliente.html', context)
+class ClienteCreateView(CreateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name_suffix = '_create_form'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cliente_list'] = Cliente.objects.order_by('id')
+        return context
     
-    def post(self, request, *args, **kwargs):
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            cliente = Cliente()
-            cliente.dni = form.cleaned_data['dni']
-            cliente.nombre = form.cleaned_data['nombre']
-            cliente.apellido = form.cleaned_data['apellido']
-            cliente.email = form.cleaned_data['email']
-            cliente.telefono = form.cleaned_data['telefono']
-            cliente.save()
-            return redirect('index clientes')
-        return render(request, 'reg_cliente.html', {'form': form})
+    def get_success_url(self):
+        return reverse_lazy('cliente', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar un cliente
 class ClienteUpdateView(UpdateView):
@@ -180,6 +161,9 @@ class ClienteUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['cliente_list'] = Cliente.objects.order_by('id')
         return context
+    
+    def get_success_url(self):
+        return reverse_lazy('cliente', kwargs={'pk': self.object.id})
 
 # borra el cliente
 class ClienteDeleteView(DeleteView):
@@ -207,25 +191,18 @@ class EmpleadoDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un empleado
-class EmpleadoCreateView(View):
-    def get(self, request, *args, **kwargs):
-        empleado_list = Empleado.objects.order_by('id')
-        form = EmpleadoForm()
-        context = {'empleado_list': empleado_list, 'form': form}
-        return render(request, 'reg_empleado.html', context)
+class EmpleadoCreateView(CreateView):
+    model = Empleado
+    form_class = EmpleadoForm
+    template_name_suffix = '_create_form'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['empleado_list'] = Empleado.objects.order_by('id')
+        return context
     
-    def post(self, request, *args, **kwargs):
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            empleado = Empleado()
-            empleado.dni = form.cleaned_data['dni']
-            empleado.nombre = form.cleaned_data['nombre']
-            empleado.apellido = form.cleaned_data['apellido']
-            empleado.email = form.cleaned_data['email']
-            empleado.telefono = form.cleaned_data['telefono']
-            empleado.save()
-            return redirect('index empleados')
-        return render(request, 'reg_empleado.html', {'form': form})
+    def get_success_url(self):
+        return reverse_lazy('empleado', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar un empleado
 class EmpleadoUpdateView(UpdateView):
@@ -238,6 +215,9 @@ class EmpleadoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['empleado_list'] = Empleado.objects.order_by('id')
         return context
+    
+    def get_success_url(self):
+        return reverse_lazy('empleado', kwargs={'pk': self.object.id})
 
 # borra el empleado
 class EmpleadoDeleteView(DeleteView):
