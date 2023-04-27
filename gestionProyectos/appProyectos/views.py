@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import DeleteView, UpdateView
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import RegProyectoForm, RegTareaForm, RegClienteForm,RegEmpleadoForm
+from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm
 
 # devuelve la página principal
 def index(request):
@@ -32,42 +32,32 @@ class ProyectoDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un proyecto
-class ProyectoCreateView(View):
-    # mostrar el formulario vacío
-    def get(self, request, *args, **kwargs):
-        proyecto_list = Proyecto.objects.order_by('id')
-        form = RegProyectoForm()
-        context = {'proyecto_list': proyecto_list, 'form': form}
-        return render(request, 'reg_proyecto.html', context)
-
-    # registrar el proyecto
-    def post(self, request, *args, **kwargs):
-        form = RegProyectoForm(request.POST)
-        if form.is_valid():
-            proyecto = Proyecto()
-            proyecto.nombre = form.cleaned_data['nombre']
-            proyecto.descripcion = form.cleaned_data['descripcion']
-            proyecto.fecha_inicio = form.cleaned_data['fecha_inicio']
-            proyecto.fecha_fin = form.cleaned_data['fecha_fin']
-            proyecto.cliente = form.cleaned_data['cliente']
-            proyecto.responsable = form.cleaned_data['responsable']
-            proyecto.presupuesto = form.cleaned_data['presupuesto']
-            proyecto.save()
-            return redirect('index proyectos')
-            #return reverse_lazy('proyecto', kwargs={'pk': proyecto.id})
-        return render(request, 'reg_proyecto.html', {'form': form})
-
-# devuelve un formulario para modificar el proyecto
-class ProyectoUpdateView(UpdateView):
+class ProyectoCreateView(CreateView):
     model = Proyecto
-    template_name_suffix = "_update_form"
-    form_class = RegProyectoForm
-    success_url = reverse_lazy('index proyectos')
+    form_class = ProyectoForm
+    template_name_suffix = '_create_form'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
         return context
+    
+    def get_success_url(self):
+        return reverse_lazy('proyecto', kwargs={'pk': self.object.id})
+
+# devuelve un formulario para modificar el proyecto
+class ProyectoUpdateView(UpdateView):
+    model = Proyecto
+    form_class = ProyectoForm
+    template_name_suffix = "_update_form"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['proyecto_list'] = Proyecto.objects.order_by('id')
+        return context
+    
+    def get_success_url(self):
+        return reverse_lazy('proyecto', kwargs={'pk': self.object.id})
 
 # borra el proyecto
 class ProyectoDeleteView(DeleteView):
@@ -99,13 +89,13 @@ class TareaCreateView(View):
     # mostrar el formulario vacío
     def get(self, request, *args, **kwargs):
         tarea_list = Tarea.objects.order_by('id')
-        form = RegTareaForm()
+        form = TareaForm()
         context = {'tarea_list': tarea_list, 'form': form}
         return render(request, 'reg_tarea.html', context)
     
     # registrar la tarea
     def post(self, request, *args, **kwargs):
-        form = RegTareaForm(request.POST)
+        form = TareaForm(request.POST)
         if form.is_valid():
             tarea = Tarea()
             tarea.nombre = form.cleaned_data['nombre']
@@ -125,7 +115,7 @@ class TareaCreateView(View):
 class TareaUpdateView(UpdateView):
     model = Tarea
     template_name_suffix = "_update_form"
-    form_class = RegTareaForm
+    form_class = TareaForm
     success_url = reverse_lazy('index tareas')
 
     def get_context_data(self, **kwargs):
@@ -162,12 +152,12 @@ class ClienteDetailView(DetailView):
 class ClienteCreateView(View):
     def get(self, request, *args, **kwargs):
         cliente_list = Cliente.objects.order_by('id')
-        form = RegClienteForm()
+        form = ClienteForm()
         context = {'cliente_list': cliente_list, 'form': form}
         return render(request, 'reg_cliente.html', context)
     
     def post(self, request, *args, **kwargs):
-        form = RegClienteForm(request.POST)
+        form = ClienteForm(request.POST)
         if form.is_valid():
             cliente = Cliente()
             cliente.dni = form.cleaned_data['dni']
@@ -183,7 +173,7 @@ class ClienteCreateView(View):
 class ClienteUpdateView(UpdateView):
     model = Cliente
     template_name_suffix = "_update_form"
-    form_class = RegClienteForm
+    form_class = ClienteForm
     success_url = reverse_lazy('index clientes')
 
     def get_context_data(self, **kwargs):
@@ -220,12 +210,12 @@ class EmpleadoDetailView(DetailView):
 class EmpleadoCreateView(View):
     def get(self, request, *args, **kwargs):
         empleado_list = Empleado.objects.order_by('id')
-        form = RegEmpleadoForm()
+        form = EmpleadoForm()
         context = {'empleado_list': empleado_list, 'form': form}
         return render(request, 'reg_empleado.html', context)
     
     def post(self, request, *args, **kwargs):
-        form = RegClienteForm(request.POST)
+        form = ClienteForm(request.POST)
         if form.is_valid():
             empleado = Empleado()
             empleado.dni = form.cleaned_data['dni']
@@ -241,7 +231,7 @@ class EmpleadoCreateView(View):
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
     template_name_suffix = "_update_form"
-    form_class = RegEmpleadoForm
+    form_class = EmpleadoForm
     success_url = reverse_lazy('index empleados')
 
     def get_context_data(self, **kwargs):
