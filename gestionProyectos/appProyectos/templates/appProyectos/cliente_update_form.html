@@ -3,12 +3,14 @@
     Modificación del cliente
 {% endblock titulo %}
 {% block vista %}
-    <h2>Modificar el cliente</h2>
-    <form method="POST">
-        <fieldset>
-            {% csrf_token %}
-            {{ form.as_p }}
-        </fieldset>
-        <input class="button-small" type="submit" value="Guardar cambios">
-    </form>
+    <div class="form-style-2">
+        <div class="form-style-2-heading">Registrar cliente</div>
+        <form method="POST">
+            <fieldset>
+                {% csrf_token %}
+                {{ form.as_p }}
+            </fieldset>
+            <input type="submit" value="Guardar cambios">
+        </form>
+    </div>
 {% endblock vista %}

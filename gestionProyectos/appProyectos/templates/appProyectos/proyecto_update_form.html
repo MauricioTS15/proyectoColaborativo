@@ -3,12 +3,14 @@
     Modificación del proyecto
 {% endblock titulo %}
 {% block vista %}
-    <h2>Modificar el proyecto</h2>
+<div class="form-style-2">
+    <div class="form-style-2-heading">modificar proyecto</div>
     <form method="POST">
         <fieldset>
             {% csrf_token %}
             {{ form.as_p }}
         </fieldset>
-        <input class="button-small" type="submit" value="Guardar cambios">
+        <input type="submit" value="Guardar cambios">
     </form>
+</div>
 {% endblock vista %}
