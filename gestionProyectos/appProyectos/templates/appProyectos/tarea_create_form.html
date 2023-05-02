@@ -3,14 +3,13 @@
     Registrar tarea
 {% endblock titulo %}
 {% block vista %}
-<div class="form-style-2">
-    <div class="form-style-2-heading">Registrar tarea</div>
+    <h2>Registrar tarea</h2>
     <form method="POST">
         <fieldset>
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.as_ul }}
         </fieldset>
-        <input type="submit" value="Registrar">
+        <input class="button-small" type="submit" value="Registrar">
     </form>
 </div>
 {% endblock vista %}
