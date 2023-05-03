@@ -5,11 +5,11 @@
 {% block vista %}
     <h2>Borrar el empleado</h2>
     <form method="POST">
-        <fieldset>
+        <fieldset class="warning">
             {% csrf_token %}
             <p>Se va a borrar el empleado "{{ empleado }}".</p>
             {{ form }}
         </fieldset>
-        <input class="button-small" type="submit" value="Confirmar">
+        <input id="button-delete" class="button-small" type="submit" value="Confirmar">
     </form>
 {% endblock vista %}

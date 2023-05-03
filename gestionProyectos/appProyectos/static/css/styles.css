@@ -1,13 +1,4 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0 auto;
-}
-
-main {
-    padding-top: 120px;
-}
-
-/* HEADER STYLE */
+/* CABECERA */
 
 #header-principal {
     position: fixed;
@@ -24,17 +15,20 @@ main {
     display: flex;
     align-items: center;
 }
+
 #header-principal div a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
+
 #header-principal div a img {
     display: flex;
     align-items: center;
     margin-left: 50px;
     height: 50px;
 }
+
 #header-principal div a span {
     font-size: 30px;
     color: white;
@@ -47,6 +41,7 @@ main {
     cursor: pointer;
     margin-right: 50px;
 }
+
 #header-principal nav ul {
     display: flex;
     list-style: none;
@@ -56,15 +51,17 @@ main {
     margin: 0 20px;
 
 }
+
 #header-principal nav ul li a {
     color: white;
     text-decoration: none;
 }
+
 #header-principal nav ul li a:hover {
     color: rgb(111, 170, 224);
 }
 
-/* FOOTER STYLE */
+/* PIE */
 
 #footer-principal {
     background-color: rgb(235, 235, 235);
@@ -88,9 +85,11 @@ main {
     justify-content: center;
     width: 350px;
 }
+
 .item1-footer img {
     height: 30px;
 }
+
 .item1-footer span {
     font-size: 20px;
     font-weight: bold;
@@ -107,22 +106,27 @@ main {
     align-items: center;
     width: 350px;
 }
+
 .item2-footer ul {
     display: flex;
     padding-left: 0;
 }
+
 .item2-footer ul li {
     display: flex;
     margin-right: 20px;
 }
+
 .item2-footer ul li img {
     width: 50px;
     transition: transform .1s;
 }
+
 .item2-footer ul li img:hover {
     transform: scale(1.05);
     cursor: pointer;
 }
+
 .item2-footer ul li img:active {
     transform: scale(1.05) translateY(.125rem);
 }
@@ -139,11 +143,21 @@ main {
     text-decoration: none;
     color: black;
 }
+
 .link-block:hover {
     color: rgb(111, 170, 224);
 }
 
-/* MAIN STYLE */
+/* CONTENIDO */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0 auto;
+}
+
+main {
+    padding-top: 120px;
+}
 
 img {
     max-width: 100%;
@@ -151,42 +165,6 @@ img {
 
 h1 {
     margin: 0 auto;
-}
-
-table {
-    color: white;
-    text-align: center;
-    border-collapse: collapse;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 10px;
-    width: 50vw;
-}
-table a {
-    color: white;
-}
-table ul {
-    padding: 0;
-}
-table li {
-    list-style-type: none;
-}
-table td,
-th {
-    padding: 10px;
-}
-table thead {
-    background-color: rgb(12, 43, 67);
-    font-size: larger;
-}
-table tbody tr:nth-child(odd) {
-    background-color: rgb(0, 86, 167);
-}
-table tbody tr:nth-child(even) {
-    background-color: rgb(0, 59, 114);
-}
-table a:hover {
-    color:rgb(111, 170, 224);
 }
 
 .button {
@@ -203,11 +181,13 @@ table a:hover {
     color: rgb(17, 108, 194);
     transition: transform .1s;
 }
+
 .button-big:hover {
     color: white;
     background-image: linear-gradient(to left, rgb(17, 108, 194), rgb(54, 158, 255));
     cursor: pointer;
 }
+
 .button-big:active {
     transform: scale(0.95);
 }
@@ -219,20 +199,43 @@ table a:hover {
     color: rgb(17, 108, 194);
     transition: transform .1s;
 }
+
 .button-small:hover {
     border-color: white;
     color: white;
     background-image: linear-gradient(to left, rgb(17, 108, 194), rgb(54, 158, 255));
     cursor: pointer;
 }
+
 .button-small:active {
     transform: scale(0.95);
+}
+
+#button-update {
+    color: rgb(13, 180, 13);
+}
+
+#button-update:hover {
+    background-image: none;
+    background-color: rgb(13, 180, 13);
+    color: white;
+}
+
+#button-delete {
+    color: rgb(180, 13, 13);
+}
+
+#button-delete:hover {
+    background-image: none;
+    background-color: rgb(180, 13, 13);
+    color: white;
 }
 
 #section-index {
     margin: 20px 10vw 20px 10vw;
     height: 70vh;
 }
+
 #section-index h1 {
     font-size: 2em;
     margin-bottom: 0.5em;
@@ -245,11 +248,13 @@ table a:hover {
     padding: 0;
     margin-top: 60px;
 }
+
 #section-index article ul li {
     list-style: none;
     width: 23%;
     
 }
+
 #section-index article ul li a {
     width: 100%;
     text-decoration: none;
@@ -257,6 +262,7 @@ table a:hover {
     flex-direction: column;
     align-items: center;
 }
+
 #section-index article ul li a div {
     width: 100%;
     align-items: center;
@@ -272,10 +278,12 @@ table a:hover {
     background-size: cover;
     transition: transform .1s;
 }
+
 #section-index article ul li a div:hover {
     transform: scale(1.05);
     cursor: pointer;
 }
+
 #section-index article ul li a div:active {
     transform: scale(1);
 }
@@ -290,6 +298,7 @@ table a:hover {
 #container-main {
     display: flex;
 }
+
 #container-main aside {
     padding: 40px;
     width: 28%;
@@ -306,6 +315,7 @@ table a:hover {
     display: flex;
     flex-direction: row;
 }
+
 #container-main aside nav div a {
     display: flex;
     text-decoration: none;
@@ -313,9 +323,11 @@ table a:hover {
     margin-bottom: 15px;
     margin-right: 10px;
 }
+
 #container-main aside nav div a:hover {
     color: rgb(136, 136, 136);
 }
+
 #container-main aside nav div i {
     display: flex;
     align-items: center;
@@ -328,14 +340,58 @@ table a:hover {
     width: 70%;
 }
 
-/* estilo de los formularios */
-form fieldset {
-    border: none;
+/* TABLAS */
+
+table {
+    color: white;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    width: 50vw;
 }
 
-fieldset {
+table a {
+    color: white;
+}
+
+table ul {
+    padding: 0;
+}
+
+table li {
+    list-style-type: none;
+}
+
+table td, th {
+    padding: 10px;
+}
+
+table thead {
+    background-color: rgb(12, 43, 67);
+    font-size: larger;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: rgb(0, 86, 167);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: rgb(0, 59, 114);
+}
+
+table a:hover {
+    color:rgb(111, 170, 224);
+}
+
+/* FORMULARIOS */
+
+form fieldset {
+    border: none;
     max-width: 400px;
-    padding-left: 0;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
 form fieldset li {
@@ -343,33 +399,45 @@ form fieldset li {
     flex-direction: column;
 }
 
-form fieldset li label {
+form fieldset label {
     font-weight: bold;
     font-size: 16px;
 }
 
-form fieldset li input, textarea, select {
+form fieldset input, textarea, select {
     margin-bottom: 0.9em;
     border: 1px solid grey;
     border-radius: 2%;
 }
 
-form fieldset li input:hover, textarea:hover, select:hover {
+form fieldset input:hover, textarea:hover, select:hover {
     border-color: rgb(17, 108, 194);
     box-shadow: rgb(173, 173, 173) 0px 0px 30px 0px;
 }
 
-form fieldset li input:focus, textarea:focus, select:focus{
+form fieldset input:focus, textarea:focus, select:focus{
     border:2px solid #206da8;
     outline: none;
 }
 
-form fieldset li textarea {
+form fieldset textarea {
     width: 280px;
     font-size: 16px;
 }
 
-form fieldset li input, select {
+form fieldset input, select {
     width: 170px;
     font-size: 16px;
+}
+
+.warning {
+    border-radius: 5px;
+    background: rgb(255, 236, 236);
+    border: 1px solid rgb(245, 172, 166);
+    color: rgb(180, 13, 13);
+    padding: 10px;
+}
+
+.warning p {
+    margin: 0;
 }
