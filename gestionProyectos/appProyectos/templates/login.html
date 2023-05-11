@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Login
+{% endblock titulo %}
+{% block contenido %}
+    <h2>Login</h2>
+    <form method="POST">
+        <fieldset>
+            {% csrf_token %}
+            {{ form }}
+        </fieldset>
+        <input id="button-submit" class="button-small" type="submit" value="Submit">
+    </form>
+</div>
+{% endblock contenido %}

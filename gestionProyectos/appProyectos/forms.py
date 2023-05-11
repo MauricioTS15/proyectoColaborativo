@@ -29,6 +29,11 @@ class ClienteForm(ModelForm):
         fields = '__all__'
         
 class EmpleadoForm(ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = Empleado
         fields = '__all__'
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(label="Introduce tu email", max_length=155, required=True)
+    password = forms.CharField(label="Introduce tu contraseña", max_length=155, required=True, widget=forms.PasswordInput)

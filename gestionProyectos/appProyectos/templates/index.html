@@ -7,12 +7,18 @@ Página principal
     <h1>Herramienta de gestión de proyectos</h1>
     <article>
         <h2>Inicio</h2>
+        <select onchange="location=this.value;" multiple>
+            <option value="{% url 'index_filter' 0 %}">Más reciente</option>
+            <option value="{% url 'index_filter' 1 %}">Más antiguo</option>
+            <option value="{% url 'index_filter' 2 %}">Primero alfabéticamente</option>
+            <option value="{% url 'index_filter' 3 %}">Último alfabéticamente</option>
+        </select>
         <ul>
             <li>
                 {% if proyecto %}
                 <a href="{% url 'proyecto' proyecto.id %}">
                     <div style="background-image: url('../static/images/proyecto-img.jpg');" alt="Proyecto reciente">
-                        <span>Proyecto más reciente: </span>
+                        <span>Proyecto {{ filtro }}o:</span>
                         <span>{{ proyecto.nombre }}</span>
                     </div>
                 </a>
@@ -27,7 +33,7 @@ Página principal
                 {% if tarea %}
                 <a href="{% url 'tarea' tarea.id %}">
                     <div style="background-image: url('../static/images/tarea-img.jpg');" alt="Tarea reciente">
-                        <span>Tarea más reciente: </span>
+                        <span>Tarea {{ filtro }}a:</span>
                         <span>{{ tarea.nombre }}</span>
                     </div>
                 </a>
@@ -42,7 +48,7 @@ Página principal
                 {% if cliente %}
                 <a href="{% url 'cliente' cliente.id %}">
                     <div style="background-image: url('../static/images/cliente-img.jpg');" alt="Cliente reciente">
-                        <span>Cliente más reciente: </span>
+                        <span>Cliente {{ filtro }}o:</span>
                         <span>{{ cliente.nombre }} {{ cliente.apellido }}</span>
                     </div>
                 </a>
@@ -57,7 +63,7 @@ Página principal
                 {% if empleado %}
                 <a href="{% url 'empleado' empleado.id %}">
                     <div style="background-image: url('../static/images/empleado-img.jpg');" alt="Empleado reciente">
-                        <span>Empleado más reciente: </span>
+                        <span>Empleado {{ filtro }}o:</span>
                         <span>{{ empleado.nombre }} {{ empleado.apellido }}</span>
                     </div>
                 </a>

@@ -1,17 +1,63 @@
+from django.forms import ValidationError
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm
+from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm
+from django.db.models.functions import Lower
 
-# devuelve la página principal
 def index(request):
     proyecto = Proyecto.objects.last()
     tarea = Tarea.objects.last()
     cliente = Cliente.objects.last()
     empleado = Empleado.objects.last()
     context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado}
+    return render(request, 'index.html', context)
+
+def loginForm(request):
+    if request.method == 'GET':
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form} )
+    elif request.method == 'POST':
+        form = LoginForm(request.POST)
+        for usuario in Empleado.objects.all():
+            if usuario.email == form.cleaned_data['email']:
+                if usuario.password == (form.cleaned_data['password']):
+                    return render(request, 'index' )
+                else:
+                    raise ValidationError('La contraseña es incorrecta.')
+            else:
+                raise ValidationError('No se ha encontrado el usuario.')
+        
+
+# devuelve la página principal
+def index_filter(request, selector):
+    if (selector == 0):
+        proyecto = Proyecto.objects.last()
+        tarea = Tarea.objects.last()
+        cliente = Cliente.objects.last()
+        empleado = Empleado.objects.last()
+        filtro = "más nuev"
+    elif (selector == 1):
+        proyecto = Proyecto.objects.first()
+        tarea = Tarea.objects.first()
+        cliente = Cliente.objects.first()
+        empleado = Empleado.objects.first()
+        filtro = "más antigu"
+    elif (selector == 2):
+        proyecto = Proyecto.objects.order_by('nombre').first()
+        tarea = Tarea.objects.order_by('nombre').first()
+        cliente = Cliente.objects.order_by('nombre').first()
+        empleado = Empleado.objects.order_by('nombre').first()
+        filtro = "alfabéticamente primer"
+    elif (selector == 3):
+        proyecto = Proyecto.objects.order_by(Lower('nombre')).last()
+        tarea = Tarea.objects.order_by(Lower('nombre')).last()
+        cliente = Cliente.objects.order_by(Lower('nombre')).last()
+        empleado = Empleado.objects.order_by(Lower('nombre')).last()
+        filtro = "alfabéticamente últim"
+    context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado, 'filtro': filtro}
     return render(request, 'index.html', context)
 
 # devuelve el listado de proyectos

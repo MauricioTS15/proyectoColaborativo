@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('<int:selector>', views.index_filter, name='index_filter'),
+    path('login', views.loginForm, name='login'),
     # proyectos
     path('proyectos/', views.ProyectoListView.as_view(), name='index proyectos'),
     path('proyectos/reg_proyecto', views.ProyectoCreateView.as_view(), name='registrar proyecto'),
