@@ -28,6 +28,7 @@
         </div>
         <nav>
             <ul>
+                {% if request.user.is_authenticated %}
                 <li>
                     <a href="{% url 'index' %}">Inicio</a>
                 </li>
@@ -43,11 +44,22 @@
                 <li>
                     <a href="{% url 'index empleados' %}">Empleados</a>
                 </li>
+                <div id="header-cuenta">
                 <li>
-                    <a href="{% url 'login' %}">
-                        <i class="fa fa-user-circle" aria-hidden="true"></i>
-                    </a>
+                    <a href="#">Bienvenido {{ request.user | title }} <i class="fa fa-user-circle" aria-hidden="true"></i></a>
                 </li>
+                <li>
+                    <a href="{% url 'logout' %}" class="btn btn-outline">Cerrar sesión</a>
+                </li>
+                </div>       
+	            {% else %}
+                <li>
+                    <a href="{% url 'login' %}" class="btn btn-outline">Iniciar sesión</a>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-primary">Registrarse</a>
+                </li>       
+	            {% endif %}
             </ul>
         </nav>
     </header>

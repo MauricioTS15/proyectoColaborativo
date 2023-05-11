@@ -18,7 +18,6 @@ class Empleado(models.Model):
     apellido = models.CharField(max_length=155)
     email = models.EmailField(max_length=155)
     telefono = models.IntegerField()
-    password = models.CharField(max_length=155, default="")
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

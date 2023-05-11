@@ -1,12 +1,44 @@
-from django.forms import ValidationError
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from django.contrib.auth.views import LoginView
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm
 from django.db.models.functions import Lower
+from django.contrib import messages
 
+# devuelve el formulario de inicio de sesión
+# def loginForm(request):
+#     if request.method == 'GET':
+#         form = LoginForm()
+#         return render(request, 'login.html', {'form': form} )
+#     elif request.method == 'POST':
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             for usuario in Empleado.objects.all():
+#                 if usuario.email == form.cleaned_data['email']:
+#                     if usuario.password == (form.cleaned_data['password']):
+#                         return render(request, 'index' )
+#                     else:
+#                         return render(request, 'login.html', {'form': form} )
+#                 else:
+#                     return render(request, 'login.html', {'form': form} )
+
+class loginForm(LoginView):
+    template_name = 'login.html'
+    authentication_form = LoginForm
+
+    def get_success_url(self):
+        return reverse_lazy('index') 
+    
+    def form_invalid(self, form):
+        messages.error(self.request,'Usuario o contraseña incorrectas.')
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+# devuelve la página principal
 def index(request):
     proyecto = Proyecto.objects.last()
     tarea = Tarea.objects.last()
@@ -15,48 +47,32 @@ def index(request):
     context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado}
     return render(request, 'index.html', context)
 
-def loginForm(request):
-    if request.method == 'GET':
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form} )
-    elif request.method == 'POST':
-        form = LoginForm(request.POST)
-        for usuario in Empleado.objects.all():
-            if usuario.email == form.cleaned_data['email']:
-                if usuario.password == (form.cleaned_data['password']):
-                    return render(request, 'index' )
-                else:
-                    raise ValidationError('La contraseña es incorrecta.')
-            else:
-                raise ValidationError('No se ha encontrado el usuario.')
-        
-
-# devuelve la página principal
+# devuelve la página principal con el filtrado seleccionado
 def index_filter(request, selector):
     if (selector == 0):
         proyecto = Proyecto.objects.last()
         tarea = Tarea.objects.last()
         cliente = Cliente.objects.last()
         empleado = Empleado.objects.last()
-        filtro = "más nuev"
+        filtro = 'más nuev'
     elif (selector == 1):
         proyecto = Proyecto.objects.first()
         tarea = Tarea.objects.first()
         cliente = Cliente.objects.first()
         empleado = Empleado.objects.first()
-        filtro = "más antigu"
+        filtro = 'más antigu'
     elif (selector == 2):
-        proyecto = Proyecto.objects.order_by('nombre').first()
-        tarea = Tarea.objects.order_by('nombre').first()
-        cliente = Cliente.objects.order_by('nombre').first()
-        empleado = Empleado.objects.order_by('nombre').first()
-        filtro = "alfabéticamente primer"
+        proyecto = Proyecto.objects.order_by(Lower('nombre')).first()
+        tarea = Tarea.objects.order_by(Lower('nombre')).first()
+        cliente = Cliente.objects.order_by(Lower('nombre')).first()
+        empleado = Empleado.objects.order_by(Lower('nombre')).first()
+        filtro = 'alfabéticamente primer'
     elif (selector == 3):
         proyecto = Proyecto.objects.order_by(Lower('nombre')).last()
         tarea = Tarea.objects.order_by(Lower('nombre')).last()
         cliente = Cliente.objects.order_by(Lower('nombre')).last()
         empleado = Empleado.objects.order_by(Lower('nombre')).last()
-        filtro = "alfabéticamente últim"
+        filtro = 'alfabéticamente últim'
     context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado, 'filtro': filtro}
     return render(request, 'index.html', context)
 

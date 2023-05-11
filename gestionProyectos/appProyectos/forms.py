@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Proyecto, Tarea, Cliente, Empleado
 
 # formulario con campos de la clase proyecto
@@ -29,11 +30,10 @@ class ClienteForm(ModelForm):
         fields = '__all__'
         
 class EmpleadoForm(ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = Empleado
         fields = '__all__'
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(label="Introduce tu email", max_length=155, required=True)
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label="Introduce tu nombre de usuario", max_length=155, required=True)
     password = forms.CharField(label="Introduce tu contraseña", max_length=155, required=True, widget=forms.PasswordInput)

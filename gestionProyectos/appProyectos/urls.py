@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:selector>', views.index_filter, name='index_filter'),
-    path('login', views.loginForm, name='login'),
+    path('login/', views.loginForm.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     # proyectos
     path('proyectos/', views.ProyectoListView.as_view(), name='index proyectos'),
     path('proyectos/reg_proyecto', views.ProyectoCreateView.as_view(), name='registrar proyecto'),

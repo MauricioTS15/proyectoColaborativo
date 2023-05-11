@@ -3,13 +3,24 @@
     Login
 {% endblock titulo %}
 {% block contenido %}
-    <h2>Login</h2>
+    <h2>Iniciar sesión</h2>
     <form method="POST">
         <fieldset>
             {% csrf_token %}
-            {{ form }}
+            <ul>
+            {% for field in form %}
+	    		<li>{{ field.label_tag }}</li> 
+                <li>{{ field }}</li>
+	        	{% if field.errors %}
+                    <li><small>{{ field.errors|striptags }}</small></li>
+	        	{% endif %}
+		    {% endfor %}
+            </ul>
         </fieldset>
-        <input id="button-submit" class="button-small" type="submit" value="Submit">
+        <input id="button-submit" class="button-small" type="submit" value="Iniciar sesión">
+        <hr>
+		<p class="text-center">Contraseña olvidada? <a href="#">Cambiar Contraseña</a></p>
+		<p class="text-center">Haz click para crear una nueva cuenta -> <a href="#">Registrarse</a></p>
     </form>
 </div>
 {% endblock contenido %}
