@@ -8,10 +8,10 @@ Página principal
     <article>
         <h2>Inicio</h2>
         <select onchange="location=this.value;" multiple>
-            <option value="{% url 'index_filter' 0 %}">Más reciente</option>
-            <option value="{% url 'index_filter' 1 %}">Más antiguo</option>
-            <option value="{% url 'index_filter' 2 %}">Primero alfabéticamente</option>
-            <option value="{% url 'index_filter' 3 %}">Último alfabéticamente</option>
+            <option value="{% url 'index' 0 %}">Más reciente</option>
+            <option value="{% url 'index' 1 %}">Más antiguo</option>
+            <option value="{% url 'index' 2 %}">Primero alfabéticamente</option>
+            <option value="{% url 'index' 3 %}">Último alfabéticamente</option>
         </select>
         <ul>
             <li>

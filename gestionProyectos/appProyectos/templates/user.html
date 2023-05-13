@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Login
+    Cuenta de usuario
 {% endblock titulo %}
 {% block contenido %}
-    <h2>Iniciar sesión</h2>
+    <h2>Cambio de contraseña</h2>
     <form method="POST">
         <fieldset>
             {% csrf_token %}
@@ -17,9 +17,7 @@
 		    {% endfor %}
             </ul>
         </fieldset>
-        <input id="button-submit" class="button-small" type="submit" value="Iniciar sesión">
-        <hr>
-		<p class="text-center">Haz click para crear una nueva cuenta -> <a href="{% url 'signin' %}">Registrarse</a></p>
+        <input id="button-submit" class="button-small" type="submit" value="Enviar">
     </form>
 </div>
 {% endblock contenido %}

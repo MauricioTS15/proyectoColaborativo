@@ -1,88 +1,94 @@
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.views import LoginView
 from .models import Cliente, Empleado, Tarea, Proyecto
-from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm
+from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm, SigninForm, UserForm
 from django.db.models.functions import Lower
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext_lazy as _
 
-# devuelve el formulario de inicio de sesión
-# def loginForm(request):
-#     if request.method == 'GET':
-#         form = LoginForm()
-#         return render(request, 'login.html', {'form': form} )
-#     elif request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             for usuario in Empleado.objects.all():
-#                 if usuario.email == form.cleaned_data['email']:
-#                     if usuario.password == (form.cleaned_data['password']):
-#                         return render(request, 'index' )
-#                     else:
-#                         return render(request, 'login.html', {'form': form} )
-#                 else:
-#                     return render(request, 'login.html', {'form': form} )
+# devuelve un formulario para cambiar la contraseña
+def user(request):
+    if request.method == 'POST':
+        form = UserForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, _('La contraseña se ha reestablecido correctamente'))
+            return redirect('user')
+        else:
+            messages.error(request, _('Corrije el error mostrado a continuación'))
+    else:
+        form = UserForm(request.user)
+    return render(request, 'user.html', {
+        'form': form
+    })
 
-class loginForm(LoginView):
+# devuelve un formulario de inicio de sesión
+class login(LoginView):
     template_name = 'login.html'
     authentication_form = LoginForm
 
     def get_success_url(self):
-        return reverse_lazy('index') 
+        return reverse_lazy('index', kwargs={'selector': 0}) 
     
     def form_invalid(self, form):
         messages.error(self.request,'Usuario o contraseña incorrectas.')
         return self.render_to_response(self.get_context_data(form=form))
 
+# devuelve un formulario para registrar un usuario
+class signin(CreateView):
+    template_name = 'signin.html'
+    form_class = SigninForm
+    template_name_suffix = '_create_form'
+
+    def get_success_url(self):
+        return reverse_lazy('index', kwargs={'selector': 0})
 
 # devuelve la página principal
-def index(request):
-    proyecto = Proyecto.objects.last()
-    tarea = Tarea.objects.last()
-    cliente = Cliente.objects.last()
-    empleado = Empleado.objects.last()
-    context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado}
-    return render(request, 'index.html', context)
+class index(LoginRequiredMixin, TemplateView):
+    template_name = 'index.html'
 
-# devuelve la página principal con el filtrado seleccionado
-def index_filter(request, selector):
-    if (selector == 0):
-        proyecto = Proyecto.objects.last()
-        tarea = Tarea.objects.last()
-        cliente = Cliente.objects.last()
-        empleado = Empleado.objects.last()
-        filtro = 'más nuev'
-    elif (selector == 1):
-        proyecto = Proyecto.objects.first()
-        tarea = Tarea.objects.first()
-        cliente = Cliente.objects.first()
-        empleado = Empleado.objects.first()
-        filtro = 'más antigu'
-    elif (selector == 2):
-        proyecto = Proyecto.objects.order_by(Lower('nombre')).first()
-        tarea = Tarea.objects.order_by(Lower('nombre')).first()
-        cliente = Cliente.objects.order_by(Lower('nombre')).first()
-        empleado = Empleado.objects.order_by(Lower('nombre')).first()
-        filtro = 'alfabéticamente primer'
-    elif (selector == 3):
-        proyecto = Proyecto.objects.order_by(Lower('nombre')).last()
-        tarea = Tarea.objects.order_by(Lower('nombre')).last()
-        cliente = Cliente.objects.order_by(Lower('nombre')).last()
-        empleado = Empleado.objects.order_by(Lower('nombre')).last()
-        filtro = 'alfabéticamente últim'
-    context = {'proyecto': proyecto, 'tarea': tarea, 'cliente': cliente, 'empleado': empleado, 'filtro': filtro}
-    return render(request, 'index.html', context)
+    def get_context_data(self, selector=0, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if (selector == 0):
+            context['proyecto'] = Proyecto.objects.last()
+            context['tarea'] = Tarea.objects.last()
+            context['cliente'] = Cliente.objects.last()
+            context['empleado'] = Empleado.objects.last()
+            context['filtro'] = 'más nuev'
+        elif (selector == 1):
+            context['proyecto'] = Proyecto.objects.first()
+            context['tarea'] = Tarea.objects.first()
+            context['cliente'] = Cliente.objects.first()
+            context['empleado'] = Empleado.objects.first()
+            context['filtro'] = 'más antigu'
+        elif (selector == 2):
+            context['proyecto'] = Proyecto.objects.order_by(Lower('nombre')).first()
+            context['tarea'] = Tarea.objects.order_by(Lower('nombre')).first()
+            context['cliente'] = Cliente.objects.order_by(Lower('nombre')).first()
+            context['empleado'] = Empleado.objects.order_by(Lower('nombre')).first()
+            context['filtro'] = 'alfabéticamente primer'
+        elif (selector == 3):
+            context['proyecto'] = Proyecto.objects.order_by(Lower('nombre')).last()
+            context['tarea'] = Tarea.objects.order_by(Lower('nombre')).last()
+            context['cliente'] = Cliente.objects.order_by(Lower('nombre')).last()
+            context['empleado'] = Empleado.objects.order_by(Lower('nombre')).last()
+            context['filtro'] = 'alfabéticamente últim'
+        return context
 
 # devuelve el listado de proyectos
-class ProyectoListView(ListView):
+class ProyectoListView(LoginRequiredMixin, ListView):
     model = Proyecto
     queryset = Proyecto.objects.order_by('id')
 
 # devuelve los datos de un proyecto
-class ProyectoDetailView(DetailView):
+class ProyectoDetailView(LoginRequiredMixin, DetailView):
     model = Proyecto
 
     def get_context_data(self, **kwargs):
@@ -92,7 +98,7 @@ class ProyectoDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un proyecto
-class ProyectoCreateView(CreateView):
+class ProyectoCreateView(LoginRequiredMixin, CreateView):
     model = Proyecto
     form_class = ProyectoForm
     template_name_suffix = '_create_form'
@@ -106,7 +112,7 @@ class ProyectoCreateView(CreateView):
         return reverse_lazy('proyecto', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar el proyecto
-class ProyectoUpdateView(UpdateView):
+class ProyectoUpdateView(LoginRequiredMixin, UpdateView):
     model = Proyecto
     form_class = ProyectoForm
     template_name_suffix = "_update_form"
@@ -120,7 +126,7 @@ class ProyectoUpdateView(UpdateView):
         return reverse_lazy('proyecto', kwargs={'pk': self.object.id})
 
 # borra el proyecto
-class ProyectoDeleteView(DeleteView):
+class ProyectoDeleteView(LoginRequiredMixin, DeleteView):
     model = Proyecto
     context_object_name = "proyecto"
     success_url = reverse_lazy('index proyectos')
@@ -131,12 +137,12 @@ class ProyectoDeleteView(DeleteView):
         return context
 
 # devuelve el listado de tareas
-class TareaListView(ListView):
+class TareaListView(LoginRequiredMixin, ListView):
     model = Tarea
     queryset = Tarea.objects.order_by('id')
 
 # devuelve los datos de una tarea
-class TareaDetailView(DetailView):
+class TareaDetailView(LoginRequiredMixin, DetailView):
     model = Tarea
 
     def get_context_data(self, **kwargs):
@@ -145,7 +151,7 @@ class TareaDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear una tarea
-class TareaCreateView(CreateView):
+class TareaCreateView(LoginRequiredMixin, CreateView):
     model = Tarea
     form_class = TareaForm
     template_name_suffix = '_create_form'
@@ -159,7 +165,7 @@ class TareaCreateView(CreateView):
         return reverse_lazy('tarea', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar la tarea
-class TareaUpdateView(UpdateView):
+class TareaUpdateView(LoginRequiredMixin, UpdateView):
     model = Tarea
     template_name_suffix = "_update_form"
     form_class = TareaForm
@@ -174,7 +180,7 @@ class TareaUpdateView(UpdateView):
         return reverse_lazy('tarea', kwargs={'pk': self.object.id})
 
 # borra la tarea
-class TareaDeleteView(DeleteView):
+class TareaDeleteView(LoginRequiredMixin, DeleteView):
     model = Tarea
     context_object_name = "tarea"
     success_url = reverse_lazy('index tareas')
@@ -185,12 +191,12 @@ class TareaDeleteView(DeleteView):
         return context
 
 # devuelve el listado de clientes
-class ClienteListView(ListView):
+class ClienteListView(LoginRequiredMixin, ListView):
     model = Cliente
     queryset = Cliente.objects.order_by('id')
 
 # devuelve los datos de un cliente
-class ClienteDetailView(DetailView):
+class ClienteDetailView(LoginRequiredMixin, DetailView):
     model = Cliente
 
     def get_context_data(self, **kwargs):
@@ -199,7 +205,7 @@ class ClienteDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un cliente
-class ClienteCreateView(CreateView):
+class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Cliente
     form_class = ClienteForm
     template_name_suffix = '_create_form'
@@ -213,7 +219,7 @@ class ClienteCreateView(CreateView):
         return reverse_lazy('cliente', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar un cliente
-class ClienteUpdateView(UpdateView):
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     model = Cliente
     template_name_suffix = "_update_form"
     form_class = ClienteForm
@@ -228,7 +234,7 @@ class ClienteUpdateView(UpdateView):
         return reverse_lazy('cliente', kwargs={'pk': self.object.id})
 
 # borra el cliente
-class ClienteDeleteView(DeleteView):
+class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     model = Cliente
     context_object_name = "cliente"
     success_url = reverse_lazy('index clientes')
@@ -239,12 +245,12 @@ class ClienteDeleteView(DeleteView):
         return context
 
 # devuelve el listado de empleados
-class EmpleadoListView(ListView):
+class EmpleadoListView(LoginRequiredMixin, ListView):
     model = Empleado
     queryset = Empleado.objects.order_by('id')
 
 # devuelve los datos de un empleado
-class EmpleadoDetailView(DetailView):
+class EmpleadoDetailView(LoginRequiredMixin, DetailView):
     model = Empleado
 
     def get_context_data(self, **kwargs):
@@ -253,7 +259,7 @@ class EmpleadoDetailView(DetailView):
         return context
 
 # devuelve un formulario para crear un empleado
-class EmpleadoCreateView(CreateView):
+class EmpleadoCreateView(LoginRequiredMixin, CreateView):
     model = Empleado
     form_class = EmpleadoForm
     template_name_suffix = '_create_form'
@@ -267,7 +273,7 @@ class EmpleadoCreateView(CreateView):
         return reverse_lazy('empleado', kwargs={'pk': self.object.id})
 
 # devuelve un formulario para modificar un empleado
-class EmpleadoUpdateView(UpdateView):
+class EmpleadoUpdateView(LoginRequiredMixin, UpdateView):
     model = Empleado
     template_name_suffix = "_update_form"
     form_class = EmpleadoForm
@@ -282,7 +288,7 @@ class EmpleadoUpdateView(UpdateView):
         return reverse_lazy('empleado', kwargs={'pk': self.object.id})
 
 # borra el empleado
-class EmpleadoDeleteView(DeleteView):
+class EmpleadoDeleteView(LoginRequiredMixin, DeleteView):
     model = Empleado
     context_object_name = "empleado"
     success_url = reverse_lazy('index empleados')

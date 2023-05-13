@@ -45,6 +45,7 @@
 #header-principal nav ul {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 #header-principal nav ul li {
@@ -59,6 +60,11 @@
 
 #header-principal nav ul li a:hover {
     color: rgb(111, 170, 224);
+}
+
+#header-cuenta {
+    display: flex;
+    flex-direction: column;
 }
 
 /* PIE */
@@ -293,6 +299,7 @@ h1 {
     padding: 5px;
     color: #0C2B43;
     background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
 }
 
 #container-main {

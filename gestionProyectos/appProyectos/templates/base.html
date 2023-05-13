@@ -10,7 +10,7 @@
         {% block titulo %}
         {% endblock titulo %}
     </title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2.6">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2.8">
     <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 <body>
     <header id="header-principal">
         <div>
-            <a href="{% url 'index' %}">
+            <a href="{% url 'index' 0 %}">
                 <img src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
                 <span>Deustotil Tech S.L.</span>
             </a>
@@ -30,7 +30,7 @@
             <ul>
                 {% if request.user.is_authenticated %}
                 <li>
-                    <a href="{% url 'index' %}">Inicio</a>
+                    <a href="{% url 'index' 0 %}">Inicio</a>
                 </li>
                 <li>
                     <a href="{% url 'index proyectos' %}">Proyectos</a>
@@ -46,7 +46,7 @@
                 </li>
                 <div id="header-cuenta">
                 <li>
-                    <a href="#">Bienvenido {{ request.user | title }} <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                    <a href="{% url 'user' %}">Bienvenido {{ request.user | title }} <i class="fa fa-user-circle" aria-hidden="true"></i></a>
                 </li>
                 <li>
                     <a href="{% url 'logout' %}" class="btn btn-outline">Cerrar sesión</a>
@@ -57,7 +57,7 @@
                     <a href="{% url 'login' %}" class="btn btn-outline">Iniciar sesión</a>
                 </li>
                 <li>
-                    <a href="#" class="btn btn-primary">Registrarse</a>
+                    <a href="{% url 'signin' %}" class="btn btn-primary">Registrarse</a>
                 </li>       
 	            {% endif %}
             </ul>
