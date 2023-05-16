@@ -1,4 +1,6 @@
 
+from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView
@@ -11,9 +13,10 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
+from .filters import ProyectoFilter
 
 # devuelve un formulario para cambiar la contraseña
-def user(request):
+def User(request):
     if request.method == 'POST':
         form = UserForm(request.user, request.POST)
         if form.is_valid():
@@ -30,7 +33,7 @@ def user(request):
     })
 
 # devuelve un formulario de inicio de sesión
-class login(LoginView):
+class LogIn(LoginView):
     template_name = 'login.html'
     authentication_form = LoginForm
 
@@ -42,7 +45,7 @@ class login(LoginView):
         return self.render_to_response(self.get_context_data(form=form))
 
 # devuelve un formulario para registrar un usuario
-class signin(CreateView):
+class SignIn(CreateView):
     template_name = 'signin.html'
     form_class = SigninForm
     template_name_suffix = '_create_form'
@@ -51,7 +54,7 @@ class signin(CreateView):
         return reverse_lazy('index', kwargs={'selector': 0})
 
 # devuelve la página principal
-class index(LoginRequiredMixin, TemplateView):
+class Index(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, selector=0, **kwargs):
@@ -87,14 +90,30 @@ class ProyectoListView(LoginRequiredMixin, ListView):
     model = Proyecto
     queryset = Proyecto.objects.order_by('id')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = self.filterset.form
+        return context
+    
 # devuelve los datos de un proyecto
 class ProyectoDetailView(LoginRequiredMixin, DetailView):
     model = Proyecto
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
         context['tarea_list'] = context['proyecto'].tarea_set.order_by('nombre')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve un formulario para crear un proyecto
@@ -103,9 +122,15 @@ class ProyectoCreateView(LoginRequiredMixin, CreateView):
     form_class = ProyectoForm
     template_name_suffix = '_create_form'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
     
     def get_success_url(self):
@@ -115,11 +140,17 @@ class ProyectoCreateView(LoginRequiredMixin, CreateView):
 class ProyectoUpdateView(LoginRequiredMixin, UpdateView):
     model = Proyecto
     form_class = ProyectoForm
-    template_name_suffix = "_update_form"
+    template_name_suffix = '_update_form'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
     
     def get_success_url(self):
@@ -128,12 +159,18 @@ class ProyectoUpdateView(LoginRequiredMixin, UpdateView):
 # borra el proyecto
 class ProyectoDeleteView(LoginRequiredMixin, DeleteView):
     model = Proyecto
-    context_object_name = "proyecto"
+    context_object_name = 'proyecto'
     success_url = reverse_lazy('index proyectos')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve el listado de tareas

@@ -16,6 +16,10 @@ Listado de proyectos
         <div>
             <h2>Listado de proyectos</h2>
             <nav>
+                <form method="GET" action="{% url 'index proyectos' %}">
+                    {{ filter_form.as_ul }}
+                    <button><i class="fa fa-search"></i></button>
+                </form>
             {% if proyecto_list %}
             {% for p in proyecto_list %}
             <div>

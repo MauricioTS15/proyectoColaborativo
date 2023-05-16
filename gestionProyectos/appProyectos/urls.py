@@ -3,11 +3,11 @@ from . import views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('<int:selector>', views.index.as_view(), name='index'),
-    path('login/', views.login.as_view(), name='login'),
+    path('<int:selector>', views.Index.as_view(), name='index'),
+    path('login/', views.LogIn.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-    path('signin/', views.signin.as_view(), name='signin'),
-    path('user/', views.user, name='user'),
+    path('signin/', views.SignIn.as_view(), name='signin'),
+    path('user/', views.User, name='user'),
     # proyectos
     path('proyectos/', views.ProyectoListView.as_view(), name='index proyectos'),
     path('proyectos/reg_proyecto', views.ProyectoCreateView.as_view(), name='registrar proyecto'),
