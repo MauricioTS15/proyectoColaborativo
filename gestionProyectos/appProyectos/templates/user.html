@@ -3,8 +3,9 @@
     Cuenta de usuario
 {% endblock titulo %}
 {% block contenido %}
-    <h2>Cambio de contraseña</h2>
+<section id="section-user">
     <form method="POST">
+        <h2>Cambio de contraseña</h2>
         <fieldset>
             {% csrf_token %}
             <ul>
@@ -17,7 +18,7 @@
 		    {% endfor %}
             </ul>
         </fieldset>
-        <input id="button-submit" class="button-small" type="submit" value="Enviar">
+        <input id="button-submit" class="button-small" type="submit" value="Cambiar">
     </form>
-</div>
+</section>
 {% endblock contenido %}

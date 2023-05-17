@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
-from .filters import ProyectoFilter
+from .filters import ProyectoFilter, TareaFilter, ClienteFilter, EmpleadoFilter
 
 # devuelve un formulario para cambiar la contraseña
 def User(request):
@@ -38,7 +38,7 @@ class LogIn(LoginView):
     authentication_form = LoginForm
 
     def get_success_url(self):
-        return reverse_lazy('index', kwargs={'selector': 0}) 
+        return reverse_lazy('index') 
     
     def form_invalid(self, form):
         messages.error(self.request,'Usuario o contraseña incorrectas.')
@@ -51,38 +51,18 @@ class SignIn(CreateView):
     template_name_suffix = '_create_form'
 
     def get_success_url(self):
-        return reverse_lazy('index', kwargs={'selector': 0})
+        return reverse_lazy('index')
 
 # devuelve la página principal
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
-    def get_context_data(self, selector=0, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if (selector == 0):
-            context['proyecto'] = Proyecto.objects.last()
-            context['tarea'] = Tarea.objects.last()
-            context['cliente'] = Cliente.objects.last()
-            context['empleado'] = Empleado.objects.last()
-            context['filtro'] = 'más nuev'
-        elif (selector == 1):
-            context['proyecto'] = Proyecto.objects.first()
-            context['tarea'] = Tarea.objects.first()
-            context['cliente'] = Cliente.objects.first()
-            context['empleado'] = Empleado.objects.first()
-            context['filtro'] = 'más antigu'
-        elif (selector == 2):
-            context['proyecto'] = Proyecto.objects.order_by(Lower('nombre')).first()
-            context['tarea'] = Tarea.objects.order_by(Lower('nombre')).first()
-            context['cliente'] = Cliente.objects.order_by(Lower('nombre')).first()
-            context['empleado'] = Empleado.objects.order_by(Lower('nombre')).first()
-            context['filtro'] = 'alfabéticamente primer'
-        elif (selector == 3):
-            context['proyecto'] = Proyecto.objects.order_by(Lower('nombre')).last()
-            context['tarea'] = Tarea.objects.order_by(Lower('nombre')).last()
-            context['cliente'] = Cliente.objects.order_by(Lower('nombre')).last()
-            context['empleado'] = Empleado.objects.order_by(Lower('nombre')).last()
-            context['filtro'] = 'alfabéticamente últim'
+        context['proyecto'] = Proyecto.objects.last()
+        context['tarea'] = Tarea.objects.last()
+        context['cliente'] = Cliente.objects.last()
+        context['empleado'] = Empleado.objects.last()
         return context
 
 # devuelve el listado de proyectos
@@ -121,7 +101,7 @@ class ProyectoCreateView(LoginRequiredMixin, CreateView):
     model = Proyecto
     form_class = ProyectoForm
     template_name_suffix = '_create_form'
-
+        
     def get_queryset(self):
         queryset = super().get_queryset()
         self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
@@ -130,7 +110,7 @@ class ProyectoCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['proyecto_list'] = Proyecto.objects.order_by('id')
-        context['filter_form'] = self.filterset.form
+        context['filter_form'] = ProyectoFilter().form
         return context
     
     def get_success_url(self):
@@ -178,13 +158,29 @@ class TareaListView(LoginRequiredMixin, ListView):
     model = Tarea
     queryset = Tarea.objects.order_by('id')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TareaFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = self.filterset.form
+        return context
+
 # devuelve los datos de una tarea
 class TareaDetailView(LoginRequiredMixin, DetailView):
     model = Tarea
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TareaFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tarea_list'] = Tarea.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve un formulario para crear una tarea
@@ -193,9 +189,15 @@ class TareaCreateView(LoginRequiredMixin, CreateView):
     form_class = TareaForm
     template_name_suffix = '_create_form'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TareaFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tarea_list'] = Tarea.objects.order_by('id')
+        context['filter_form'] = TareaFilter().form
         return context
     
     def get_success_url(self):
@@ -206,11 +208,16 @@ class TareaUpdateView(LoginRequiredMixin, UpdateView):
     model = Tarea
     template_name_suffix = "_update_form"
     form_class = TareaForm
-    success_url = reverse_lazy('index tareas')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TareaFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tarea_list'] = Tarea.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
     
     def get_success_url(self):
@@ -222,9 +229,15 @@ class TareaDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = "tarea"
     success_url = reverse_lazy('index tareas')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = TareaFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tarea_list'] = Tarea.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve el listado de clientes
@@ -232,13 +245,29 @@ class ClienteListView(LoginRequiredMixin, ListView):
     model = Cliente
     queryset = Cliente.objects.order_by('id')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = self.filterset.form
+        return context
+
 # devuelve los datos de un cliente
 class ClienteDetailView(LoginRequiredMixin, DetailView):
     model = Cliente
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cliente_list'] = Cliente.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve un formulario para crear un cliente
@@ -247,9 +276,15 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
     form_class = ClienteForm
     template_name_suffix = '_create_form'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cliente_list'] = Cliente.objects.order_by('id')
+        context['filter_form'] = ClienteFilter().form
         return context
     
     def get_success_url(self):
@@ -260,11 +295,16 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     model = Cliente
     template_name_suffix = "_update_form"
     form_class = ClienteForm
-    success_url = reverse_lazy('index clientes')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cliente_list'] = Cliente.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
     
     def get_success_url(self):
@@ -276,9 +316,15 @@ class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = "cliente"
     success_url = reverse_lazy('index clientes')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cliente_list'] = Cliente.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve el listado de empleados
@@ -286,13 +332,29 @@ class EmpleadoListView(LoginRequiredMixin, ListView):
     model = Empleado
     queryset = Empleado.objects.order_by('id')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = self.filterset.form
+        return context
+
 # devuelve los datos de un empleado
 class EmpleadoDetailView(LoginRequiredMixin, DetailView):
     model = Empleado
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['empleado_list'] = Empleado.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
 
 # devuelve un formulario para crear un empleado
@@ -301,9 +363,15 @@ class EmpleadoCreateView(LoginRequiredMixin, CreateView):
     form_class = EmpleadoForm
     template_name_suffix = '_create_form'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['empleado_list'] = Empleado.objects.order_by('id')
+        context['filter_form'] = EmpleadoFilter().form
         return context
     
     def get_success_url(self):
@@ -314,11 +382,16 @@ class EmpleadoUpdateView(LoginRequiredMixin, UpdateView):
     model = Empleado
     template_name_suffix = "_update_form"
     form_class = EmpleadoForm
-    success_url = reverse_lazy('index empleados')
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['empleado_list'] = Empleado.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context
     
     def get_success_url(self):
@@ -330,7 +403,13 @@ class EmpleadoDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = "empleado"
     success_url = reverse_lazy('index empleados')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['empleado_list'] = Empleado.objects.order_by('id')
+        context['filter_form'] = self.filterset.form
         return context

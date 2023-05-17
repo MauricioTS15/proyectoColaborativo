@@ -10,7 +10,7 @@
         {% block titulo %}
         {% endblock titulo %}
     </title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=3.1">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=3.3">
     <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 <body>
     <header id="header-principal">
         <div>
-            <a href="{% url 'index' 0 %}">
+            <a href="{% url 'index' %}">
                 <img src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
                 <span>Deustotil Tech S.L.</span>
             </a>
@@ -30,34 +30,34 @@
             <ul>
                 {% if request.user.is_authenticated %}
                 <li>
-                    <a href="{% url 'index' 0 %}">Inicio</a>
+                    <a class="link-header" href="{% url 'index' %}">Inicio</a>
                 </li>
                 <li>
-                    <a href="{% url 'index proyectos' %}">Proyectos</a>
+                    <a class="link-header" href="{% url 'index proyectos' %}">Proyectos</a>
                 </li>
                 <li>
-                    <a href="{% url 'index tareas' %}">Tareas</a>
+                    <a class="link-header" href="{% url 'index tareas' %}">Tareas</a>
                 </li>
                 <li>
-                    <a href="{% url 'index clientes' %}">Clientes</a>
+                    <a class="link-header" href="{% url 'index clientes' %}">Clientes</a>
                 </li>
                 <li>
-                    <a href="{% url 'index empleados' %}">Empleados</a>
+                    <a class="link-header" href="{% url 'index empleados' %}">Empleados</a>
                 </li>
                 <div id="header-cuenta">
                 <li>
-                    <a href="{% url 'user' %}">Bienvenido {{ request.user | title }} <span><i class="fa fa-user-circle" aria-hidden="true"></i></span></a>
+                    <a class="link-header" href="{% url 'user' %}">Bienvenido {{ request.user | title }} <i class="fa fa-user-circle" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                    <a href="{% url 'logout' %}" class="btn btn-outline">Cerrar sesión</a>
+                    <a href="{% url 'logout' %}" class="button"><input type="button" class="button-header" value="Cerrar sesión"></a>
                 </li>
                 </div>       
 	            {% else %}
                 <li>
-                    <a href="{% url 'login' %}" class="btn btn-outline">Iniciar sesión</a>
+                    <a href="{% url 'login' %}" class="button"><input type="button" class="button-header" value="Iniciar sesión"></a>
                 </li>
                 <li>
-                    <a href="{% url 'signin' %}" class="btn btn-primary">Registrarse</a>
+                    <a href="{% url 'signin' %}" class="button"><input type="button" class="button-header" value="Registrarse"></a>
                 </li>       
 	            {% endif %}
             </ul>

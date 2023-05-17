@@ -16,6 +16,18 @@ Listado de empleados
         <div>
             <h2>Listado de empleados</h2>
             <nav>
+                <form method="GET" action="{% url 'index empleados' %}" id="filter-form">
+                    <div>
+                        <button><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                    <ul>
+                        {% for field in filter_form %}
+	    		        <li>{{ field.label_tag }}</li> 
+                        <li>{{ field }}</li>
+		                {% endfor %}
+                    </ul>
+                </form>
             {% if empleado_list %}   
             {% for e in empleado_list %}
             <div>

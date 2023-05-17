@@ -53,18 +53,39 @@
 
 }
 
-#header-principal nav ul li a {
+.link-header {
     color: white;
     text-decoration: none;
 }
 
-#header-principal nav ul li a:hover {
+.link-header:hover {
     color: rgb(111, 170, 224);
 }
 
 #header-cuenta {
     display: flex;
     flex-direction: column;
+}
+
+.button-header {
+    border-radius: 4px;
+    padding: 0.4em 0.6em;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(33, 150, 243);
+    transition: transform .1s;
+    border: 0;
+}
+
+.button-header:hover {
+    background-image: none;
+    background-color: rgb(33, 150, 243);
+    color: white;
+    cursor: pointer;
+}
+
+.button-header:active {
+    transform: scale(0.95);
 }
 
 /* PIE */
@@ -237,6 +258,33 @@ h1 {
     color: white;
 }
 
+#section-user {
+    margin: 40px 35vw 40px 35vw;
+}
+
+#section-user form {
+    background-color: rgba(204, 204, 204, 0.6);
+    border-radius: 15px;
+    padding: 40px;
+}
+
+#section-user form fieldset {
+    margin-bottom: 0;
+}
+
+#section-user form hr {
+    margin-top: 30px;
+}
+
+#section-user form a {
+    color: black;
+    text-decoration: none;
+}
+
+#section-user form a:hover {
+    color: rgb(33, 150, 243);
+}
+
 #section-index {
     margin: 20px 10vw 20px 10vw;
     height: 70vh;
@@ -309,7 +357,7 @@ h1 {
 #container-main aside {
     padding: 40px;
     width: 28%;
-    height: 100vh;
+    height: 100%;
     box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.45);
 }
 
@@ -321,6 +369,7 @@ h1 {
 #container-main aside nav div {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
 #container-main aside nav div a {
@@ -337,9 +386,37 @@ h1 {
 
 #container-main aside nav div i {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-left: 10px;
-    background-color: white;
+}
+
+#filter-form {
+    margin-bottom: 20px;
+    border: solid 3px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#container-main #filter-form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#filter-form div button {
+    padding: 10px 13px 10px 3px;
+    background-color: rgb(17, 108, 194);
+    border-radius: 10px;
+    color: white;
+    border: 0;
+}
+
+#filter-form div button:active {
+    background-color: rgb(33, 150, 243);;
+}
+
+#filter-form ul {
+    list-style-type: none;
 }
 
 #container-main section {
@@ -396,11 +473,11 @@ h1 {
 }
   
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: rgb(33, 150, 243);
 }
   
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px rgb(33, 150, 243);
 }
   
 input:checked + .slider:before {
@@ -473,18 +550,18 @@ form fieldset label {
     font-size: 16px;
 }
 
-form fieldset input, textarea, select {
+form fieldset input, form fieldset textarea, form fieldset select {
     margin-bottom: 0.9em;
     border: 1px solid grey;
     border-radius: 2%;
 }
 
-form fieldset input:hover, textarea:hover, select:hover {
+form fieldset input:hover, form fieldset textarea:hover, form fieldset select:hover {
     border-color: rgb(17, 108, 194);
     box-shadow: rgb(173, 173, 173) 0px 0px 30px 0px;
 }
 
-form fieldset input:focus, textarea:focus, select:focus{
+form fieldset input:focus, form fieldset textarea:focus, form fieldset select:focus{
     border:2px solid #206da8;
     outline: none;
 }
@@ -494,7 +571,7 @@ form fieldset textarea {
     font-size: 16px;
 }
 
-form fieldset input, select {
+form fieldset input, form fieldset select {
     width: 170px;
     font-size: 16px;
 }

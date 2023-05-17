@@ -16,9 +16,17 @@ Listado de proyectos
         <div>
             <h2>Listado de proyectos</h2>
             <nav>
-                <form method="GET" action="{% url 'index proyectos' %}">
-                    {{ filter_form.as_ul }}
-                    <button><i class="fa fa-search"></i></button>
+                <form method="GET" action="{% url 'index proyectos' %}" id="filter-form">
+                    <div>
+                        <button><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                    <ul>
+                        {% for field in filter_form %}
+	    		        <li>{{ field.label_tag }}</li> 
+                        <li>{{ field }}</li>
+		                {% endfor %}
+                    </ul>
                 </form>
             {% if proyecto_list %}
             {% for p in proyecto_list %}
