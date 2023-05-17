@@ -23,7 +23,7 @@
         <div>
             <a href="{% url 'index' %}">
                 <img src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
-                <span>Deustotil Tech S.L.</span>
+                <span class="cambiar-tamaño">Deustotil Tech S.L.</span>
             </a>
         </div>
         <nav>
@@ -64,15 +64,23 @@
         </nav>
     </header>
     <main>
-        {% block contenido %}
-        {% endblock contenido %}
         <div id="accessibility-panel">
-            <label for="switch-accessibility">Acesibilidad: aumentar tamaño del texto</label>
+            <label for="switch-accessibility">Cambiar tema</label>
             <label class="switch">
                 <input id="switch-accessibility" type="checkbox">
                 <span class="slider"></span>
             </label>
+            <label for="change-font-size">Cambiar tamaño del texto</label>
+            {% comment %} <input class="button-small" type="button" value="Incrementar tamaño del texto 5px" id="aumentar"> {% endcomment %}
+            <i class="fa fa-plus" aria-hidden="true" id="aumentar"></i>
+            {% comment %} <input class="button-small" type="button" value="Reducir tamaño del texto 5px" id="reducir"> {% endcomment %}
+            <i class="fa fa-minus" aria-hidden="true" id="reducir"></i>
+
+            {% comment %} <input class="button-small" type="button" value="Restaurar" id="restaurar"> {% endcomment %}
+            <i class="fa fa-undo" aria-hidden="true" id="restaurar"></i>
         </div>
+        {% block contenido %}
+        {% endblock contenido %}
     </main>
     <footer id="footer-principal">
         <div class="container-footer">
@@ -157,6 +165,7 @@
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>
