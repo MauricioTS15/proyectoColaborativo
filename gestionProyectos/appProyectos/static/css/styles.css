@@ -88,6 +88,11 @@
     transform: scale(0.95);
 }
 
+.darkmode {
+    background-color: #2c2c2c;
+    color: white;
+}
+
 /* PIE */
 
 #footer-principal {
@@ -484,6 +489,14 @@ input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+.fa-plus:active, .fa-minus:active, .fa-undo:active {
+    color: white;
+}
+
+.toggle-darkmode:checked + .fa-plus:active, .toggle-darkmode:checked + .fa-minus:active, .toggle-darkmode:checked + .fa-undo:active {
+    color: black;
 }
 
 /* TABLAS */

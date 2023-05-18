@@ -10,7 +10,7 @@
         {% block titulo %}
         {% endblock titulo %}
     </title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=3.3">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=3.5">
     <link rel="shortcut icon" href="{% static 'images/logo-white.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,18 +65,14 @@
     </header>
     <main>
         <div id="accessibility-panel">
-            <label for="switch-accessibility">Cambiar tema</label>
+            <label for="toggle-darkmode">Cambiar tema</label>
             <label class="switch">
-                <input id="switch-accessibility" type="checkbox">
+                <input id="toggle-darkmode" type="checkbox">
                 <span class="slider"></span>
             </label>
             <label for="change-font-size">Cambiar tamaño del texto</label>
-            {% comment %} <input class="button-small" type="button" value="Incrementar tamaño del texto 5px" id="aumentar"> {% endcomment %}
             <i class="fa fa-plus" aria-hidden="true" id="aumentar"></i>
-            {% comment %} <input class="button-small" type="button" value="Reducir tamaño del texto 5px" id="reducir"> {% endcomment %}
             <i class="fa fa-minus" aria-hidden="true" id="reducir"></i>
-
-            {% comment %} <input class="button-small" type="button" value="Restaurar" id="restaurar"> {% endcomment %}
             <i class="fa fa-undo" aria-hidden="true" id="restaurar"></i>
         </div>
         {% block contenido %}
@@ -165,7 +161,7 @@
             </div>
         </div>
     </footer>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/general-script.js' %}?v=0.1"></script>
 </body>
 
 </html>
