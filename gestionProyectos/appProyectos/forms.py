@@ -39,12 +39,6 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Introduce tu nombre de usuario", max_length=155, required=True)
     password = forms.CharField(label="Introduce tu contraseña", max_length=155, required=True, widget=forms.PasswordInput)
 
-    error_messages = {
-        'invalid_login': _("Introduce el %(username)s y contraseña correctamente. "
-                           "*Ambos campos pueden ser case-sensitive."),
-        'inactive': _("This account is inactive."),
-    }
-
 class SigninForm(UserCreationForm):
     username = forms.CharField(label="Nombre de usuario", max_length=155, required=True)
     password1 = forms.CharField(label="Contraseña", max_length=155, required=True, widget=forms.PasswordInput)

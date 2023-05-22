@@ -1,10 +1,12 @@
 /* CABECERA */
+#header-container {
+    position: fixed;
+    width: 100%;
+}
 
 #header-principal {
-    position: fixed;
     background-color: #0C2B43;
     display: flex;
-    width: 100%;
     justify-content: space-between;
     height: 120px;
     align-items: center;
@@ -188,7 +190,7 @@ body {
 }
 
 main {
-    padding-top: 120px;
+    padding-top: 160px;
 }
 
 img {
@@ -263,6 +265,10 @@ h1 {
     color: white;
 }
 
+#button-filter {
+    margin-bottom: 20px;
+}
+
 #section-user {
     margin: 40px 35vw 40px 35vw;
 }
@@ -311,7 +317,7 @@ h1 {
 #section-index article ul li {
     list-style: none;
     width: 23%;
-    
+
 }
 
 #section-index article ul li a {
@@ -395,14 +401,6 @@ h1 {
     margin-left: 10px;
 }
 
-#filter-form {
-    margin-bottom: 20px;
-    border: solid 3px;
-    padding: 10px;
-    border-radius: 5px;
-    width: 70%;
-}
-
 #container-main #filter-form div {
     display: flex;
     justify-content: space-between;
@@ -417,11 +415,21 @@ h1 {
 }
 
 #filter-form div button:active {
-    background-color: rgb(33, 150, 243);;
+    background-color: rgb(33, 150, 243);
+    ;
 }
 
 #filter-form ul {
     list-style-type: none;
+}
+
+#filter-form {
+    display: none;
+    margin-bottom: 20px;
+    border: solid 3px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
 }
 
 #container-main section {
@@ -444,13 +452,13 @@ h1 {
     width: 60px;
     height: 34px;
 }
-  
-.switch input { 
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-  
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -463,7 +471,7 @@ h1 {
     transition: .4s;
     border-radius: 34px;
 }
-  
+
 .slider:before {
     position: absolute;
     content: "";
@@ -476,26 +484,30 @@ h1 {
     transition: .4s;
     border-radius: 50%;
 }
-  
-input:checked + .slider {
+
+input:checked+.slider {
     background-color: rgb(33, 150, 243);
 }
-  
-input:focus + .slider {
+
+input:focus+.slider {
     box-shadow: 0 0 1px rgb(33, 150, 243);
 }
-  
-input:checked + .slider:before {
+
+input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
 
-.fa-plus:active, .fa-minus:active, .fa-undo:active {
+.fa-plus:active,
+.fa-minus:active,
+.fa-undo:active {
     color: white;
 }
 
-.toggle-darkmode:checked + .fa-plus:active, .toggle-darkmode:checked + .fa-minus:active, .toggle-darkmode:checked + .fa-undo:active {
+.toggle-darkmode:checked+.fa-plus:active,
+.toggle-darkmode:checked+.fa-minus:active,
+.toggle-darkmode:checked+.fa-undo:active {
     color: black;
 }
 
@@ -523,7 +535,8 @@ table li {
     list-style-type: none;
 }
 
-table td, th {
+table td,
+th {
     padding: 10px;
 }
 
@@ -541,7 +554,7 @@ table tbody tr:nth-child(even) {
 }
 
 table a:hover {
-    color:rgb(111, 170, 224);
+    color: rgb(111, 170, 224);
 }
 
 /* FORMULARIOS */
@@ -563,19 +576,25 @@ form fieldset label {
     font-size: 16px;
 }
 
-form fieldset input, form fieldset textarea, form fieldset select {
+form fieldset input,
+form fieldset textarea,
+form fieldset select {
     margin-bottom: 0.9em;
     border: 1px solid grey;
     border-radius: 2%;
 }
 
-form fieldset input:hover, form fieldset textarea:hover, form fieldset select:hover {
+form fieldset input:hover,
+form fieldset textarea:hover,
+form fieldset select:hover {
     border-color: rgb(17, 108, 194);
     box-shadow: rgb(173, 173, 173) 0px 0px 30px 0px;
 }
 
-form fieldset input:focus, form fieldset textarea:focus, form fieldset select:focus{
-    border:2px solid #206da8;
+form fieldset input:focus,
+form fieldset textarea:focus,
+form fieldset select:focus {
+    border: 2px solid #206da8;
     outline: none;
 }
 
@@ -584,7 +603,8 @@ form fieldset textarea {
     font-size: 16px;
 }
 
-form fieldset input, form fieldset select {
+form fieldset input,
+form fieldset select {
     width: 170px;
     font-size: 16px;
 }

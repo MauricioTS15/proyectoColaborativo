@@ -19,7 +19,9 @@
 </head>
 
 <body>
-    <header id="header-principal">
+    
+    <header id="header-container">
+        <div id="header-principal">
         <div>
             <a href="{% url 'index' %}">
                 <img src="{% static 'images/logo-white.png' %}" alt="Deustotil logo blue" />
@@ -62,19 +64,20 @@
 	            {% endif %}
             </ul>
         </nav>
+    </div>
+    <div id="accessibility-panel">
+        <label for="toggle-darkmode">Cambiar tema</label>
+        <label class="switch">
+            <input id="toggle-darkmode" type="checkbox">
+            <span class="slider"></span>
+        </label>
+        <label for="change-font-size">Cambiar tamaño del texto</label>
+        <i class="fa fa-plus" aria-hidden="true" id="aumentar"></i>
+        <i class="fa fa-minus" aria-hidden="true" id="reducir"></i>
+        <i class="fa fa-undo" aria-hidden="true" id="restaurar"></i>
+    </div>
     </header>
     <main>
-        <div id="accessibility-panel">
-            <label for="toggle-darkmode">Cambiar tema</label>
-            <label class="switch">
-                <input id="toggle-darkmode" type="checkbox">
-                <span class="slider"></span>
-            </label>
-            <label for="change-font-size">Cambiar tamaño del texto</label>
-            <i class="fa fa-plus" aria-hidden="true" id="aumentar"></i>
-            <i class="fa fa-minus" aria-hidden="true" id="reducir"></i>
-            <i class="fa fa-undo" aria-hidden="true" id="restaurar"></i>
-        </div>
         {% block contenido %}
         {% endblock contenido %}
     </main>
@@ -161,7 +164,7 @@
             </div>
         </div>
     </footer>
-    <script src="{% static 'js/general-script.js' %}?v=0.1"></script>
+    <script src="{% static 'js/general-script.js' %}?v=0.2"></script>
 </body>
 
 </html>
