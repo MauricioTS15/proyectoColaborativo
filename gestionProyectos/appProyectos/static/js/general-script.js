@@ -5,10 +5,12 @@ var restaurarBtn = document.getElementById('restaurar');
 var elementos = document.querySelectorAll('div > span');
 var tamañosOriginales = [];
 
+
 aumentarBtn.addEventListener('click', function () {
     for (var i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
-        if (fontSize < 25)
+        //console.log(tamañosOriginales[i]);
+        if (fontSize < tamañosOriginales[i]+15)
             elementos[i].style.fontSize = (fontSize + 3) + 'px';
     }
 });
@@ -16,7 +18,7 @@ aumentarBtn.addEventListener('click', function () {
 reducirBtn.addEventListener('click', function () {
     for (var i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
-        if (fontSize > 15)
+        if (fontSize > tamañosOriginales[i]-10)
             elementos[i].style.fontSize = (fontSize - 3) + 'px';
     }
 });
@@ -31,6 +33,7 @@ restaurarBtn.addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', function () {
     for (var i = 0; i < elementos.length; i++) {
         tamañosOriginales.push(window.getComputedStyle(elementos[i]).fontSize);
+        console.log(window.getComputedStyle(elementos[i]).fontSize);
     }
 });
 
@@ -45,3 +48,21 @@ toggler.addEventListener('change', function toggleDarkMode() {
         element.classList.toggle("darkmode");
     }
 });
+
+// TOGGLE FILTER HIDE/SHOW
+
+let filterOn = document.getElementById('button-filter');
+filterOn.addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('button-filter').style.display = "none";
+    document.getElementById("filter-form").style.display = "block";
+});
+
+let filterOff = document.getElementById('button-exit');
+filterOff.addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById("filter-form").style.display = "none";
+    document.getElementById('button-filter').style.display = "block";
+});
+
+
