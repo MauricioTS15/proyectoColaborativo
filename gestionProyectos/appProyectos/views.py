@@ -1,6 +1,8 @@
 
+import json
 from typing import Any, Dict
 from django.db.models.query import QuerySet
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView
@@ -9,11 +11,13 @@ from django.contrib.auth.views import LoginView
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm, SigninForm, UserForm
 from django.db.models.functions import Lower
+from django.forms.models import model_to_dict
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from .filters import ProyectoFilter, TareaFilter, ClienteFilter, EmpleadoFilter
+from django.core.serializers import serialize 
 
 # devuelve un formulario para cambiar la contraseña
 def User(request):
@@ -43,6 +47,16 @@ class LogIn(LoginView):
     def form_invalid(self, form):
         messages.error(self.request,'Usuario o contraseña incorrectas.')
         return self.render_to_response(self.get_context_data(form=form))
+
+# devuelve los nombres de los usuarios en formato JSON  
+def getUsers(request):
+    User = get_user_model()
+    users = User.objects.all()
+    lista_usuarios = []
+    for usuario in users:
+        lista_usuarios.append(usuario.username)
+    data = json.dumps(lista_usuarios)
+    return HttpResponse(data, 'application/json')
 
 # devuelve un formulario para registrar un usuario
 class SignIn(CreateView):

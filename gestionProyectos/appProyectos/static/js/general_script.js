@@ -5,7 +5,6 @@ var restaurarBtn = document.getElementById('restaurar');
 var elementos = document.querySelectorAll('div > span');
 var tamañosOriginales = [];
 
-
 aumentarBtn.addEventListener('click', function () {
     for (var i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
@@ -43,26 +42,25 @@ let toggler = document.getElementById('toggle-darkmode');
 toggler.addEventListener('change', function toggleDarkMode() {
     var element = document.body;
     if (this.checked) {
-        element.classList.toggle("darkmode");
+        element.classList.toggle('darkmode');
     } else {
-        element.classList.toggle("darkmode");
+        element.classList.toggle('darkmode');
     }
 });
 
 // TOGGLE FILTER HIDE/SHOW
-
 let filterOn = document.getElementById('button-filter');
 filterOn.addEventListener('click', function(event) {
     event.preventDefault();
-    document.getElementById('button-filter').style.display = "none";
-    document.getElementById("filter-form").style.display = "block";
+    document.getElementById('button-filter').style.display = 'none';
+    document.getElementById('filter-form').style.display = 'block';
 });
 
 let filterOff = document.getElementById('button-exit');
 filterOff.addEventListener('click', function(event) {
     event.preventDefault();
-    document.getElementById("filter-form").style.display = "none";
-    document.getElementById('button-filter').style.display = "block";
+    document.getElementById('filter-form').style.display = 'none';
+    document.getElementById('button-filter').style.display = 'block';
 });
 
 
