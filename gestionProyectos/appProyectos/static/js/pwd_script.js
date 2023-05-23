@@ -12,6 +12,7 @@ pwd2.parentNode.after(error);
 pwd1.addEventListener('focusout', PasswordMatch);
 pwd2.addEventListener('focusout', PasswordMatch);
 
+// comprueba si las contraseñas coinciden
 function PasswordMatch() {
     error.innerHTML = '';
     if (pwd1.value != pwd2.value) {
