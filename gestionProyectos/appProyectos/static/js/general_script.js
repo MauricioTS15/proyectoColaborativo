@@ -6,7 +6,7 @@ var elementos = document.querySelectorAll('div > span');
 var tamañosOriginales = [];
 
 aumentarBtn.addEventListener('click', function () {
-    for (var i = 0; i < elementos.length; i++) {
+    for (let i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
         //console.log(tamañosOriginales[i]);
         if (fontSize < tamañosOriginales[i]+15)
@@ -15,7 +15,7 @@ aumentarBtn.addEventListener('click', function () {
 });
 
 reducirBtn.addEventListener('click', function () {
-    for (var i = 0; i < elementos.length; i++) {
+    for (let i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
         if (fontSize > tamañosOriginales[i]-10)
             elementos[i].style.fontSize = (fontSize - 3) + 'px';
@@ -23,14 +23,14 @@ reducirBtn.addEventListener('click', function () {
 });
 
 restaurarBtn.addEventListener('click', function () {
-    for (var i = 0; i < elementos.length; i++) {
+    for (let i = 0; i < elementos.length; i++) {
         elementos[i].style.fontSize = tamañosOriginales[i];
     }
 });
 
 // IMPORTANTE PARA EL RESTAURAR: Guarda el tamaño en el array para luego poder volver a su tamaño cuando le demos al boton
 document.addEventListener('DOMContentLoaded', function () {
-    for (var i = 0; i < elementos.length; i++) {
+    for (let i = 0; i < elementos.length; i++) {
         tamañosOriginales.push(window.getComputedStyle(elementos[i]).fontSize);
         console.log(window.getComputedStyle(elementos[i]).fontSize);
     }
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // TOGGLE DARK MODE
-let toggler = document.getElementById('toggle-darkmode');
+var toggler = document.getElementById('toggle-darkmode');
 toggler.addEventListener('change', function toggleDarkMode() {
     var element = document.body;
     if (this.checked) {
@@ -47,20 +47,3 @@ toggler.addEventListener('change', function toggleDarkMode() {
         element.classList.toggle('darkmode');
     }
 });
-
-// TOGGLE FILTER HIDE/SHOW
-let filterOn = document.getElementById('button-filter');
-filterOn.addEventListener('click', function(event) {
-    event.preventDefault();
-    document.getElementById('button-filter').style.display = 'none';
-    document.getElementById('filter-form').style.display = 'block';
-});
-
-let filterOff = document.getElementById('button-exit');
-filterOff.addEventListener('click', function(event) {
-    event.preventDefault();
-    document.getElementById('filter-form').style.display = 'none';
-    document.getElementById('button-filter').style.display = 'block';
-});
-
-
