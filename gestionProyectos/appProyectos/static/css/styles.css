@@ -2,6 +2,7 @@
 #header-container {
     position: fixed;
     width: 100%;
+    z-index: 1;
 }
 
 #header-principal {
@@ -64,7 +65,7 @@
     color: rgb(111, 170, 224);
 }
 
-#header-cuenta {
+#header-account {
     display: flex;
     flex-direction: column;
 }
@@ -90,20 +91,30 @@
     transform: scale(0.95);
 }
 
-.darkmode {
-    background-color: #2c2c2c;
-    color: white;
+#accessibility-panel {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-light {
+    background-color: rgb(178, 178, 178);
 }
 
 /* PIE */
 
 #footer-principal {
-    background-color: rgb(235, 235, 235);
     margin: 0;
     width: 100%;
-    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.45) inset;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.footer-light {
+    background-color: rgb(235, 235, 235);
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.45) inset;
 }
 
 .container-footer {
@@ -368,7 +379,6 @@ h1 {
 #container-main aside {
     padding: 40px;
     width: 28%;
-    height: 100%;
     box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.45);
 }
 
@@ -386,9 +396,12 @@ h1 {
 #container-main aside nav div a {
     display: flex;
     text-decoration: none;
-    color: black;
     margin-bottom: 15px;
     margin-right: 10px;
+}
+
+.nav-light div a  {
+    color: black;
 }
 
 #container-main aside nav div a:hover {
@@ -401,9 +414,27 @@ h1 {
     margin-left: 10px;
 }
 
+#container-main section {
+    padding: 40px 100px;
+    width: 70%;
+}
+
 #container-main #filter-form div {
     display: flex;
     justify-content: space-between;
+}
+
+#filter-form {
+    display: none;
+    margin-bottom: 20px;
+    border: solid 3px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#filter-form ul {
+    list-style-type: none;
 }
 
 #filter-form div button {
@@ -416,34 +447,6 @@ h1 {
 
 #filter-form div button:active {
     background-color: rgb(33, 150, 243);
-    ;
-}
-
-#filter-form ul {
-    list-style-type: none;
-}
-
-#filter-form {
-    display: none;
-    margin-bottom: 20px;
-    border: solid 3px;
-    padding: 10px;
-    border-radius: 5px;
-    width: 70%;
-}
-
-#container-main section {
-    padding: 40px 100px;
-    width: 70%;
-}
-
-#accessibility-panel {
-    background-color: rgb(178 178 178);
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
 }
 
 .switch {
@@ -619,4 +622,24 @@ form fieldset select {
 
 .warning p {
     margin: 0;
+}
+
+/* MODO OSCURO */
+
+.header-dark {
+    background-color: rgb(97, 97, 97);
+}
+
+.body-dark {
+    background-color: rgb(44, 44, 44);
+    color: white;
+}
+
+.footer-dark {
+    background-color: rgb(31, 31, 31);
+    box-shadow: 0 20px 20px -20px rgba(92, 92, 92, 0.45) inset;
+}
+
+.footer-dark a, .nav-dark div a {
+    color: white;
 }

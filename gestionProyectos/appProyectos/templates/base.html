@@ -47,7 +47,7 @@
                 <li>
                     <a class="link-header" href="{% url 'index empleados' %}">Empleados</a>
                 </li>
-                <div id="header-cuenta">
+                <div id="header-account">
                 <li>
                     <a class="link-header" href="{% url 'user' %}">Bienvenido {{ request.user | title }} <i class="fa fa-user-circle" aria-hidden="true"></i></a>
                 </li>
@@ -66,8 +66,8 @@
             </ul>
         </nav>
     </div>
-    <div id="accessibility-panel">
-        <label for="toggle-darkmode">Cambiar tema</label>
+    <div id="accessibility-panel" class="header-light">
+        <label for="toggle-darkmode">Modo oscuro</label>
         <label class="switch">
             <input id="toggle-darkmode" type="checkbox">
             <span class="slider"></span>
@@ -82,7 +82,7 @@
         {% block contenido %}
         {% endblock contenido %}
     </main>
-    <footer id="footer-principal">
+    <footer id="footer-principal" class="footer-light">
         <div class="container-footer">
             <div class="item1-footer">
                 <img src="{% static 'images/logo.png' %}" alt="Deustotil logo white">

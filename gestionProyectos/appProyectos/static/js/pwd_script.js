@@ -1,5 +1,9 @@
 var pwd1 = document.getElementById('id_password1');
 var pwd2 = document.getElementById('id_password2');
+if (pwd1 == null || pwd2 == null) {
+    pwd1 = document.getElementById('id_new_password1');
+    pwd2 = document.getElementById('id_new_password2');
+}
 
 const error = document.createElement('li');
 error.style.marginBottom = '10px';
