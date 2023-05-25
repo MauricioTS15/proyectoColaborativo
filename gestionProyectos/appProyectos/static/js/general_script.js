@@ -2,7 +2,7 @@ var toggler = document.getElementById('toggle-darkmode');
 var aumentarBtn = document.getElementById('aumentar');
 var reducirBtn = document.getElementById('reducir');
 var restaurarBtn = document.getElementById('restaurar');
-var elementos = document.querySelectorAll('div > span');
+var elementos = document.querySelectorAll('div, span, ul, p');
 var tamañosOriginales = [];
 
 // guarda una cookie
