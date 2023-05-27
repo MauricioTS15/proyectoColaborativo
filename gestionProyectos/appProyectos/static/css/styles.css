@@ -117,66 +117,66 @@
     box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.45) inset;
 }
 
-.container-footer {
+.footer-container {
     display: flex;
     justify-content: space-between;
     margin-left: 50px;
     margin-right: 50px;
 }
 
-.item1-footer {
+.footer-item1 {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 350px;
 }
 
-.item1-footer img {
+.footer-item1 img {
     height: 30px;
 }
 
-.item1-footer span {
+.footer-item1 span {
     font-size: 20px;
     font-weight: bold;
     margin-left: 10px;
 }
 
-#logo-img-footer {
+#footer-logo-img {
     height: 60px;
 }
 
-.item2-footer {
+.footer-item2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 350px;
 }
 
-.item2-footer ul {
+.footer-item2 ul {
     display: flex;
     padding-left: 0;
 }
 
-.item2-footer ul li {
+.footer-item2 ul li {
     display: flex;
     margin-right: 20px;
 }
 
-.item2-footer ul li img {
+.footer-item2 ul li img {
     width: 50px;
     transition: transform .1s;
 }
 
-.item2-footer ul li img:hover {
+.footer-item2 ul li img:hover {
     transform: scale(1.05);
     cursor: pointer;
 }
 
-.item2-footer ul li img:active {
+.footer-item2 ul li img:active {
     transform: scale(1.05) translateY(.125rem);
 }
 
-.item3-footer {
+.footer-item3 {
     display: flex;
     width: 350px;
     flex-direction: column;
@@ -610,6 +610,15 @@ form fieldset input,
 form fieldset select {
     width: 170px;
     font-size: 16px;
+}
+
+small {
+    border-radius: 5px;
+    background: rgb(255, 236, 236);
+    border: 1px solid rgb(245, 172, 166);
+    color: rgb(180, 13, 13);
+    font-size: 10px;
+    width: fit-content;
 }
 
 .warning {

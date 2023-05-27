@@ -1,26 +1,20 @@
-
-import json
-from typing import Any, Dict
-from django.db.models.query import QuerySet
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.views import LoginView
 from .models import Cliente, Empleado, Tarea, Proyecto
 from .forms import ProyectoForm, TareaForm, ClienteForm, EmpleadoForm, LoginForm, SigninForm, UserForm
-from django.db.models.functions import Lower
-from django.forms.models import model_to_dict
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from .filters import ProyectoFilter, TareaFilter, ClienteFilter, EmpleadoFilter
-from django.core.serializers import serialize 
 
 # devuelve un formulario para cambiar la contraseña
-def User(request):
+def UserUpdateView(request):
     if request.method == 'POST':
         form = UserForm(request.user, request.POST)
         if form.is_valid():
@@ -28,16 +22,24 @@ def User(request):
             update_session_auth_hash(request, user)
             messages.success(request, _('La contraseña se ha reestablecido correctamente'))
             return redirect('user')
-        else:
-            messages.error(request, _('Corrije el error mostrado a continuación'))
     else:
         form = UserForm(request.user)
     return render(request, 'user.html', {
         'form': form
     })
 
+# devuelve los nombres de los usuarios en formato JSON 
+class GetUsers(View):
+    def get(self, request):
+        User = get_user_model()
+        users = User.objects.all()
+        lista_usuarios = []
+        for usuario in users:
+            lista_usuarios.append(usuario.username)
+        return JsonResponse(list(lista_usuarios), safe=False)
+
 # devuelve un formulario de inicio de sesión
-class LogIn(LoginView):
+class LogInView(LoginView):
     template_name = 'login.html'
     authentication_form = LoginForm
 
@@ -48,18 +50,8 @@ class LogIn(LoginView):
         messages.error(self.request,'Usuario o contraseña incorrectas.')
         return self.render_to_response(self.get_context_data(form=form))
 
-# devuelve los nombres de los usuarios en formato JSON  
-def getUsers(request):
-    User = get_user_model()
-    users = User.objects.all()
-    lista_usuarios = []
-    for usuario in users:
-        lista_usuarios.append(usuario.username)
-    data = json.dumps(lista_usuarios)
-    return HttpResponse(data, 'application/json')
-
 # devuelve un formulario para registrar un usuario
-class SignIn(CreateView):
+class SignInView(CreateView):
     template_name = 'signin.html'
     form_class = SigninForm
     template_name_suffix = '_create_form'
@@ -89,7 +81,7 @@ class ProyectoListView(LoginRequiredMixin, ListView):
         self.filterset = ProyectoFilter(self.request.GET, queryset=queryset)
         return self.filterset.qs
     
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = self.filterset.form
         return context
@@ -177,7 +169,7 @@ class TareaListView(LoginRequiredMixin, ListView):
         self.filterset = TareaFilter(self.request.GET, queryset=queryset)
         return self.filterset.qs
     
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = self.filterset.form
         return context
@@ -264,7 +256,7 @@ class ClienteListView(LoginRequiredMixin, ListView):
         self.filterset = ClienteFilter(self.request.GET, queryset=queryset)
         return self.filterset.qs
     
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = self.filterset.form
         return context
@@ -351,7 +343,7 @@ class EmpleadoListView(LoginRequiredMixin, ListView):
         self.filterset = EmpleadoFilter(self.request.GET, queryset=queryset)
         return self.filterset.qs
     
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = self.filterset.form
         return context

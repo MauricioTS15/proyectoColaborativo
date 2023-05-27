@@ -4,30 +4,26 @@ var usuarios = [];
 const formato = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
 const errors = document.createElement('li');
-errors.style.marginBottom = '10px';
 
-const err_format = document.createElement('span');
-err_format.style.color = 'red';
-err_format.style.fontSize = '10px';
+const err_format = document.createElement('small');
 errors.append(err_format);
 
-const err_exists = document.createElement('span');
-err_exists.style.color = 'red';
-err_exists.style.fontSize = '10px';
+const err_exists = document.createElement('small');
 errors.append(err_exists);
 
 errors.style.display = 'none';
 usuario.parentNode.after(errors);
 
-// obtiene el listado de nombres de usuarios mediante fetch
+// obtiene el listado de nombres de usuarios
 fetch('/appProyectos/get_users/', {
-    method : 'GET',
-    headers : {
-        'Content-Type' : 'application/json'
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
     }
 })
 .then(response => response.json())
-.then(json => {usuarios = json});
+.then(json => {usuarios = json})
+.catch(error => {console.error('Error:', error)});
 
 // evento al deseleccionar el input de nombre de usuario
 usuario.addEventListener('focusout', event => {

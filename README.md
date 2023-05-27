@@ -1,20 +1,21 @@
-PROYECTO COLABORATIVO: E2
-
+PROYECTO COLABORATIVO
+---------------------
 Equipo 3
-- Juan de Cruz García
-- Mauricio Tavara Silva
-- Rubén Bellido Cereijo
+● Juan de Cruz García
+● Mauricio Tavara Silva
+● Rubén Bellido Cereijo
 
 Enlace al repositorio git:
 https://github.com/MauricioTS15/proyectoColaborativo.git
 
-Funcionalidades adicionales:
-Botón de último objeto registrado en la base de datos para las entidades proyecto, tarea, cliente y empleado, el cual redirecciona al detalle de dicho objeto (funcionalidad implementada en index.html)
 
-Funcionalidades incompletas:
-Ninguna
+FUNCIONALIDADES ADICIONALES E2
+------------------------------
+● Botón de último objeto registrado en la base de datos para las entidades proyecto, tarea, cliente y empleado, el cual redirecciona al detalle de dicho objeto (funcionalidad implementada en index.html)
 
-E3
+
+FUNCIONALIDADES AÑADIDAS E3
+---------------------------
 ● 4 puntos: Ampliación de funcionalidades en Python, implementando dos
 funcionalidades entre las siguientes (cada una que se implemente tendrá un valor de
 2 puntos):
@@ -30,3 +31,4 @@ mejor puntuación):
 
 ● (2 puntos) Funcionalidades JavaScript para cargar y/o almacenar datos utilizando
 Fetch. Escoger una de las siguientes opciones:
+    ○ Cargar datos y modificar el DOM mediante JavaScript: llamada a API de Django utilizando Fetch para obtener datos y mostrar mensajes en función de los valores obtenidos modificando el DOM

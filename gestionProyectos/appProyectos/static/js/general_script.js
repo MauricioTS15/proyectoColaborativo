@@ -2,8 +2,9 @@ var toggler = document.getElementById('toggle-darkmode');
 var aumentarBtn = document.getElementById('aumentar');
 var reducirBtn = document.getElementById('reducir');
 var restaurarBtn = document.getElementById('restaurar');
-var elementos = document.querySelectorAll('div, span, ul, p');
+var elementos = document.querySelectorAll('#section-user, #section-index, #container-main, #footer-principal, small');
 var tamañosOriginales = [];
+var tamaño;
 
 // guarda una cookie
 function setCookie(cName, cValue, expDays) {
@@ -35,6 +36,39 @@ document.addEventListener('DOMContentLoaded', function() {
         toggler.checked = true;
         toggleDarkMode();
     }
+    switch (getCookie('size')) {
+        case '-6':
+            for (let i = 0; i < elementos.length; i++) {
+                var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
+                elementos[i].style.fontSize = (fontSize - 6) + 'px';
+            }
+            tamaño = -6;
+            break;
+        case '-3':
+            for (let i = 0; i < elementos.length; i++) {
+                var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
+                elementos[i].style.fontSize = (fontSize - 3) + 'px';
+            }
+            tamaño = -3;
+            break;
+        case '3':
+            for (let i = 0; i < elementos.length; i++) {
+                var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
+                elementos[i].style.fontSize = (fontSize + 3) + 'px';
+            }
+            tamaño = 3;
+            break;
+        case '6':
+            for (let i = 0; i < elementos.length; i++) {
+                var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
+                elementos[i].style.fontSize = (fontSize + 6) + 'px';
+            }
+            tamaño = 6;
+            break;
+        default:
+            tamaño = 0;
+            break;
+    }
 });
 
 toggler.addEventListener('change', toggleDarkMode);
@@ -57,18 +91,24 @@ function toggleDarkMode() {
 aumentarBtn.addEventListener('click', function() {
     for (let i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
-        if (fontSize < tamañosOriginales[i]+6)
+        if (fontSize < tamañosOriginales[i] + 6)
             elementos[i].style.fontSize = (fontSize + 3) + 'px';
     }
+    if (tamaño < 6)
+        tamaño += 3;
+        setCookie('size', tamaño, 1);
 });
 
 // reduce el tamaño de cada elemento al hacer click
 reducirBtn.addEventListener('click', function() {
     for (let i = 0; i < elementos.length; i++) {
         var fontSize = parseFloat(window.getComputedStyle(elementos[i]).fontSize);
-        if (fontSize > tamañosOriginales[i]-6)
+        if (fontSize > tamañosOriginales[i] - 6)
             elementos[i].style.fontSize = (fontSize - 3) + 'px';
     }
+    if (tamaño > -6)
+        tamaño -= 3;
+        setCookie('size', tamaño, 1);
 });
 
 // aplica el tamaño de cada elemento guardado en el array al hacer click
@@ -76,4 +116,6 @@ restaurarBtn.addEventListener('click', function() {
     for (let i = 0; i < elementos.length; i++) {
         elementos[i].style.fontSize = tamañosOriginales[i] + 'px';
     }
+    tamaño = 0;
+    setCookie('size', 0, 1);
 });

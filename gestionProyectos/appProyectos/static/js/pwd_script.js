@@ -6,9 +6,10 @@ if (pwd1 == null || pwd2 == null) {
 }
 
 const error = document.createElement('li');
-error.style.marginBottom = '10px';
-error.style.color = 'red';
-error.style.fontSize = '10px';
+
+const err_pwd = document.createElement('small');
+error.append(err_pwd);
+
 error.style.display = 'none';
 pwd2.parentNode.after(error);
 
@@ -18,11 +19,11 @@ pwd2.addEventListener('focusout', PasswordMatch);
 
 // comprueba si las contraseñas coinciden
 function PasswordMatch() {
-    error.innerHTML = '';
+    err_pwd.innerHTML = '';
     if (pwd1.value != pwd2.value) {
         pwd1.style.borderColor = 'red';
         pwd2.style.borderColor = 'red';
-        error.innerHTML += 'Las contraseñas no coinciden.';
+        err_pwd.innerHTML += 'Las contraseñas no coinciden.';
         error.style.display = 'block';
     } else {
         pwd1.style.borderColor = 'black';

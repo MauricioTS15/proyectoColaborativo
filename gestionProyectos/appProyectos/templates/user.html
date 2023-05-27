@@ -16,6 +16,11 @@
                     <li><small>{{ field.errors|striptags }}</small></li>
 	        	{% endif %}
 		    {% endfor %}
+            {% if messages %}
+                {% for message in messages %}
+                    <li><small>{{ message }}</small></li>
+                {% endfor %}
+            {% endif %}
             </ul>
         </fieldset>
         <input id="button-submit" class="button-small" type="submit" value="Cambiar">
